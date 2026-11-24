@@ -1686,11 +1686,48 @@ fn resolve_hook_authoring_shape(
     })
 }
 
-/// Static reachability check for condition hooks.
-/// for each hook, infer the set of Phase B intent kinds the hook would emit
-/// (modifier-emitting body and/or any side-effect Op in the reachable subtree)
-/// and reject if any `(event_kind, intent_kind)` pair is missing from the
-/// composer registration table in `spellkave_schema::composer_registrations`.
+/// AST origin for the hook reachability walk.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum HookExpressionSource {
+    /// The manifest validator follows both children of `RollTable`.
+    Manifest,
+    /// The server's stored AST walk follows only the draw child of `RollTable`.
+    Server,
+}
+
+/// Intent kinds emitted by a hook without a registered composer for `event_kind`.
+///
+/// The caller owns event-path and expression-root validation. A modifier
+/// template contributes a `ModifierDelta` when the root is absent or does
+/// not itself emit a side-effect intent.
+pub fn unregistered_hook_intent_kinds(
+    event_kind: &str,
+    modifier_template_id: &str,
+    hook_expression: spellkave_dsl::NodeId,
+    expr: &spellkave_dsl::Expression,
+    source: HookExpressionSource,
+) -> BTreeSet<&'static str> {
+    use spellkave_schema::{is_composer_registered, CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA};
+
+    let mut intent_kinds = BTreeSet::new();
+    collect_hook_intent_kinds(
+        expr,
+        hook_expression,
+        source,
+        &mut intent_kinds,
+        &mut BTreeSet::new(),
+    );
+
+    let root_is_side_effect = expr
+        .node(hook_expression)
+        .is_some_and(|root| side_effect_intent_tag(&root.op).is_some());
+    if !root_is_side_effect && !modifier_template_id.is_empty() {
+        intent_kinds.insert(CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA);
+    }
+    intent_kinds.retain(|intent_kind| !is_composer_registered(event_kind, intent_kind));
+    intent_kinds
+}
+
 fn validate_hook_composer_reachability(
     condition_definition_id: &str,
     modifier_template_id: &str,
@@ -1700,28 +1737,16 @@ fn validate_hook_composer_reachability(
     expr: &spellkave_dsl::Expression,
     diags: &mut Vec<Diagnostic>,
 ) {
-    use spellkave_schema::{is_composer_registered, CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA};
-
-    if parse_event_kind_path(event_kind).is_err() {
+    if parse_event_kind_path(event_kind).is_err() || expr.node(hook_expression).is_none() {
         return;
     }
-    let Some(root) = expr.node(hook_expression) else {
-        return;
-    };
-
-    let mut intent_kinds: BTreeSet<&'static str> = BTreeSet::new();
-    let mut visited: BTreeSet<u32> = BTreeSet::new();
-    collect_hook_intent_kinds(expr, hook_expression, &mut intent_kinds, &mut visited);
-
-    let root_is_side_effect = side_effect_intent_tag(&root.op).is_some();
-    if !root_is_side_effect && !modifier_template_id.is_empty() {
-        intent_kinds.insert(CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA);
-    }
-
-    for intent_kind in &intent_kinds {
-        if is_composer_registered(event_kind, intent_kind) {
-            continue;
-        }
+    for intent_kind in unregistered_hook_intent_kinds(
+        event_kind,
+        modifier_template_id,
+        hook_expression,
+        expr,
+        HookExpressionSource::Manifest,
+    ) {
         diags.push(fatal(
             MF_VAL_HOOK_REACHABILITY,
             "condition_definitions.hooks.expression",
@@ -1739,9 +1764,10 @@ fn validate_hook_composer_reachability(
 
 fn collect_hook_intent_kinds(
     expr: &spellkave_dsl::Expression,
-    node_id: u32,
+    node_id: spellkave_dsl::NodeId,
+    source: HookExpressionSource,
     out: &mut BTreeSet<&'static str>,
-    visited: &mut BTreeSet<u32>,
+    visited: &mut BTreeSet<spellkave_dsl::NodeId>,
 ) {
     if !visited.insert(node_id) {
         return;
@@ -1752,8 +1778,12 @@ fn collect_hook_intent_kinds(
     if let Some(tag) = side_effect_intent_tag(&node.op) {
         out.insert(tag);
     }
+    if let (HookExpressionSource::Server, spellkave_dsl::Op::RollTable(roll)) = (source, &node.op) {
+        collect_hook_intent_kinds(expr, roll.draw_node, source, out, visited);
+        return;
+    }
     for child in node.op.child_nodes() {
-        collect_hook_intent_kinds(expr, child, out, visited);
+        collect_hook_intent_kinds(expr, child, source, out, visited);
     }
 }
 
@@ -3332,6 +3362,72 @@ mod tests {
                     && diag.message.contains("Tick")
                     && diag.message.contains("ModifierDelta")),
             "unregistered (event_kind, intent_kind) pair must be rejected: {diagnostics:?}"
+        );
+    }
+
+    #[test]
+    fn shared_hook_reachability_preserves_both_walks() {
+        use spellkave_dsl::{
+            EmitTrace, Expression, ExpressionKind, Node, Op, RollTable, SubjectRef, ValueType,
+        };
+        use spellkave_schema::{
+            CONDITION_HOOK_INTENT_KIND_EMIT_TRACE, CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA,
+        };
+
+        // This hand-built AST puts an intent behind the table-id edge to
+        // distinguish the two walks. All admitted event kinds have an EmitTrace
+        // composer, so use an unknown event to expose the walk's result.
+        let expr = Expression {
+            kind: ExpressionKind::Predicate,
+            root_node_id: 1,
+            nodes: vec![
+                Node {
+                    node_id: 1,
+                    value_type: ValueType::Int,
+                    op: Op::RollTable(RollTable {
+                        table_id_node: 2,
+                        draw_node: 3,
+                    }),
+                    span: Default::default(),
+                },
+                Node {
+                    node_id: 2,
+                    value_type: ValueType::Outcome,
+                    op: Op::EmitTrace(EmitTrace {
+                        subject: SubjectRef::Actor,
+                        trace_kind_id: "core/test".into(),
+                    }),
+                    span: Default::default(),
+                },
+            ],
+        };
+        assert_eq!(
+            unregistered_hook_intent_kinds(
+                "UnknownEvent",
+                "",
+                1,
+                &expr,
+                HookExpressionSource::Manifest
+            ),
+            BTreeSet::from([CONDITION_HOOK_INTENT_KIND_EMIT_TRACE]),
+        );
+        assert!(unregistered_hook_intent_kinds(
+            "UnknownEvent",
+            "",
+            1,
+            &expr,
+            HookExpressionSource::Server
+        )
+        .is_empty());
+        assert_eq!(
+            unregistered_hook_intent_kinds(
+                "Tick",
+                "core/modifier",
+                3,
+                &expr,
+                HookExpressionSource::Server
+            ),
+            BTreeSet::from([CONDITION_HOOK_INTENT_KIND_MODIFIER_DELTA]),
         );
     }
 
