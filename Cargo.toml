@@ -7,5 +7,6 @@ members = [
     "crates/spellkave-authoring",
     "crates/spellkave-validate-wasm",
     "crates/spellkave-authoring-wasm",
+    "crates/spellkave-test-data",
 ]
 resolver = "2"
