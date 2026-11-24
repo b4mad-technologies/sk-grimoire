@@ -102,7 +102,7 @@ fn qualified(bundle: &str, key: &str) -> String {
 
 fn diagnostic(path: &str, message: String, severity: crate::Severity) -> crate::Diagnostic {
     crate::Diagnostic {
-        code: "MF-VAL-391".into(),
+        code: crate::diagnostic_codes::MF_VAL_CONTAINMENT_POLICY.into(),
         severity,
         message,
         path: path.into(),

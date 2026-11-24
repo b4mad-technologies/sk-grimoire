@@ -2,7 +2,8 @@
 // Scans the executing checkout's validator sources through Cargo.
 // keep-file(K5): diagnostic-code inventory; sk-jay0.7.174.27 and sk-jay0.7.174.28.
 
-use std::collections::BTreeMap;
+use spellkave_validate::diagnostic_codes::GRIMOIRE_DIAGNOSTIC_CODES;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::path::Path;
 
@@ -48,6 +49,39 @@ fn collect_codes(dir: &Path, out: &mut Vec<(String, String, String)>) {
     }
 }
 
+fn registered_codes() -> impl Iterator<Item = &'static str> {
+    GRIMOIRE_DIAGNOSTIC_CODES
+        .iter()
+        .flat_map(|group| group.iter().copied())
+}
+
+#[test]
+fn generated_diagnostic_code_list_matches_registry() {
+    let codes: Vec<_> = registered_codes().collect();
+    let sorted: BTreeSet<_> = codes.iter().copied().collect();
+    assert_eq!(
+        sorted.len(),
+        codes.len(),
+        "duplicate diagnostic code in the registry"
+    );
+
+    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../diagnostic-codes.json");
+    let expected = serde_json::to_string_pretty(&sorted).expect("render diagnostic codes") + "\n";
+    if std::env::var("SPELLKAVE_WRITE_DIAGNOSTIC_CODES")
+        .ok()
+        .as_deref()
+        == Some("1")
+    {
+        fs::write(&path, expected).expect("write diagnostic-codes.json");
+    } else {
+        let actual = fs::read_to_string(&path).expect("read diagnostic-codes.json");
+        assert_eq!(
+            actual, expected,
+            "diagnostic-codes.json is stale. See README.md to regenerate."
+        );
+    }
+}
+
 #[test]
 fn no_two_diagnostic_code_constants_share_a_code() {
     let src_dir = std::path::PathBuf::from(
@@ -66,7 +100,13 @@ fn no_two_diagnostic_code_constants_share_a_code() {
     // Grouping by code (not by declaration order) is independent of
     // `fs::read_dir`'s unspecified directory order.
     let mut by_code: BTreeMap<&str, BTreeMap<&str, &str>> = BTreeMap::new();
+    let registered: BTreeSet<_> = registered_codes().collect();
     for (name, code, file) in &declarations {
+        assert!(
+            registered.contains(code.as_str()),
+            "{name} ({file}) is missing from the diagnostic registry"
+        );
+
         by_code
             .entry(code.as_str())
             .or_default()

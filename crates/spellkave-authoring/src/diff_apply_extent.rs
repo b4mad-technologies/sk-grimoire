@@ -49,9 +49,9 @@ fn memory_refusal(row: &MemoryReach, held: &BTreeSet<String>) -> Option<&'static
             && (row.claims_memory || row.retracts || !row.owner_preserving)
             && !row.target_owners_in_bundle_extents)
     {
-        Some("MF-APPLY-042")
+        Some(spellkave_validate::diagnostic_codes::MF_APPLY_BUNDLE_SCOPE_REFUSED)
     } else if row.owners.is_empty() && row.live && !row.satellite {
-        Some("MF-APPLY-043")
+        Some(spellkave_validate::diagnostic_codes::MF_APPLY_UNLISTED_MEMORY)
     } else {
         None
     }
@@ -91,7 +91,7 @@ pub fn memory_verdicts(
             refused.push(ExtentVerdict {
                 kind: "applyset".into(),
                 key: applyset.into(),
-                code: "MF-APPLY-042".into(),
+                code: spellkave_validate::diagnostic_codes::MF_APPLY_BUNDLE_SCOPE_REFUSED.into(),
                 owners: memory.bundle_ids.clone().unwrap_or_default(),
             });
         }
@@ -100,7 +100,7 @@ pub fn memory_verdicts(
         refused.push(ExtentVerdict {
             kind: "bundles".into(),
             key: bundle.clone(),
-            code: "MF-APPLY-042".into(),
+            code: spellkave_validate::diagnostic_codes::MF_APPLY_BUNDLE_SCOPE_REFUSED.into(),
             owners: vec![bundle.clone()],
         });
     }

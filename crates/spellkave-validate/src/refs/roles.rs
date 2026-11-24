@@ -112,7 +112,7 @@ pub(super) fn validate(
             )
         }))
     {
-        diags.push(diag_warning("MF-VAL-379", kind,
+        diags.push(diag_warning(crate::diagnostic_codes::MF_VAL_AUTHORITY_SENSITIVE_ROLE, kind,
             format!("role '{role_id}' is authority-sensitive: scoped writers need holder-or-escalate over bundle '{bundle_id}' and affected realised bindings need old/new bind admission; unknown reserved definitions and new clock authority require publisher/genesis; static validity is not live admission")));
         for id in ids {
             let resolves = capabilities
@@ -128,7 +128,7 @@ pub(super) fn validate(
     }
     for row in &manifest.capability_definitions {
         if row.capability_id.starts_with("frontier.") {
-            diags.push(diag_warning("MF-VAL-379", "capability_definitions",
+            diags.push(diag_warning(crate::diagnostic_codes::MF_VAL_AUTHORITY_SENSITIVE_ROLE, "capability_definitions",
                 format!("reserved definition '{}' needs publisher/genesis for introduction and holder-or-escalate plus ownership for maintenance; a definition grants no authority", row.capability_id)));
         }
     }

@@ -256,7 +256,7 @@ pub fn authority_verdicts(
                 Some(false) => result.push(verdict(
                     &row.kind,
                     &row.key,
-                    Some("MF-APPLY-039"),
+                    Some(spellkave_validate::diagnostic_codes::MF_APPLY_PRIVILEGED_TEMPLATE_UNAUTHORIZED),
                     "missing_capability",
                 )),
                 None => result.push(verdict(&row.kind, &row.key, None, "server decides")),
@@ -337,7 +337,7 @@ pub fn authority_verdicts(
                 result.push(verdict(
                     &row.kind,
                     &row.key,
-                    Some("MF-APPLY-035"),
+                    Some(spellkave_validate::diagnostic_codes::MF_APPLY_ROOT_AUTHORITY_REQUIRED),
                     "reserved_definition_root",
                 ));
                 continue;
@@ -364,7 +364,7 @@ pub fn authority_verdicts(
                 result.push(verdict(
                     &row.kind,
                     &row.key,
-                    Some("MF-APPLY-035"),
+                    Some(spellkave_validate::diagnostic_codes::MF_APPLY_ROOT_AUTHORITY_REQUIRED),
                     "clock_root",
                 ));
                 continue;
@@ -383,7 +383,7 @@ pub fn authority_verdicts(
                     Some(false) => result.push(verdict(
                         &row.kind,
                         &row.key,
-                        Some("MF-APPLY-045"),
+                        Some(spellkave_validate::diagnostic_codes::MF_APPLY_ROLE_ESCALATION_UNAUTHORIZED),
                         "missing_capability",
                     )),
                     None => result.push(verdict(&row.kind, &row.key, None, "server decides")),
@@ -392,7 +392,7 @@ pub fn authority_verdicts(
                 result.push(verdict(
                     &row.kind,
                     &row.key,
-                    Some("MF-APPLY-035"),
+                    Some(spellkave_validate::diagnostic_codes::MF_APPLY_ROOT_AUTHORITY_REQUIRED),
                     "reserved_definition_root",
                 ));
             }
@@ -410,7 +410,8 @@ pub fn authority_verdicts(
             result.push(verdict(
                 &row.kind,
                 &row.key,
-                (!has_prune).then_some("MF-APPLY-046"),
+                (!has_prune)
+                    .then_some(spellkave_validate::diagnostic_codes::MF_APPLY_PRUNE_UNAUTHORIZED),
                 if has_prune {
                     "server decides"
                 } else {
@@ -451,7 +452,8 @@ pub fn authority_verdicts(
             let mut finding = verdict(
                 "role_bindings",
                 &binding.binding_id,
-                (admitted == Some(false)).then_some("MF-APPLY-036"),
+                (admitted == Some(false))
+                    .then_some(spellkave_validate::diagnostic_codes::MF_APPLY_ROLE_BINDING_REFUSED),
                 if admitted.is_none() {
                     "server decides"
                 } else {
@@ -491,7 +493,7 @@ pub fn authority_verdicts(
                 Some(false) => result.push(verdict(
                     "role_bindings",
                     &row.key,
-                    Some("MF-APPLY-036"),
+                    Some(spellkave_validate::diagnostic_codes::MF_APPLY_ROLE_BINDING_REFUSED),
                     "missing_capability",
                 )),
                 None => result.push(verdict("role_bindings", &row.key, None, "server decides")),

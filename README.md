@@ -23,6 +23,18 @@ The Wasm build produces `spellkave_validate_wasm.wasm` and
 `spellkave_authoring_wasm.wasm` in `target/wasm32-unknown-unknown/release/`.
 The workspace and its frozen fixture data are documented in [PROVENANCE.md](PROVENANCE.md).
 
+## Diagnostic codes
+
+[`diagnostic-codes.json`](diagnostic-codes.json) lists the codes emitted by the
+parser, manifest validation, and authoring tools. The workspace tests keep it
+in sync with the Rust registry. To regenerate it after an intentional change,
+run the following command from the repository root.
+
+```sh
+SPELLKAVE_WRITE_DIAGNOSTIC_CODES=1 cargo test --locked --target-dir target \
+  -p spellkave-validate --test no_duplicate_diagnostic_codes generated_diagnostic_code_list_matches_registry
+```
+
 ## Wasm npm packages
 
 Install both packages at an exact sk-grimoire release version. The first

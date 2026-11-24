@@ -1,6 +1,21 @@
+pub mod diagnostic_codes;
 pub mod eval;
 pub mod rng;
 pub mod spatial;
+
+use diagnostic_codes::{
+    MF_DSL_BAD_NUMBER, MF_DSL_DANGLING_RELATION, MF_DSL_EQUIPMENT_SLOT_LITERAL,
+    MF_DSL_EXPECTED_BINDING, MF_DSL_EXPECTED_BINDING_SCOPE, MF_DSL_EXPECTED_BOOL,
+    MF_DSL_EXPECTED_COMMA, MF_DSL_EXPECTED_COMPARE, MF_DSL_EXPECTED_DIE, MF_DSL_EXPECTED_DOT,
+    MF_DSL_EXPECTED_EQUAL, MF_DSL_EXPECTED_FIELD, MF_DSL_EXPECTED_IDENT, MF_DSL_EXPECTED_INT,
+    MF_DSL_EXPECTED_LPAREN, MF_DSL_EXPECTED_METHOD, MF_DSL_EXPECTED_RPAREN,
+    MF_DSL_EXPECTED_SEMICOLON, MF_DSL_EXPECTED_STRING, MF_DSL_EXPECTED_SUBJECT,
+    MF_DSL_EXPECTED_TEXT, MF_DSL_EXPECTED_TEXT_READ, MF_DSL_INT_FIELD, MF_DSL_MACRO_ARG_TYPE,
+    MF_DSL_MACRO_ARITY, MF_DSL_MACRO_ID, MF_DSL_MACRO_IN_BODY, MF_DSL_MACRO_RETURN_TYPE,
+    MF_DSL_MACRO_UNAVAILABLE, MF_DSL_MACRO_UNKNOWN, MF_DSL_MACRO_UNSUPPORTED_TYPE, MF_DSL_TRAILING,
+    MF_DSL_UNKNOWN_BINDING_SCOPE, MF_DSL_UNKNOWN_CHAR, MF_DSL_UNKNOWN_EVENT_BINDING,
+    MF_DSL_UNKNOWN_PRIMITIVE, MF_DSL_UNKNOWN_SUBJECT, MF_DSL_UNTERMINATED_STRING,
+};
 
 pub use eval::{
     count_static_draws, evaluate_expression_traced, evaluate_int_expression,
@@ -1765,7 +1780,7 @@ pub fn parse_int_expression(source: &str) -> Result<Expression, ParseFailure> {
     if !matches!(parser.peek().kind, TokenKind::Eof) {
         let token = parser.peek().clone();
         return Err(ParseFailure::single(
-            "MF-DSL-TRAILING",
+            MF_DSL_TRAILING,
             "unexpected trailing input".to_string(),
             token.span,
         ));
@@ -1815,7 +1830,7 @@ fn legacy_compile_text_expression_with_macros(
         != Some(ValueType::Text)
     {
         return Err(macro_failure(
-            "MF-DSL-MACRO-RETURN-TYPE",
+            MF_DSL_MACRO_RETURN_TYPE,
             "expected a Text macro expression",
         ));
     }
@@ -1841,33 +1856,30 @@ fn expand_macro_calls(
     };
     let open = start + "macro".len();
     let end = matching_paren(source, open)
-        .ok_or_else(|| macro_failure("MF-DSL-EXPECTED-RPAREN", "unterminated macro call"))?;
+        .ok_or_else(|| macro_failure(MF_DSL_EXPECTED_RPAREN, "unterminated macro call"))?;
     let before = &source[..start];
     let after = &source[end + 1..];
     let parts = split_macro_arguments(&source[open + 1..end]);
     let Some((id, arguments)) = parts.split_first() else {
-        return Err(macro_failure("MF-DSL-MACRO-ID", "expected quoted macro id"));
+        return Err(macro_failure(MF_DSL_MACRO_ID, "expected quoted macro id"));
     };
     let macro_id =
-        unquote(id).ok_or_else(|| macro_failure("MF-DSL-MACRO-ID", "expected quoted macro id"))?;
+        unquote(id).ok_or_else(|| macro_failure(MF_DSL_MACRO_ID, "expected quoted macro id"))?;
     let definition = definitions
         .iter()
         .find(|definition| definition.macro_id == macro_id)
         .ok_or_else(|| {
-            macro_failure(
-                "MF-DSL-MACRO-UNKNOWN",
-                format!("unknown macro `{macro_id}`"),
-            )
+            macro_failure(MF_DSL_MACRO_UNKNOWN, format!("unknown macro `{macro_id}`"))
         })?;
     if definition.body_source.contains("macro(") {
         return Err(macro_failure(
-            "MF-DSL-MACRO-IN-BODY",
+            MF_DSL_MACRO_IN_BODY,
             format!("macro `{macro_id}` body invokes a macro"),
         ));
     }
     if arguments.len() != definition.parameters.len() {
         return Err(macro_failure(
-            "MF-DSL-MACRO-ARITY",
+            MF_DSL_MACRO_ARITY,
             format!(
                 "macro `{macro_id}` expects {} arguments, got {}",
                 definition.parameters.len(),
@@ -1885,7 +1897,7 @@ fn expand_macro_calls(
                     .then_some(())
                     .ok_or_else(|| {
                         ParseFailure::single(
-                            "MF-DSL-EXPECTED-TEXT",
+                            MF_DSL_EXPECTED_TEXT,
                             "expected text expression".to_string(),
                             SourceSpan { start: 0, end: 0 },
                         )
@@ -1893,14 +1905,14 @@ fn expand_macro_calls(
             }),
             ValueType::RowRef | ValueType::Outcome => {
                 return Err(macro_failure(
-                    "MF-DSL-MACRO-UNSUPPORTED-TYPE",
+                    MF_DSL_MACRO_UNSUPPORTED_TYPE,
                     "macro signatures support Bool, Int, and Text only",
                 ))
             }
         };
         if parsed.is_err() {
             return Err(macro_failure(
-                "MF-DSL-MACRO-ARG-TYPE",
+                MF_DSL_MACRO_ARG_TYPE,
                 format!(
                     "macro `{macro_id}` argument for `{}` has the wrong type",
                     parameter.name
@@ -2067,7 +2079,7 @@ fn parse_internal(source: &str, kind: ExpressionKind) -> Result<Expression, Pars
     if !matches!(parser.peek().kind, TokenKind::Eof) {
         let token = parser.peek().clone();
         return Err(ParseFailure::single(
-            "MF-DSL-TRAILING",
+            MF_DSL_TRAILING,
             "unexpected trailing input".to_string(),
             token.span,
         ));
@@ -2101,7 +2113,7 @@ fn parse_macro_body(definition: &DslMacroDefinition) -> Result<Expression, Parse
     if !matches!(parser.peek().kind, TokenKind::Eof) {
         let token = parser.peek().clone();
         return Err(ParseFailure::single(
-            "MF-DSL-TRAILING",
+            MF_DSL_TRAILING,
             "unexpected trailing input".to_string(),
             token.span,
         ));
@@ -2164,7 +2176,7 @@ pub fn compile_expression_with_macros(
         let token = parser.peek().clone();
         return Err(MacroCompileFailure {
             diagnostics: vec![Diagnostic {
-                code: "MF-DSL-TRAILING",
+                code: MF_DSL_TRAILING,
                 message: "unexpected trailing input".to_string(),
                 span: token.span,
             }],
@@ -2229,7 +2241,7 @@ fn compile_with_macro_root(
         let token = parser.peek().clone();
         return Err(MacroCompileFailure {
             diagnostics: vec![Diagnostic {
-                code: "MF-DSL-TRAILING",
+                code: MF_DSL_TRAILING,
                 message: "unexpected trailing input".to_string(),
                 span: token.span,
             }],
@@ -2454,7 +2466,7 @@ fn lex(source: &str) -> Result<Vec<Token>, ParseFailure> {
                 }
                 if i >= bytes.len() {
                     return Err(ParseFailure::single(
-                        "MF-DSL-UNTERMINATED-STRING",
+                        MF_DSL_UNTERMINATED_STRING,
                         "unterminated string literal".to_string(),
                         SourceSpan {
                             start,
@@ -2517,7 +2529,7 @@ fn lex(source: &str) -> Result<Vec<Token>, ParseFailure> {
                 }
                 if i >= bytes.len() {
                     return Err(ParseFailure::single(
-                        "MF-DSL-UNTERMINATED-STRING",
+                        MF_DSL_UNTERMINATED_STRING,
                         "unterminated string literal".to_string(),
                         SourceSpan {
                             start,
@@ -2540,7 +2552,7 @@ fn lex(source: &str) -> Result<Vec<Token>, ParseFailure> {
                 let text = &source[start..i];
                 let value = text.parse::<i64>().map_err(|_| {
                     ParseFailure::single(
-                        "MF-DSL-BAD-NUMBER",
+                        MF_DSL_BAD_NUMBER,
                         format!("invalid integer literal `{text}`"),
                         SourceSpan { start, end: i },
                     )
@@ -2568,7 +2580,7 @@ fn lex(source: &str) -> Result<Vec<Token>, ParseFailure> {
             }
             _ => {
                 return Err(ParseFailure::single(
-                    "MF-DSL-UNKNOWN-CHAR",
+                    MF_DSL_UNKNOWN_CHAR,
                     "unknown token".to_string(),
                     SourceSpan {
                         start: i,
@@ -2644,7 +2656,7 @@ impl Parser<'_> {
             ValueType::Int => self.parse_int_expr(),
             ValueType::Text => self.parse_text_expression(),
             ValueType::RowRef | ValueType::Outcome => Err(ParseFailure::single(
-                "MF-DSL-MACRO-UNSUPPORTED-TYPE",
+                MF_DSL_MACRO_UNSUPPORTED_TYPE,
                 "macros may return only Bool, Int, or Text".to_string(),
                 self.peek().span,
             )),
@@ -2670,7 +2682,7 @@ impl Parser<'_> {
                 ))
             }
             _ => Err(ParseFailure::single(
-                "MF-DSL-EXPECTED-TEXT",
+                MF_DSL_EXPECTED_TEXT,
                 "expected text expression".to_string(),
                 token.span,
             )),
@@ -2686,35 +2698,35 @@ impl Parser<'_> {
         let macro_token = self.next();
         if !self.macro_calls_allowed {
             return Err(ParseFailure::single(
-                "MF-DSL-MACRO-IN-BODY",
+                MF_DSL_MACRO_IN_BODY,
                 "macro calls are not allowed in macro bodies".to_string(),
                 macro_token.span,
             ));
         }
         let definitions = self.macro_definitions.ok_or_else(|| {
             ParseFailure::single(
-                "MF-DSL-MACRO-UNAVAILABLE",
+                MF_DSL_MACRO_UNAVAILABLE,
                 "macro calls require the macro-aware compiler".to_string(),
                 macro_token.span,
             )
         })?;
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let id_span = self.peek().span;
-        let macro_id = self.expect_string("MF-DSL-MACRO-ID", "expected quoted macro id")?;
+        let macro_id = self.expect_string(MF_DSL_MACRO_ID, "expected quoted macro id")?;
         let definition = definitions
             .iter()
             .find(|definition| definition.macro_id == macro_id)
             .cloned()
             .ok_or_else(|| {
                 ParseFailure::single(
-                    "MF-DSL-MACRO-UNKNOWN",
+                    MF_DSL_MACRO_UNKNOWN,
                     format!("unknown macro `{macro_id}`"),
                     id_span,
                 )
             })?;
         if definition.return_type != expected {
             return Err(ParseFailure::single(
-                "MF-DSL-MACRO-RETURN-TYPE",
+                MF_DSL_MACRO_RETURN_TYPE,
                 format!(
                     "macro `{}` returns {:?}, not {:?}",
                     definition.macro_id, definition.return_type, expected
@@ -2726,7 +2738,7 @@ impl Parser<'_> {
         for (index, parameter) in definition.parameters.iter().enumerate() {
             self.expect_simple(
                 TokenKind::Comma,
-                "MF-DSL-MACRO-ARITY",
+                MF_DSL_MACRO_ARITY,
                 "expected `,` before macro argument",
             )?;
             let argument = self.parse_value_expression(parameter.value_type)?;
@@ -2738,7 +2750,7 @@ impl Parser<'_> {
                 .expect("parsed macro argument node exists");
             if actual != parameter.value_type {
                 return Err(ParseFailure::single(
-                    "MF-DSL-MACRO-ARG-TYPE",
+                    MF_DSL_MACRO_ARG_TYPE,
                     format!(
                         "macro `{}` parameter `{}` expects {:?}, got {:?}",
                         definition.macro_id, parameter.name, parameter.value_type, actual
@@ -2751,7 +2763,7 @@ impl Parser<'_> {
                 && matches!(self.peek().kind, TokenKind::Comma)
             {
                 return Err(ParseFailure::single(
-                    "MF-DSL-MACRO-ARITY",
+                    MF_DSL_MACRO_ARITY,
                     format!(
                         "macro `{}` received too many arguments",
                         definition.macro_id
@@ -2762,7 +2774,7 @@ impl Parser<'_> {
         }
         if definition.parameters.is_empty() && matches!(self.peek().kind, TokenKind::Comma) {
             return Err(ParseFailure::single(
-                "MF-DSL-MACRO-ARITY",
+                MF_DSL_MACRO_ARITY,
                 format!(
                     "macro `{}` received too many arguments",
                     definition.macro_id
@@ -2770,7 +2782,7 @@ impl Parser<'_> {
                 self.peek().span,
             ));
         }
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         let body = parse_macro_body(&definition)?;
         self.graft_macro_body(&body, &definition.parameters, &arguments)
     }
@@ -2820,13 +2832,13 @@ impl Parser<'_> {
     fn parse_outcome_expr(&mut self) -> Result<NodeId, ParseFailure> {
         if self.peek_ident("sequence") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
             let mut steps = vec![self.parse_outcome_expr()?];
             while matches!(self.peek().kind, TokenKind::Comma) {
                 self.pos += 1;
                 steps.push(self.parse_outcome_expr()?);
             }
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Outcome,
                 Op::OutcomeSequence(OutcomeSequence { steps }),
@@ -2835,10 +2847,10 @@ impl Parser<'_> {
 
         if self.peek_ident("invoke_outcome_graph") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
             let outcome_graph_id =
-                self.expect_quoted_string("MF-DSL-EXPECTED-STRING", "expected outcome graph id")?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+                self.expect_quoted_string(MF_DSL_EXPECTED_STRING, "expected outcome graph id")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Outcome,
                 Op::InvokeOutcomeGraph(InvokeOutcomeGraph { outcome_graph_id }),
@@ -2847,30 +2859,30 @@ impl Parser<'_> {
 
         if self.peek_ident("arbitrate") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let request_shape_id = self
-                .expect_quoted_string("MF-DSL-EXPECTED-STRING", "expected arbitration shape id")?;
-            self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let request_shape_id =
+                self.expect_quoted_string(MF_DSL_EXPECTED_STRING, "expected arbitration shape id")?;
+            self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
             let context = self.expect_quoted_string(
-                "MF-DSL-EXPECTED-STRING",
+                MF_DSL_EXPECTED_STRING,
                 "expected arbitration context fact",
             )?;
             let context_node = self.add_text_literal(context);
-            self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+            self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
             let first_allowed = self.expect_quoted_string(
-                "MF-DSL-EXPECTED-STRING",
+                MF_DSL_EXPECTED_STRING,
                 "expected arbitration allowed outcome",
             )?;
             let mut allowed_outcome_nodes = vec![self.add_text_literal(first_allowed)];
             while matches!(self.peek().kind, TokenKind::Comma) {
                 self.pos += 1;
                 let allowed = self.expect_quoted_string(
-                    "MF-DSL-EXPECTED-STRING",
+                    MF_DSL_EXPECTED_STRING,
                     "expected arbitration allowed outcome",
                 )?;
                 allowed_outcome_nodes.push(self.add_text_literal(allowed));
             }
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Outcome,
                 Op::Arbitrate(Arbitrate {
@@ -2895,12 +2907,12 @@ impl Parser<'_> {
     fn parse_let_bool(&mut self) -> Result<NodeId, ParseFailure> {
         if self.peek_ident("let") {
             self.pos += 1;
-            let name = self.expect_ident("MF-DSL-EXPECTED-BINDING", "expected binding name")?;
-            self.expect_simple(TokenKind::Equal, "MF-DSL-EXPECTED-EQUAL", "expected `=`")?;
+            let name = self.expect_ident(MF_DSL_EXPECTED_BINDING, "expected binding name")?;
+            self.expect_simple(TokenKind::Equal, MF_DSL_EXPECTED_EQUAL, "expected `=`")?;
             let value = self.parse_int_expr()?;
             self.expect_simple(
                 TokenKind::Semicolon,
-                "MF-DSL-EXPECTED-SEMICOLON",
+                MF_DSL_EXPECTED_SEMICOLON,
                 "expected `;`",
             )?;
             let body = self.parse_let_bool()?;
@@ -2918,12 +2930,12 @@ impl Parser<'_> {
     fn parse_let_int(&mut self) -> Result<NodeId, ParseFailure> {
         if self.peek_ident("let") {
             self.pos += 1;
-            let name = self.expect_ident("MF-DSL-EXPECTED-BINDING", "expected binding name")?;
-            self.expect_simple(TokenKind::Equal, "MF-DSL-EXPECTED-EQUAL", "expected `=`")?;
+            let name = self.expect_ident(MF_DSL_EXPECTED_BINDING, "expected binding name")?;
+            self.expect_simple(TokenKind::Equal, MF_DSL_EXPECTED_EQUAL, "expected `=`")?;
             let value = self.parse_int_expr()?;
             self.expect_simple(
                 TokenKind::Semicolon,
-                "MF-DSL-EXPECTED-SEMICOLON",
+                MF_DSL_EXPECTED_SEMICOLON,
                 "expected `;`",
             )?;
             let body = self.parse_let_int()?;
@@ -2991,7 +3003,7 @@ impl Parser<'_> {
                     if err
                         .diagnostics
                         .first()
-                        .map(|d| d.code == "MF-DSL-UNKNOWN-PRIMITIVE")
+                        .map(|d| d.code == MF_DSL_UNKNOWN_PRIMITIVE)
                         .unwrap_or(false) =>
                 {
                     return Err(err);
@@ -3013,7 +3025,7 @@ impl Parser<'_> {
             _ => {
                 let token = self.peek().clone();
                 return Err(ParseFailure::single(
-                    "MF-DSL-EXPECTED-COMPARE",
+                    MF_DSL_EXPECTED_COMPARE,
                     "expected comparison operator".to_string(),
                     token.span,
                 ));
@@ -3033,14 +3045,14 @@ impl Parser<'_> {
 
     fn parse_method_bool(&mut self) -> Result<NodeId, ParseFailure> {
         let subject = self.parse_subject()?;
-        self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
-        let method = self.expect_ident("MF-DSL-EXPECTED-METHOD", "expected method name")?;
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
+        let method = self.expect_ident(MF_DSL_EXPECTED_METHOD, "expected method name")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let arg = self.expect_string_or_binding_path(
-            "MF-DSL-EXPECTED-STRING",
+            MF_DSL_EXPECTED_STRING,
             "expected string literal or binding path",
         )?;
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
 
         let node_id = match method.as_str() {
             "has_capability" => self.add_node(
@@ -3096,14 +3108,14 @@ impl Parser<'_> {
             "stat" | "effective" | "armor" | "resource_max" | "resource_min" => {
                 // int-typed field access — caller backtracks to parse_int_expr
                 return Err(ParseFailure::single(
-                    "MF-DSL-INT-FIELD",
+                    MF_DSL_INT_FIELD,
                     format!("`{method}` is an int field, not a bool method"),
                     self.slice_span_for_name(&method),
                 ));
             }
             _ => {
                 return Err(ParseFailure::single(
-                    "MF-DSL-UNKNOWN-PRIMITIVE",
+                    MF_DSL_UNKNOWN_PRIMITIVE,
                     format!("unknown primitive `{method}`"),
                     self.slice_span_for_name(&method),
                 ))
@@ -3129,7 +3141,7 @@ impl Parser<'_> {
                     }
                 }
                 _ => Err(ParseFailure::single(
-                    "MF-DSL-EXPECTED-BOOL",
+                    MF_DSL_EXPECTED_BOOL,
                     "expected boolean literal after `==` or `!=`".to_string(),
                     self.peek().span,
                 )),
@@ -3140,26 +3152,26 @@ impl Parser<'_> {
     }
 
     fn parse_roll_under(&mut self) -> Result<NodeId, ParseFailure> {
-        let fn_name = self.expect_ident("MF-DSL-EXPECTED-IDENT", "expected identifier")?;
+        let fn_name = self.expect_ident(MF_DSL_EXPECTED_IDENT, "expected identifier")?;
         if fn_name != "roll_under" {
             return Err(ParseFailure::single(
-                "MF-DSL-UNKNOWN-PRIMITIVE",
+                MF_DSL_UNKNOWN_PRIMITIVE,
                 format!("unknown primitive `{fn_name}`"),
                 self.slice_span_for_name(&fn_name),
             ));
         }
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let die_span = self.peek().span;
         let dice = self.try_parse_dice().ok_or_else(|| {
             ParseFailure::single(
-                "MF-DSL-EXPECTED-DIE",
+                MF_DSL_EXPECTED_DIE,
                 "expected die token (e.g. d20, 2d6)".to_string(),
                 die_span,
             )
         })?;
-        self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+        self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
         let target_node = self.parse_int_expr()?;
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         let roll_node = self.add_node(ValueType::Int, Op::Roll(Roll { dice }));
         Ok(self.add_node(
             ValueType::Bool,
@@ -3174,24 +3186,24 @@ impl Parser<'_> {
     /// and an authored tag-id prefix (mirrors the `roll_under` free-function
     /// shape, not the `subject.method(arg)` shape). Emits `Op::SharesTag`.
     fn parse_shares_tag(&mut self) -> Result<NodeId, ParseFailure> {
-        let fn_name = self.expect_ident("MF-DSL-EXPECTED-IDENT", "expected identifier")?;
+        let fn_name = self.expect_ident(MF_DSL_EXPECTED_IDENT, "expected identifier")?;
         if fn_name != "shares_tag" {
             return Err(ParseFailure::single(
-                "MF-DSL-UNKNOWN-PRIMITIVE",
+                MF_DSL_UNKNOWN_PRIMITIVE,
                 format!("unknown primitive `{fn_name}`"),
                 self.slice_span_for_name(&fn_name),
             ));
         }
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let subject_a = self.parse_subject()?;
-        self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+        self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
         let subject_b = self.parse_subject()?;
-        self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+        self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
         let prefix = self.expect_quoted_string(
-            "MF-DSL-EXPECTED-STRING",
+            MF_DSL_EXPECTED_STRING,
             "expected tag-id prefix string literal",
         )?;
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         Ok(self.add_node(
             ValueType::Bool,
             Op::SharesTag(SharesTag {
@@ -3300,11 +3312,11 @@ impl Parser<'_> {
         }
         if self.peek_ident("max") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
             let left = self.parse_int_expr()?;
-            self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+            self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
             let right = self.parse_int_expr()?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::Arithmetic(Arithmetic {
@@ -3316,11 +3328,11 @@ impl Parser<'_> {
         }
         if self.peek_ident("min") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
             let left = self.parse_int_expr()?;
-            self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+            self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
             let right = self.parse_int_expr()?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::Arithmetic(Arithmetic {
@@ -3332,9 +3344,9 @@ impl Parser<'_> {
         }
         if self.peek_ident("roll_table") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
             let table_id_node = self.parse_text_id_or_read_node()?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             let draw_node = self.add_node(ValueType::Int, Op::IntLiteral(IntLiteral { value: 0 }));
             return Ok(self.add_node(
                 ValueType::Int,
@@ -3349,17 +3361,15 @@ impl Parser<'_> {
         }
         if self.peek_ident("implied_by_count") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let condition_definition_id =
-                if matches!(self.peek().kind, TokenKind::RParen) {
-                    None
-                } else {
-                    Some(self.expect_string(
-                        "MF-DSL-EXPECTED-STRING",
-                        "expected condition definition id",
-                    )?)
-                };
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let condition_definition_id = if matches!(self.peek().kind, TokenKind::RParen) {
+                None
+            } else {
+                Some(
+                    self.expect_string(MF_DSL_EXPECTED_STRING, "expected condition definition id")?,
+                )
+            };
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::ImpliedByCount(ImpliedByCount {
@@ -3369,19 +3379,18 @@ impl Parser<'_> {
         }
         if self.peek_ident("participant_tag_group_count") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let prefix = self.expect_string("MF-DSL-EXPECTED-STRING", "expected tag prefix")?;
-            let excluding_condition_definition_id =
-                if matches!(self.peek().kind, TokenKind::Comma) {
-                    self.pos += 1;
-                    Some(self.expect_string(
-                        "MF-DSL-EXPECTED-STRING",
-                        "expected condition definition id",
-                    )?)
-                } else {
-                    None
-                };
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let prefix = self.expect_string(MF_DSL_EXPECTED_STRING, "expected tag prefix")?;
+            let excluding_condition_definition_id = if matches!(self.peek().kind, TokenKind::Comma)
+            {
+                self.pos += 1;
+                Some(
+                    self.expect_string(MF_DSL_EXPECTED_STRING, "expected condition definition id")?,
+                )
+            } else {
+                None
+            };
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::ParticipantTagGroupCount(ParticipantTagGroupCount {
@@ -3392,21 +3401,20 @@ impl Parser<'_> {
         }
         if self.peek_ident("peers_near_target") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let prefix = self.expect_string("MF-DSL-EXPECTED-STRING", "expected tag prefix")?;
-            self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
-            let radius_mm = self.expect_int_literal("MF-DSL-EXPECTED-INT", "expected radius_mm")?;
-            let excluding_condition_definition_id =
-                if matches!(self.peek().kind, TokenKind::Comma) {
-                    self.pos += 1;
-                    Some(self.expect_string(
-                        "MF-DSL-EXPECTED-STRING",
-                        "expected condition definition id",
-                    )?)
-                } else {
-                    None
-                };
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let prefix = self.expect_string(MF_DSL_EXPECTED_STRING, "expected tag prefix")?;
+            self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
+            let radius_mm = self.expect_int_literal(MF_DSL_EXPECTED_INT, "expected radius_mm")?;
+            let excluding_condition_definition_id = if matches!(self.peek().kind, TokenKind::Comma)
+            {
+                self.pos += 1;
+                Some(
+                    self.expect_string(MF_DSL_EXPECTED_STRING, "expected condition definition id")?,
+                )
+            } else {
+                None
+            };
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::PeersNearTarget(PeersNearTarget {
@@ -3418,19 +3426,18 @@ impl Parser<'_> {
         }
         if self.peek_ident("occupants_at") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let scope = self.expect_string("MF-DSL-EXPECTED-STRING", "expected node scope")?;
-            let excluding_condition_definition_id =
-                if matches!(self.peek().kind, TokenKind::Comma) {
-                    self.pos += 1;
-                    Some(self.expect_string(
-                        "MF-DSL-EXPECTED-STRING",
-                        "expected condition definition id",
-                    )?)
-                } else {
-                    None
-                };
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let scope = self.expect_string(MF_DSL_EXPECTED_STRING, "expected node scope")?;
+            let excluding_condition_definition_id = if matches!(self.peek().kind, TokenKind::Comma)
+            {
+                self.pos += 1;
+                Some(
+                    self.expect_string(MF_DSL_EXPECTED_STRING, "expected condition definition id")?,
+                )
+            } else {
+                None
+            };
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(
                 ValueType::Int,
                 Op::OccupantsAt(OccupantsAt {
@@ -3441,9 +3448,9 @@ impl Parser<'_> {
         }
         if self.peek_ident("channel_pool") {
             self.pos += 1;
-            self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-            let channel_id = self.expect_string("MF-DSL-EXPECTED-STRING", "expected channel id")?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+            let channel_id = self.expect_string(MF_DSL_EXPECTED_STRING, "expected channel id")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(self.add_node(ValueType::Int, Op::ChannelPool(ChannelPool { channel_id })));
         }
 
@@ -3453,7 +3460,7 @@ impl Parser<'_> {
         if matches!(self.peek().kind, TokenKind::LParen) {
             self.pos += 1;
             let inner = self.parse_int_expr()?;
-            self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+            self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
             return Ok(inner);
         }
 
@@ -3484,11 +3491,11 @@ impl Parser<'_> {
                     || subject == "world"
                     || subject == "bindings" =>
             {
-                self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
+                self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
                 let subject_ref = if subject == "bindings" {
                     let name =
-                        self.expect_ident("MF-DSL-EXPECTED-BINDING", "expected binding name")?;
-                    self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
+                        self.expect_ident(MF_DSL_EXPECTED_BINDING, "expected binding name")?;
+                    self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
                     SubjectRef::Binding(BindingRef { name })
                 } else {
                     subject_from_ident(&subject).map_err(|code| {
@@ -3499,7 +3506,7 @@ impl Parser<'_> {
                         )
                     })?
                 };
-                let field = self.expect_ident("MF-DSL-EXPECTED-FIELD", "expected field name")?;
+                let field = self.expect_ident(MF_DSL_EXPECTED_FIELD, "expected field name")?;
                 // Chained relation accessor: `actor.wielded_item.<field>`. The
                 // relation token re-roots the subject; the real field follows the
                 // next `.`. Closed K-5 vocab (ADR-0021 D-2); shares the
@@ -3516,7 +3523,7 @@ impl Parser<'_> {
                         // `actor.wielded_item` is rejected — it is not itself a value.
                         if !matches!(self.peek().kind, TokenKind::Dot) {
                             return Err(ParseFailure::single(
-                                "MF-DSL-DANGLING-RELATION",
+                                MF_DSL_DANGLING_RELATION,
                                 format!(
                                     "`{field}` is a relation accessor; read a field off it, \
                                      e.g. `actor.{field}.stat('…')`"
@@ -3526,7 +3533,7 @@ impl Parser<'_> {
                         }
                         self.next(); // consume `.`
                         let real_field =
-                            self.expect_ident("MF-DSL-EXPECTED-FIELD", "expected field name")?;
+                            self.expect_ident(MF_DSL_EXPECTED_FIELD, "expected field name")?;
                         (resubject, real_field)
                     }
                     None => (subject_ref, field),
@@ -3537,17 +3544,9 @@ impl Parser<'_> {
                     field
                 };
                 if field == "stat" {
-                    self.expect_simple(
-                        TokenKind::LParen,
-                        "MF-DSL-EXPECTED-LPAREN",
-                        "expected `(`",
-                    )?;
-                    let stat = self.expect_string("MF-DSL-EXPECTED-STRING", "expected stat id")?;
-                    self.expect_simple(
-                        TokenKind::RParen,
-                        "MF-DSL-EXPECTED-RPAREN",
-                        "expected `)`",
-                    )?;
+                    self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+                    let stat = self.expect_string(MF_DSL_EXPECTED_STRING, "expected stat id")?;
+                    self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
                     Ok(self.add_node(
                         ValueType::Int,
                         Op::ReadInt(ReadField {
@@ -3560,17 +3559,9 @@ impl Parser<'_> {
                     // value via the `effective_int_fields` overlay. `stat` stays
                     // strictly base (ADR-0035 zirkularity cut); `effective` is the
                     // author opt-in to gate on composed condition modifiers.
-                    self.expect_simple(
-                        TokenKind::LParen,
-                        "MF-DSL-EXPECTED-LPAREN",
-                        "expected `(`",
-                    )?;
-                    let stat = self.expect_string("MF-DSL-EXPECTED-STRING", "expected stat id")?;
-                    self.expect_simple(
-                        TokenKind::RParen,
-                        "MF-DSL-EXPECTED-RPAREN",
-                        "expected `)`",
-                    )?;
+                    self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+                    let stat = self.expect_string(MF_DSL_EXPECTED_STRING, "expected stat id")?;
+                    self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
                     Ok(self.add_node(
                         ValueType::Int,
                         Op::ReadEffectiveInt(ReadField {
@@ -3585,18 +3576,10 @@ impl Parser<'_> {
                     // leaf op (not `stat(field_id)`) because the lookup is a
                     // parameterized table-backed constant, not a per-subject
                     // fact string — see the design draft.
-                    self.expect_simple(
-                        TokenKind::LParen,
-                        "MF-DSL-EXPECTED-LPAREN",
-                        "expected `(`",
-                    )?;
+                    self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
                     let resource_id =
-                        self.expect_string("MF-DSL-EXPECTED-STRING", "expected resource id")?;
-                    self.expect_simple(
-                        TokenKind::RParen,
-                        "MF-DSL-EXPECTED-RPAREN",
-                        "expected `)`",
-                    )?;
+                        self.expect_string(MF_DSL_EXPECTED_STRING, "expected resource id")?;
+                    self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
                     Ok(self.add_node(
                         ValueType::Int,
                         Op::ReadResourceMax(ReadField {
@@ -3607,18 +3590,10 @@ impl Parser<'_> {
                 } else if field == "resource_min" {
                     // #30 / sk-ct8.2: sibling of `resource_max` — the EFFECTIVE
                     // per-entity MIN bound.
-                    self.expect_simple(
-                        TokenKind::LParen,
-                        "MF-DSL-EXPECTED-LPAREN",
-                        "expected `(`",
-                    )?;
+                    self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
                     let resource_id =
-                        self.expect_string("MF-DSL-EXPECTED-STRING", "expected resource id")?;
-                    self.expect_simple(
-                        TokenKind::RParen,
-                        "MF-DSL-EXPECTED-RPAREN",
-                        "expected `)`",
-                    )?;
+                        self.expect_string(MF_DSL_EXPECTED_STRING, "expected resource id")?;
+                    self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
                     Ok(self.add_node(
                         ValueType::Int,
                         Op::ReadResourceMin(ReadField {
@@ -3644,17 +3619,9 @@ impl Parser<'_> {
                     // argument's text-valued-node grammar
                     // (`parse_text_id_or_read_node`): a quoted literal or a
                     // `<subject>.text('id')` runtime-resolved read.
-                    self.expect_simple(
-                        TokenKind::LParen,
-                        "MF-DSL-EXPECTED-LPAREN",
-                        "expected `(`",
-                    )?;
+                    self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
                     let slot_node = self.parse_text_id_or_read_node()?;
-                    self.expect_simple(
-                        TokenKind::RParen,
-                        "MF-DSL-EXPECTED-RPAREN",
-                        "expected `)`",
-                    )?;
+                    self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
                     Ok(self.add_node(
                         ValueType::Int,
                         Op::DslSource(DslSource {
@@ -3680,7 +3647,7 @@ impl Parser<'_> {
                 }),
             )),
             _ => Err(ParseFailure::single(
-                "MF-DSL-EXPECTED-INT",
+                MF_DSL_EXPECTED_INT,
                 "expected integer expression".to_string(),
                 token.span,
             )),
@@ -3691,13 +3658,13 @@ impl Parser<'_> {
     /// a full Bool expression; both branches are full Int expressions.
     fn parse_cond(&mut self) -> Result<NodeId, ParseFailure> {
         self.pos += 1; // consume `cond`
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let cond = self.parse_let_bool()?;
-        self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+        self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
         let then_node = self.parse_int_expr()?;
-        self.expect_simple(TokenKind::Comma, "MF-DSL-EXPECTED-COMMA", "expected `,`")?;
+        self.expect_simple(TokenKind::Comma, MF_DSL_EXPECTED_COMMA, "expected `,`")?;
         let else_node = self.parse_int_expr()?;
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         Ok(self.add_node(
             ValueType::Int,
             Op::Cond(Cond {
@@ -3710,19 +3677,19 @@ impl Parser<'_> {
 
     fn parse_event_binding_ref(&mut self, dollar_span: SourceSpan) -> Result<NodeId, ParseFailure> {
         let scope = self.expect_ident(
-            "MF-DSL-EXPECTED-BINDING-SCOPE",
+            MF_DSL_EXPECTED_BINDING_SCOPE,
             "expected binding scope after `$`",
         )?;
         if scope != "event" {
             return Err(ParseFailure::single(
-                "MF-DSL-UNKNOWN-BINDING-SCOPE",
+                MF_DSL_UNKNOWN_BINDING_SCOPE,
                 format!("unknown binding scope `{scope}`"),
                 dollar_span,
             ));
         }
 
-        self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
-        let segment = self.expect_ident("MF-DSL-EXPECTED-FIELD", "expected event field")?;
+        self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
+        let segment = self.expect_ident(MF_DSL_EXPECTED_FIELD, "expected event field")?;
         match segment.as_str() {
             "kind" => Ok(self.add_node(
                 ValueType::Text,
@@ -3732,9 +3699,9 @@ impl Parser<'_> {
                 }),
             )),
             "detail" => {
-                self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
+                self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
                 let field =
-                    self.expect_ident("MF-DSL-EXPECTED-FIELD", "expected event detail field")?;
+                    self.expect_ident(MF_DSL_EXPECTED_FIELD, "expected event detail field")?;
                 let subject = SubjectRef::Event(EventRef::Detail {
                     field_id: field.clone(),
                 });
@@ -3756,7 +3723,7 @@ impl Parser<'_> {
                 }
             }
             other => Err(ParseFailure::single(
-                "MF-DSL-UNKNOWN-EVENT-BINDING",
+                MF_DSL_UNKNOWN_EVENT_BINDING,
                 format!("unknown event binding `$event.{other}`"),
                 self.slice_span_for_name(other),
             )),
@@ -3767,7 +3734,7 @@ impl Parser<'_> {
         let token = self.next();
         let TokenKind::Ident(ident) = token.kind else {
             return Err(ParseFailure::single(
-                "MF-DSL-EXPECTED-SUBJECT",
+                MF_DSL_EXPECTED_SUBJECT,
                 "expected subject identifier".to_string(),
                 token.span,
             ));
@@ -3804,20 +3771,20 @@ impl Parser<'_> {
     }
 
     fn parse_equipped_item_subject(&mut self) -> Result<SubjectRef, ParseFailure> {
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
         let span = self.peek().span;
         let slot_id = self.expect_string(
-            "MF-DSL-EQUIPMENT-SLOT-LITERAL",
+            MF_DSL_EQUIPMENT_SLOT_LITERAL,
             "expected a nonempty literal equipment slot id",
         )?;
         if slot_id.trim().is_empty() {
             return Err(ParseFailure::single(
-                "MF-DSL-EQUIPMENT-SLOT-LITERAL",
+                MF_DSL_EQUIPMENT_SLOT_LITERAL,
                 "equipment slot id must not be empty".to_string(),
                 span,
             ));
         }
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         Ok(SubjectRef::ActorEquippedItem { slot_id })
     }
 
@@ -3835,15 +3802,15 @@ impl Parser<'_> {
     /// a second caller with no roll-table meaning at all.
     fn parse_text_id_or_read_node(&mut self) -> Result<NodeId, ParseFailure> {
         if matches!(self.peek().kind, TokenKind::StringLit(_)) {
-            let value = self.expect_string("MF-DSL-EXPECTED-STRING", "expected a quoted id")?;
+            let value = self.expect_string(MF_DSL_EXPECTED_STRING, "expected a quoted id")?;
             return Ok(self.add_node(ValueType::Text, Op::TextLiteral(TextLiteral { value })));
         }
         let subject = self.parse_subject()?;
-        self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
-        let method = self.expect_ident("MF-DSL-EXPECTED-METHOD", "expected `text`")?;
+        self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
+        let method = self.expect_ident(MF_DSL_EXPECTED_METHOD, "expected `text`")?;
         if method != "text" {
             return Err(ParseFailure::single(
-                "MF-DSL-EXPECTED-TEXT-READ",
+                MF_DSL_EXPECTED_TEXT_READ,
                 format!(
                     "expected a quoted id or a `<subject>.text('id')` \
                      read, got `.{method}`"
@@ -3851,9 +3818,9 @@ impl Parser<'_> {
                 self.slice_span_for_name(&method),
             ));
         }
-        self.expect_simple(TokenKind::LParen, "MF-DSL-EXPECTED-LPAREN", "expected `(`")?;
-        let field_id = self.expect_string("MF-DSL-EXPECTED-STRING", "expected quoted state id")?;
-        self.expect_simple(TokenKind::RParen, "MF-DSL-EXPECTED-RPAREN", "expected `)`")?;
+        self.expect_simple(TokenKind::LParen, MF_DSL_EXPECTED_LPAREN, "expected `(`")?;
+        let field_id = self.expect_string(MF_DSL_EXPECTED_STRING, "expected quoted state id")?;
+        self.expect_simple(TokenKind::RParen, MF_DSL_EXPECTED_RPAREN, "expected `)`")?;
         Ok(self.add_node(
             ValueType::Text,
             Op::ReadText(ReadField { subject, field_id }),
@@ -3995,13 +3962,13 @@ impl Parser<'_> {
             let scope = self.expect_ident(code, message)?;
             if scope != "bindings" {
                 return Err(ParseFailure::single(
-                    "MF-DSL-UNKNOWN-BINDING-SCOPE",
+                    MF_DSL_UNKNOWN_BINDING_SCOPE,
                     format!("unknown binding scope `{scope}`"),
                     dollar.span,
                 ));
             }
-            self.expect_simple(TokenKind::Dot, "MF-DSL-EXPECTED-DOT", "expected `.`")?;
-            let name = self.expect_ident("MF-DSL-EXPECTED-BINDING", "expected binding name")?;
+            self.expect_simple(TokenKind::Dot, MF_DSL_EXPECTED_DOT, "expected `.`")?;
+            let name = self.expect_ident(MF_DSL_EXPECTED_BINDING, "expected binding name")?;
             return Ok(format!("${scope}.{name}"));
         }
         self.expect_string(code, message)
@@ -4040,7 +4007,7 @@ fn subject_from_ident(ident: &str) -> Result<SubjectRef, &'static str> {
         "location" => Ok(SubjectRef::Location),
         "session" => Ok(SubjectRef::Session),
         "world" => Ok(SubjectRef::World),
-        _ => Err("MF-DSL-UNKNOWN-SUBJECT"),
+        _ => Err(MF_DSL_UNKNOWN_SUBJECT),
     }
 }
 
