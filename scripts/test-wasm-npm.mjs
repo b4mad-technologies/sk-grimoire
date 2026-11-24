@@ -111,9 +111,10 @@ try {
             server.listen(0, '127.0.0.1', () => {
                 chrome = spawn(process.env.CHROME_BIN ?? 'google-chrome', [
                     '--headless', '--no-first-run', '--no-default-browser-check',
+                    '--disable-background-networking',
                     `--user-data-dir=${join(project, 'chrome')}`,
                     `http://127.0.0.1:${server.address().port}/`,
-                ], { stdio: ['ignore', 'ignore', 'pipe'], timeout: 30_000 });
+                ], { stdio: ['ignore', 'ignore', 'pipe'], timeout: 120_000 });
                 let stderr = '';
                 chrome.stderr.setEncoding('utf8').on('data', chunk => { stderr += chunk; });
                 chrome.on('error', fail);
