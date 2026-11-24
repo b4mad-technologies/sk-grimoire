@@ -1372,7 +1372,7 @@ pub fn evaluate_dsl_expression_json_core(
             let unknown_macro = compile_failure
                 .diagnostics
                 .iter()
-                .find(|d| d.code == "MF-DSL-MACRO-UNKNOWN");
+                .find(|d| d.code == spellkave_dsl::diagnostic_codes::MF_DSL_MACRO_UNKNOWN);
 
             let rejection = if let Some(op_name) = outcome_op {
                 EvaluationRejection {

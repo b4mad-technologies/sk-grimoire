@@ -11,6 +11,7 @@ pub mod affordance_template_participants;
 mod area_shapes;
 pub mod autonomy_jobs;
 pub mod containment_policy;
+pub mod diagnostic_codes;
 pub mod dm_acts;
 pub mod dm_document_authority;
 pub mod dm_document_envelope;

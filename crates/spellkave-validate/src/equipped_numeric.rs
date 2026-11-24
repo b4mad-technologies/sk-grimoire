@@ -147,7 +147,7 @@ pub(crate) fn validate(manifest: &Manifest, diagnostics: &mut Vec<Diagnostic>) {
         // These are possible hazards, never an independent author admission gate.
         for reason in reasons {
             diagnostics.push(Diagnostic {
-                code:"MF-VAL-390".into(), severity:Severity::Warning,
+                code:crate::diagnostic_codes::MF_VAL_EQUIPPED_DEPENDENCY_HAZARD.into(), severity:Severity::Warning,
                 message:format!("potential equipped dependency hazard in definition {definition}: {reason}; any statically followed source assumes a possible compatible placement; predicates, wearer state and other equipment determine the concrete result"),
                 path:"entity_definition_equip_modifier".into(),span:None,
                 hint:Some("check the prospective wearer graph with EquipItem; resolve cycles/sources before equipping".into()),details:Some(serde_json::json!({"entity_def_id":definition,"modifier_template_ids":template_ids})),

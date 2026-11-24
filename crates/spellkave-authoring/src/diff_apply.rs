@@ -321,13 +321,13 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
         }
         if memory.base_state == BaseState::Unknown {
             warnings.push(warning(
-                "MF-APPLYSET-BASE-UNKNOWN",
+                spellkave_validate::diagnostic_codes::MF_APPLYSET_BASE_UNKNOWN,
                 "the last apply of this applyset did not finish or its rows were cleared; the memory may not describe the world",
                 None,
             ));
             if input.prune {
                 diagnostics.push(fatal(
-                    "MF-APPLYSET-PRUNE-UNKNOWN",
+                    spellkave_validate::diagnostic_codes::MF_APPLYSET_PRUNE_UNKNOWN,
                     "--prune is refused while the applyset base is unknown: the memory may name rows the world no longer holds",
                     None,
                 ));
@@ -335,7 +335,7 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
         }
         if memory.root_path != input.root_path {
             warnings.push(warning(
-                "MF-APPLYSET-ROOT-MOVED",
+                spellkave_validate::diagnostic_codes::MF_APPLYSET_ROOT_MOVED,
                 "the applyset memory names another root path; an apply needs --force to take the name over",
                 Some(serde_json::json!({
                     "stored_root_path": memory.root_path,
@@ -345,14 +345,14 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
         }
     } else {
         warnings.push(warning(
-            "MF-APPLYSET-ADOPT",
+            spellkave_validate::diagnostic_codes::MF_APPLYSET_ADOPT,
             "the world has no memory of this applyset: rows the world already holds are adopted without rewriting them when comparable values agree; unreadable rows are creates (upserts), and rows only the world holds are left alone",
             None,
         ));
     }
     for dup in &built.duplicates {
         warnings.push(warning(
-            "MF-APPLYSET-DUPLICATE",
+            spellkave_validate::diagnostic_codes::MF_APPLYSET_DUPLICATE,
             &format!(
                 "{} `{}` appears in {} parts; the last one wins",
                 dup.kind,
@@ -364,7 +364,7 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
     }
     for split in &built.split_sets {
         warnings.push(warning(
-            "MF-APPLYSET-SPLIT-SET",
+            spellkave_validate::diagnostic_codes::MF_APPLYSET_SPLIT_SET,
             &format!(
                 "{} `{}` is assembled from blocks in {} parts; its hash covers all of them",
                 split.kind,
@@ -383,7 +383,7 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
     }
     for (kind, (count, parts)) in untrackable {
         warnings.push(warning(
-            "MF-APPLYSET-UNTRACKABLE",
+            spellkave_validate::diagnostic_codes::MF_APPLYSET_UNTRACKABLE,
             &format!(
                 "{count} {kind} row(s) in {parts} part(s) have no row identity; they are not compared or sent"
             ),
@@ -480,7 +480,7 @@ pub fn classify_and_build_delta(input: &DiffInput) -> Result<DiffOutput, String>
             if is_instance_kind(&entry.kind) {
                 let entity = prune_instance_entity_name(&entry.kind, &entry.key);
                 diagnostics.push(fatal(
-                    "MF-APPLYSET-PRUNE-INSTANCE",
+                    spellkave_validate::diagnostic_codes::MF_APPLYSET_PRUNE_INSTANCE,
                     &format!(
                         "{} row `{}` can be removed only together with its entity `{entity}`",
                         entry.kind, entry.key

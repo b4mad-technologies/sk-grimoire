@@ -343,7 +343,7 @@ pub fn validate_manifest_json(manifest_json: &str) -> String {
         Ok(manifest) => manifest,
         Err(err) => {
             let diagnostics = vec![spellkave_validate::Diagnostic {
-                code: "MF-VAL-109".to_owned(),
+                code: spellkave_validate::diagnostic_codes::MF_VAL_VALIDATION_INPUT.to_owned(),
                 severity: spellkave_validate::Severity::Fatal,
                 message: "manifest json parse failed".to_owned(),
                 path: "$".to_owned(),
@@ -385,7 +385,10 @@ pub fn validate_manifest_toml_with_containment_context(
         match serde_json::from_str(context_json) {
             Ok(context) => context,
             Err(error) => {
-                return single_fatal("MF-VAL-109", format!("containment context: {error}"))
+                return single_fatal(
+                    spellkave_validate::diagnostic_codes::MF_VAL_VALIDATION_INPUT,
+                    format!("containment context: {error}"),
+                )
             }
         };
     let vocabulary = context.into_vocabulary();
@@ -400,18 +403,22 @@ fn validate_toml(
         Ok(parsed) => parsed,
         Err(err) => {
             let (code, message) = match err {
-                spellkave_format::ParseError::MissingSchemaDirective => {
-                    ("MF-FMT-001", "missing schema directive".to_owned())
-                }
-                spellkave_format::ParseError::Toml(ref e) => {
-                    ("MF-FMT-002", format!("manifest parse: {e}"))
-                }
-                spellkave_format::ParseError::UnsupportedMetadataValue(ref e) => {
-                    ("MF-FMT-002", format!("manifest parse: {e}"))
-                }
-                spellkave_format::ParseError::FragmentApplyset => {
-                    ("MF-FMT-002", format!("manifest parse: {err}"))
-                }
+                spellkave_format::ParseError::MissingSchemaDirective => (
+                    spellkave_validate::MF_FMT_MISSING_SCHEMA_DIRECTIVE,
+                    "missing schema directive".to_owned(),
+                ),
+                spellkave_format::ParseError::Toml(ref e) => (
+                    spellkave_validate::diagnostic_codes::MF_FMT_MANIFEST_PARSE,
+                    format!("manifest parse: {e}"),
+                ),
+                spellkave_format::ParseError::UnsupportedMetadataValue(ref e) => (
+                    spellkave_validate::diagnostic_codes::MF_FMT_MANIFEST_PARSE,
+                    format!("manifest parse: {e}"),
+                ),
+                spellkave_format::ParseError::FragmentApplyset => (
+                    spellkave_validate::diagnostic_codes::MF_FMT_MANIFEST_PARSE,
+                    format!("manifest parse: {err}"),
+                ),
             };
             return single_fatal(code, message);
         }
