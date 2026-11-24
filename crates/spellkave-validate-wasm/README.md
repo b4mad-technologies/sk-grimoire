@@ -1,6 +1,8 @@
 # spellkave-validate-wasm
 
-WebAssembly bindings for `spellkave-validate`.
+WebAssembly bindings for `spellkave-validate`, published as
+`@spellkave/validate-wasm`. See the
+[package usage and build instructions](https://github.com/b4mad-technologies/sk-grimoire#wasm-npm-packages).
 
 From the workspace root, build with:
 
