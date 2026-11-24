@@ -8,7 +8,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use spellkave_schema::row_kinds::ROW_KIND_NATURAL_KEY;
 use spellkave_schema::Manifest;
 
-use crate::refs::BundleScope;
+use crate::reference_scope::BundleScope;
 use crate::{Diagnostic, Severity};
 
 /// A `tag` value containing `=` or `:` produces a warning.

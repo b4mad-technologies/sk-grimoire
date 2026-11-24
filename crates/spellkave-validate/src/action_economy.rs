@@ -15,7 +15,7 @@
 //! TOML so a modder adds a reset boundary (e.g. `encounter_end`) by authoring a
 //! row, with no engine change (ADR-0018 D-1).
 //!
-//! Resolution reuses the SAME `depends_on` closure (`refs::BundleScope`) every
+//! Resolution reuses the SAME `depends_on` closure (`reference_scope::BundleScope`) every
 //! cross-bundle reference uses — not a second cross-bundle rule. Two tiers:
 //!   1. **scope** — a `resets_on` whose boundary IS declared in this manifest
 //!      but in a bundle outside the row's `depends_on` closure is rejected.
@@ -40,7 +40,7 @@
 //! consuming slice (FK → C, recharge → B/C, compose → D, reaction-eligibility →
 //! E, reaction-trigger → F-impl). Codes MF-VAL-234..239 are reserved for these.
 
-use crate::refs::BundleScope;
+use crate::reference_scope::{resolve_scoped_ref, BundleScope, RefResolution};
 use crate::{Diagnostic, Severity};
 use spellkave_schema::{EconomyChannelDefinitionRow, Manifest};
 use std::collections::{BTreeMap, BTreeSet};
@@ -611,66 +611,6 @@ fn validate_reaction_trigger(
                     "locality_class": "Global",
                 })),
             });
-        }
-    }
-}
-
-/// Two-tier scoped-reference verdict shared by every action-economy field that
-/// points at authored vocabulary in a (possibly cross-bundle) closure. See the
-/// module doc: tier 1 = scope (declared but out of `depends_on` closure), tier 2
-/// = existence (undeclared, rejected only when the full closure is visible, else
-/// trusted so a per-file `just validate` never false-rejects a dependency's id).
-///
-/// `pub(crate)` (sk-zqc) so `refs.rs` can route the Class-6 frame-write checks
-/// (`MF_VAL_FRAME_WRITE_RESOURCE_REF` / `MF_VAL_FRAME_WRITE_CHANNEL_REF`)
-/// through the SAME two-tier rule instead of their old unconditional-Fatal
-/// shape — canon-warden found those two the odd ones out (no closure-incomplete
-/// fallback at all), a pre-existing gap inherited from the ModifyResource
-/// check, not introduced by sk-ct8.4.
-pub(crate) enum RefResolution {
-    /// Declared in this manifest and in the using row's `depends_on` closure.
-    InScope,
-    /// Declared in this manifest but by a bundle outside the closure.
-    OutOfScope { decl_bundle: String },
-    /// Not declared by any row here, and the full closure IS present → a typo.
-    UndeclaredButVisible,
-    /// Not declared here and the closure is incomplete (per-file run) → trust.
-    Trusted,
-}
-
-/// Resolve `token` against a `decl_bundle` map (token id → declaring bundle),
-/// scoped by `using_bundle`'s `depends_on` closure. The single place the
-/// scope/existence two-tier rule lives — `resets_on`, `spends_channel`,
-/// `recharges_on`, session combat-grid blueprints (this module) and, since
-/// sk-zqc, `refs.rs`'s Class-6 frame-write ref checks all route through it
-/// (warden condition 7: one resolution, no per-field const). `pub(crate)` for
-/// the same reason as `RefResolution` above.
-pub(crate) fn resolve_scoped_ref(
-    using_bundle: &str,
-    token: &str,
-    decl_bundle: &BTreeMap<&str, &str>,
-    scope: &BundleScope,
-    present: &BTreeSet<&str>,
-) -> RefResolution {
-    match decl_bundle.get(token) {
-        Some(decl) => {
-            if scope.in_scope(using_bundle, decl) {
-                RefResolution::InScope
-            } else {
-                RefResolution::OutOfScope {
-                    decl_bundle: (*decl).to_owned(),
-                }
-            }
-        }
-        None => {
-            let closure_visible = scope
-                .closure_of(using_bundle)
-                .is_some_and(|reach| reach.iter().all(|b| present.contains(b.as_str())));
-            if closure_visible {
-                RefResolution::UndeclaredButVisible
-            } else {
-                RefResolution::Trusted
-            }
         }
     }
 }
