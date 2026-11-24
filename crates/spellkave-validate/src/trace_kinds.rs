@@ -15,20 +15,9 @@ pub const MF_VAL_TRACE_KIND_LOCATION_KIND: &str = "MF-VAL-251";
 /// A place-node trace names an unknown trace kind in the available vocabulary.
 pub const MF_VAL_PLACE_NODE_TRACE_KIND: &str = "MF-VAL-320";
 
-/// Registered scope ids a trace kind may name in `location_kinds`.
-pub const VALID_LOCATION_KINDS: &[&str] = &[
-    "place_node",
-    "place_edge",
-    "place_graph",
-    "trace",
-    // ADR-0095 D-1: an `entity` row as a trace anchor (co-location with the
-    // anchor's CURRENT position admits, per the two new seam arms).
-    "entity",
-    "any",
-];
-
-/// Trace kinds available from the core bootstrap without an authored definition.
-pub const BOOTSTRAP_TRACE_KINDS: &[&str] = &["scrape_marks", "scent", "smoke", "handled_item"];
+pub use spellkave_schema::seed_vocabulary::{
+    CORE_SCOPE_IDS as VALID_LOCATION_KINDS, CORE_TRACE_KIND_IDS as BOOTSTRAP_TRACE_KINDS,
+};
 
 /// Validate the `[[trace_kind_definitions]]` section.
 pub fn validate_trace_kind_definitions(manifest: &Manifest, diags: &mut Vec<Diagnostic>) {

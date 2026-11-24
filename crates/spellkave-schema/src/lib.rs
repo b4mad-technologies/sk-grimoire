@@ -208,6 +208,7 @@ pub mod export_round_trip;
 
 pub mod row_identity;
 pub mod row_kinds;
+pub mod seed_vocabulary;
 pub mod storage_key;
 pub use row_kinds::{
     row_kind_composite_key_json, row_kind_natural_key_json, ROW_KIND_COMPOSITE_KEY,

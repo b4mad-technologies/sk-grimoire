@@ -63,22 +63,14 @@ pub const MF_VAL_AUTONOMY_JOB_SUBJECT_ENTITY_KEY_REF: &str = "MF-VAL-325";
 /// The reserved bundle id for runtime (reducer-inserted) autonomy jobs.
 const RUNTIME_BUNDLE: &str = "runtime";
 
-/// Effect primitives an authored autonomy job may fire (ADR-0004 D-2). See the
-/// module docstring: a narrow ambient allowlist, not modder vocabulary.
-///
-/// `pub` so the server kernel's `EffectPrimitive::autonomy_eligible_names`
-/// drift-guard test can pin the two enforcement layers together (ADR-0041 D-3,
-/// Consequences — the validator cannot import the kernel enum).
-pub const AUTONOMY_ELIGIBLE_PRIMITIVES: &[&str] = &["InscribeTraceCluster"];
-
-/// Subject-resolved actor-reaching primitives admitted only when an autonomy job
-/// carries a stored responsible subject (ADR-0054).
-pub const SUBJECT_BOUND_AUTONOMY_ACTOR_PRIMITIVES: &[&str] = &["Damage", "Heal", "ApplyModifier"];
-
-/// Frame-write variants admitted for subject-bound caster-attributed hazard
-/// consequence templates. Pinned against the server fire-time guard.
-pub const AUTONOMY_ELIGIBLE_FRAME_WRITES: &[&str] =
-    &["ApplyStatus", "ForEachActorInRadius", "ModifyResource"];
+use spellkave_schema::seed_vocabulary::{
+    autonomy_eligible_for_subject_mode, is_autonomy_actor_frame_write,
+    AUTONOMY_FRAME_WRITE_CONTAINER,
+};
+pub use spellkave_schema::seed_vocabulary::{
+    AUTONOMY_ELIGIBLE_FRAME_WRITES, AUTONOMY_ELIGIBLE_PRIMITIVES,
+    SUBJECT_BOUND_AUTONOMY_ACTOR_PRIMITIVES,
+};
 
 /// Validate the `[[autonomy_jobs]]` section.
 pub fn validate_autonomy_jobs(manifest: &Manifest, diags: &mut Vec<Diagnostic>) {
@@ -319,11 +311,6 @@ fn primitive_tokens(primitives_csv: &str) -> Vec<&str> {
         .collect()
 }
 
-fn autonomy_eligible_for_subject_mode(primitive: &str, has_subject: bool) -> bool {
-    AUTONOMY_ELIGIBLE_PRIMITIVES.contains(&primitive)
-        || (has_subject && SUBJECT_BOUND_AUTONOMY_ACTOR_PRIMITIVES.contains(&primitive))
-}
-
 fn eligible_primitives_for_subject_mode(has_subject: bool) -> Vec<&'static str> {
     let mut primitives = AUTONOMY_ELIGIBLE_PRIMITIVES.to_vec();
     if has_subject {
@@ -362,15 +349,14 @@ fn collect_ineligible_autonomy_frame_writes(
     }
     let (variant, inner) = map.iter().next().expect("len checked");
     match variant.as_str() {
-        "ApplyStatus" => {}
-        "ModifyResource" => {}
-        "ForEachActorInRadius" => {
+        variant if is_autonomy_actor_frame_write(variant) => {}
+        AUTONOMY_FRAME_WRITE_CONTAINER => {
             let serde_json::Value::Object(fields) = inner else {
-                ineligible.push("ForEachActorInRadius".to_owned());
+                ineligible.push(AUTONOMY_FRAME_WRITE_CONTAINER.to_owned());
                 return;
             };
             let Some(serde_json::Value::Array(body)) = fields.get("body") else {
-                ineligible.push("ForEachActorInRadius".to_owned());
+                ineligible.push(AUTONOMY_FRAME_WRITE_CONTAINER.to_owned());
                 return;
             };
             for leaf in body {
@@ -390,8 +376,8 @@ fn frame_write_tree_contains_actor_reaching_hazard_write(value: &serde_json::Val
     }
     let (variant, inner) = map.iter().next().expect("len checked");
     match variant.as_str() {
-        "ApplyStatus" | "ModifyResource" => true,
-        "ForEachActorInRadius" => {
+        variant if is_autonomy_actor_frame_write(variant) => true,
+        AUTONOMY_FRAME_WRITE_CONTAINER => {
             let serde_json::Value::Object(fields) = inner else {
                 return false;
             };
