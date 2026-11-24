@@ -245,5 +245,13 @@
   "MF-VAL-388",
   "MF-VAL-389",
   "MF-VAL-390",
-  "MF-VAL-391"
+  "MF-VAL-391",
+  "npc-choice-binding-invalid",
+  "npc-open-binding-missing",
+  "npc-prompt-binding-missing",
+  "npc-reference-exception-unused",
+  "npc-reference-known-missing",
+  "npc-reference-missing",
+  "npc-reference-worlds-invalid",
+  "npc-source-invalid"
 ]

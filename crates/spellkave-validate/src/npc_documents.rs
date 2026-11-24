@@ -1,5 +1,10 @@
 //! Stage-2 NPC authoring documents. These checks are client/platform admission;
 //! the kernel never interprets metadata payloads (ADR-0165 D-1).
+use crate::diagnostic_codes::{
+    NPC_CHOICE_BINDING_INVALID, NPC_OPEN_BINDING_MISSING, NPC_PROMPT_BINDING_MISSING,
+    NPC_REFERENCE_EXCEPTION_UNUSED, NPC_REFERENCE_KNOWN_MISSING, NPC_REFERENCE_MISSING,
+    NPC_REFERENCE_WORLDS_INVALID, NPC_SOURCE_INVALID,
+};
 use serde_json::{Map, Value};
 use std::collections::BTreeSet;
 
@@ -589,7 +594,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
             .into_iter()
             .map(|error| ReferenceDiagnostic {
                 severity: "error",
-                code: "npc-source-invalid",
+                code: NPC_SOURCE_INVALID,
                 reference_kind: "source".into(),
                 reference_id: error,
                 bead: None,
@@ -602,7 +607,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
         _ => {
             return vec![ReferenceDiagnostic {
                 severity: "error",
-                code: "npc-reference-worlds-invalid",
+                code: NPC_REFERENCE_WORLDS_INVALID,
                 reference_kind: "world".into(),
                 reference_id: String::new(),
                 bead: None,
@@ -645,9 +650,9 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
                     "error"
                 },
                 code: if bead.is_some() {
-                    "npc-reference-known-missing"
+                    NPC_REFERENCE_KNOWN_MISSING
                 } else {
-                    "npc-reference-missing"
+                    NPC_REFERENCE_MISSING
                 },
                 reference_kind: kind.into(),
                 reference_id: id.into(),
@@ -764,7 +769,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
         if !used_flags.contains(reference) || states.contains(reference) {
             diagnostics.push(ReferenceDiagnostic {
                 severity: "error",
-                code: "npc-reference-exception-unused",
+                code: NPC_REFERENCE_EXCEPTION_UNUSED,
                 reference_kind: "object_state_definition".into(),
                 reference_id: reference.clone(),
                 bead: exceptions[reference].as_str().map(str::to_owned),
@@ -780,7 +785,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
         {
             diagnostics.push(ReferenceDiagnostic {
                 severity: "error",
-                code: "npc-prompt-binding-missing",
+                code: NPC_PROMPT_BINDING_MISSING,
                 reference_kind: "prompt_binding".into(),
                 reference_id: prompt,
                 bead: None,
@@ -795,7 +800,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
         {
             diagnostics.push(ReferenceDiagnostic {
                 severity: "error",
-                code: "npc-open-binding-missing",
+                code: NPC_OPEN_BINDING_MISSING,
                 reference_kind: "open_binding".into(),
                 reference_id: key.into(),
                 bead: None,
@@ -809,7 +814,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
     {
         diagnostics.push(ReferenceDiagnostic {
             severity: "error",
-            code: "npc-prompt-binding-missing",
+            code: NPC_PROMPT_BINDING_MISSING,
             reference_kind: "prompt_binding".into(),
             reference_id: "0".into(),
             bead: None,
@@ -826,7 +831,7 @@ pub fn validate_quest_references_json(source: &str, worlds: &str) -> Vec<Referen
     {
         diagnostics.push(ReferenceDiagnostic {
             severity: "error",
-            code: "npc-choice-binding-invalid",
+            code: NPC_CHOICE_BINDING_INVALID,
             reference_kind: "choice_binding".into(),
             reference_id: String::new(),
             bead: None,

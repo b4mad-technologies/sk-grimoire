@@ -24,6 +24,27 @@ pub const MF_VAL_ROLE_BINDING_CONSTRAINT: &str = "MF-VAL-382";
 pub const MF_VAL_EQUIPPED_DEPENDENCY_HAZARD: &str = "MF-VAL-390";
 pub const MF_VAL_CONTAINMENT_POLICY: &str = "MF-VAL-391";
 
+pub const NPC_CHOICE_BINDING_INVALID: &str = "npc-choice-binding-invalid";
+pub const NPC_OPEN_BINDING_MISSING: &str = "npc-open-binding-missing";
+pub const NPC_PROMPT_BINDING_MISSING: &str = "npc-prompt-binding-missing";
+pub const NPC_REFERENCE_EXCEPTION_UNUSED: &str = "npc-reference-exception-unused";
+pub const NPC_REFERENCE_KNOWN_MISSING: &str = "npc-reference-known-missing";
+pub const NPC_REFERENCE_MISSING: &str = "npc-reference-missing";
+pub const NPC_REFERENCE_WORLDS_INVALID: &str = "npc-reference-worlds-invalid";
+pub const NPC_SOURCE_INVALID: &str = "npc-source-invalid";
+
+/// Reference diagnostics for NPC authoring documents.
+pub const NPC_REFERENCE_CODES: &[&str] = &[
+    NPC_CHOICE_BINDING_INVALID,
+    NPC_OPEN_BINDING_MISSING,
+    NPC_PROMPT_BINDING_MISSING,
+    NPC_REFERENCE_EXCEPTION_UNUSED,
+    NPC_REFERENCE_KNOWN_MISSING,
+    NPC_REFERENCE_MISSING,
+    NPC_REFERENCE_WORLDS_INVALID,
+    NPC_SOURCE_INVALID,
+];
+
 /// Manifest format, validation and authoring codes.
 pub const MANIFEST_DIAGNOSTIC_CODES: &[&str] = &[
     MF_APPLY_ROOT_AUTHORITY_REQUIRED,
@@ -241,4 +262,5 @@ pub const MANIFEST_DIAGNOSTIC_CODES: &[&str] = &[
 pub const GRIMOIRE_DIAGNOSTIC_CODES: &[&[&str]] = &[
     spellkave_dsl::diagnostic_codes::DSL_DIAGNOSTIC_CODES,
     MANIFEST_DIAGNOSTIC_CODES,
+    NPC_REFERENCE_CODES,
 ];

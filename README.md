@@ -26,7 +26,7 @@ The workspace and its frozen fixture data are documented in [PROVENANCE.md](PROV
 ## Diagnostic codes
 
 [`diagnostic-codes.json`](diagnostic-codes.json) lists the codes emitted by the
-parser, manifest validation, and authoring tools. The workspace tests keep it
+parser, manifest validation, authoring, and NPC reference checks. The workspace tests keep it
 in sync with the Rust registry. To regenerate it after an intentional change,
 run the following command from the repository root.
 
