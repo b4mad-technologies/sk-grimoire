@@ -464,6 +464,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "spellkave-test-data"
+version = "0.2.0"
+
+[[package]]
 name = "spellkave-validate"
 version = "0.2.0"
 dependencies = [
