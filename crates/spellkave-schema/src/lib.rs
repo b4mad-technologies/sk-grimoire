@@ -204,8 +204,6 @@ impl<'de> Deserialize<'de> for MetadataValue {
     }
 }
 
-/// Shared action-economy window rules.
-pub mod action_economy_window;
 pub mod export_round_trip;
 
 pub mod row_identity;
@@ -3817,5 +3815,3 @@ extent_ref="forest"
         );
     }
 }
-
-pub mod refusal;
