@@ -1,0 +1,92 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_spatial_inspect"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_spatial_inspect"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_spatial_inspect'."
+display_name = "Mech Spatial Inspect"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_spatial_inspect"
+
+[[place_edges]]
+bundle_id = "mech_spatial_inspect"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_spatial_inspect/alpha->mech_spatial_inspect/beta"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_spatial_inspect/alpha"
+inherit_movement_default = true
+place_graph_id = "mech_spatial_inspect"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_spatial_inspect/beta"
+
+[[place_graphs]]
+anchor_node_id = "mech_spatial_inspect/alpha"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_spatial_inspect"
+description = "Content-neutral two-node graph for populated and empty spatial CLI inspection projections."
+display_name = "Spatial Inspect Probe"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_spatial_inspect"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_spatial_inspect"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Alpha"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "alpha"
+node_id = "mech_spatial_inspect/alpha"
+place_graph_id = "mech_spatial_inspect"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_spatial_inspect"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Beta"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "beta"
+node_id = "mech_spatial_inspect/beta"
+place_graph_id = "mech_spatial_inspect"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"

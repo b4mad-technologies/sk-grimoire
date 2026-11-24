@@ -1,0 +1,70 @@
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = ["frontier.break_seal"]
+description = "Breaks a place seal through an authored act inside a realized place-graph binding extent."
+display_name = "Warden"
+role_id = "warden"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = ["frontier.read_hidden"]
+description = "Reads hidden rows inside a realized binding extent."
+display_name = "Viewer"
+role_id = "viewer"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = ["frontier.pace_time"]
+description = "Paces the world clock."
+display_name = "Timekeeper"
+role_id = "timekeeper"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = [
+    "frontier.read_hidden",
+    "frontier.read_internal",
+    "frontier.spawn_entity_definition",
+    "frontier.despawn",
+    "frontier.set_state",
+    "frontier.transfer",
+    "frontier.afflict",
+    "frontier.inscribe",
+    "frontier.open_session",
+    "frontier.impersonate",
+]
+description = "Runs a prepared region through scoped authored acts and reads its hidden and internal rows."
+display_name = "Dungeon Master"
+role_id = "dm"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = [
+    "frontier.read_hidden",
+    "frontier.read_internal",
+    "frontier.apply_manifest",
+    "frontier.prune",
+    "frontier.bind.dm",
+]
+description = "Authors adventure content and assigns the DM role inside a realized binding extent."
+display_name = "Adventure Author"
+role_id = "adventure-author"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = [
+    "frontier.read_hidden",
+    "frontier.read_internal",
+    "frontier.apply_manifest",
+    "frontier.prune",
+]
+description = "Authors system content inside a realized binding extent."
+display_name = "System Author"
+role_id = "system-author"
+
+[[role_definitions]]
+bundle_id = "core"
+capability_ids = ["frontier.drive"]
+description = "Assigns and releases durable Service drivers to unoffered NPC bodies within the host's realized binding extent."
+display_name = "NPC Host"
+role_id = "npc-host"

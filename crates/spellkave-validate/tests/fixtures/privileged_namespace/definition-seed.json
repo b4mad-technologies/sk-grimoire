@@ -1,0 +1,11 @@
+[
+  {
+    "code": "MF-VAL-364",
+    "severity": "fatal",
+    "message": "entity_definition_initial_capability 'role_capability_write_gate/item' cannot derive reserved capability 'frontier.pace_time'; use an explicit publisher-authorized actor_capabilities grant",
+    "path": "entity_definition_initial_capability",
+    "span": null,
+    "hint": null,
+    "details": null
+  }
+]

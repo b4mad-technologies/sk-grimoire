@@ -1,0 +1,523 @@
+[[roll_table_entries]]
+authored_order = 1
+result_ref = "1"
+roll_table_entry_id = "core/d20:1"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 2
+result_ref = "2"
+roll_table_entry_id = "core/d20:2"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 3
+result_ref = "3"
+roll_table_entry_id = "core/d20:3"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 4
+result_ref = "4"
+roll_table_entry_id = "core/d20:4"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 5
+result_ref = "5"
+roll_table_entry_id = "core/d20:5"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 6
+result_ref = "6"
+roll_table_entry_id = "core/d20:6"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 7
+result_ref = "7"
+roll_table_entry_id = "core/d20:7"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 8
+result_ref = "8"
+roll_table_entry_id = "core/d20:8"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 9
+result_ref = "9"
+roll_table_entry_id = "core/d20:9"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 10
+result_ref = "10"
+roll_table_entry_id = "core/d20:10"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 11
+result_ref = "11"
+roll_table_entry_id = "core/d20:11"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 12
+result_ref = "12"
+roll_table_entry_id = "core/d20:12"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 13
+result_ref = "13"
+roll_table_entry_id = "core/d20:13"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 14
+result_ref = "14"
+roll_table_entry_id = "core/d20:14"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 15
+result_ref = "15"
+roll_table_entry_id = "core/d20:15"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 16
+result_ref = "16"
+roll_table_entry_id = "core/d20:16"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 17
+result_ref = "17"
+roll_table_entry_id = "core/d20:17"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 18
+result_ref = "18"
+roll_table_entry_id = "core/d20:18"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 19
+result_ref = "19"
+roll_table_entry_id = "core/d20:19"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entries]]
+authored_order = 20
+result_ref = "20"
+roll_table_entry_id = "core/d20:20"
+roll_table_id = "core/d20"
+weight = 1
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:1"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:1"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:1"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:2"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:2"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:2"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:3"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:3"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:3"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:4"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:4"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:4"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:5"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:5"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:5"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:6"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:6"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:6"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:7"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:7"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:7"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:8"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:8"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:8"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:9"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:9"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:9"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:10"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:10"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:10"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:11"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:11"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:11"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:12"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:12"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:12"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:13"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:13"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:13"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:14"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:14"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:14"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:15"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:15"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:15"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:16"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:16"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:16"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:17"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:17"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:17"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:18"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:18"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:18"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:19"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:19"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:19"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:20"
+source = "manifest"
+tag = "core"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:20"
+source = "manifest"
+tag = "die"
+
+[[roll_table_entry_tag]]
+bundle_id = "core"
+roll_table_entry_id = "core/d20:20"
+source = "manifest"
+tag = "d20"
+
+[[roll_table_tag]]
+bundle_id = "core"
+roll_table_id = "core/d20"
+source = "manifest"
+tag = "core"
+
+[[roll_table_tag]]
+bundle_id = "core"
+roll_table_id = "core/d20"
+source = "manifest"
+tag = "die"
+
+[[roll_table_tag]]
+bundle_id = "core"
+roll_table_id = "core/d20"
+source = "manifest"
+tag = "d20"
+
+[[roll_tables]]
+bundle_id = "core"
+display_name = "d20"
+result_kind = "int"
+roll_table_id = "core/d20"

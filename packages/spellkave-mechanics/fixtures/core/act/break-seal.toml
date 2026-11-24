@@ -1,0 +1,48 @@
+[[action_definitions]]
+action_id = "core/act/break-seal"
+bundle_id = "core"
+cost_time_ms = 0
+display_name = "Break this place seal"
+on_failure = ""
+on_success = "core/act/break-seal/success"
+required_capability = "frontier.break_seal"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "frontier.break_seal"
+display_name = "Break this place seal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/mark_surface"
+outcome_template_id = "core/act/break-seal/outcome"
+predicate_bool = false
+predicate_source = "actor.has_capability('frontier.break_seal')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/act/break-seal/affordance"
+
+[[consequence_frame_writes]]
+frame_write = "BreakPlaceSeal"
+ordinal = 0
+template_id = "core/act/break-seal/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/act/break-seal/success"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Break this place seal"
+manipulation_action_id = "core/act/break-seal"
+outcome_bool = true
+outcome_template_id = "core/act/break-seal/outcome"
+sense_visibility = "local"

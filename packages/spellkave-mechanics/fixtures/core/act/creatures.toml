@@ -1,0 +1,34 @@
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/creature/wolf"
+source = "manifest"
+tag = "core.creature"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/creature/wolf"
+source = "manifest"
+tag = "core/spawnable"
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Wolf"
+entity_def_id = "core/creature/wolf"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[object_state_definitions]]
+bundle_id = "core"
+default_visibility = "Public"
+description = "Boolean lock state written by authored acts."
+display_name = "Locked"
+state_id = "core/locked"
+target_kind = "entity"

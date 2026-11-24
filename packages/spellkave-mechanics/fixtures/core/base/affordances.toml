@@ -1,0 +1,1620 @@
+[[action_definition_tag]]
+action_id = "core/pickup"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/pickup"
+bundle_id = "core"
+source = "manifest"
+tag = "inventory"
+
+[[action_definition_tag]]
+action_id = "core/drop"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/drop"
+bundle_id = "core"
+source = "manifest"
+tag = "inventory"
+
+[[action_definition_tag]]
+action_id = "core/inspect"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/inspect"
+bundle_id = "core"
+source = "manifest"
+tag = "inspection"
+
+[[action_definition_tag]]
+action_id = "core/assert"
+bundle_id = "core"
+source = "manifest"
+tag = "communication"
+
+[[action_definition_tag]]
+action_id = "core/assert"
+bundle_id = "core"
+source = "manifest"
+tag = "core/communicate"
+
+[[action_definition_tag]]
+action_id = "core/loot/drop_dagger"
+bundle_id = "core"
+source = "manifest"
+tag = "inspection"
+
+[[action_definition_tag]]
+action_id = "core/pickup/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/pickup/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "inventory"
+
+[[action_definition_tag]]
+action_id = "core/inspect/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/inspect/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "inspection"
+
+[[action_definition_tag]]
+action_id = "core/drop/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/drop/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "inventory"
+
+[[action_definition_tag]]
+action_id = "core/trace/read/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "memory"
+
+[[action_definition_tag]]
+action_id = "core/trace/read/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "trace"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light"
+bundle_id = "core"
+source = "manifest"
+tag = "equipment"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light"
+bundle_id = "core"
+source = "manifest"
+tag = "light"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "core.item"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "equipment"
+
+[[action_definition_tag]]
+action_id = "core/equip_torch_light/affordance"
+bundle_id = "core"
+source = "manifest"
+tag = "light"
+
+[[action_definition_tag]]
+action_id = "core/mark"
+bundle_id = "core"
+source = "manifest"
+tag = "trace"
+
+[[action_definitions]]
+action_id = "core/pickup"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Pick Up"
+on_failure = ""
+on_success = "core/pickup/success"
+required_capability = "core/pickup"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/drop"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Drop"
+on_failure = ""
+on_success = "core/drop/success"
+required_capability = "core/drop"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/inspect"
+bundle_id = "core"
+cost_time_ms = 250
+display_name = "Inspect"
+on_failure = ""
+on_success = "core/inspect/success"
+required_capability = "core/inspect"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/assert"
+bundle_id = "core"
+cost_time_ms = 100
+display_name = "Assert"
+on_failure = ""
+on_success = "core/assert/success"
+required_capability = "core/communicate"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/loot/drop_dagger"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Drop Loot Dagger"
+on_failure = ""
+on_success = "core/loot/drop_dagger"
+required_capability = "core/inspect"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/pickup/affordance"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Pick up the grounded item"
+on_failure = ""
+on_success = "core/pickup/success"
+required_capability = "core/pickup"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/inspect/affordance"
+bundle_id = "core"
+cost_time_ms = 250
+display_name = "Inspect the grounded item"
+on_failure = ""
+on_success = "core/inspect/success"
+required_capability = "core/inspect"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/drop/affordance"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Drop an item"
+on_failure = ""
+on_success = "core/drop/success"
+required_capability = "core/drop"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/trace/read/affordance"
+bundle_id = "core"
+cost_time_ms = 200
+display_name = "Read the fresh handling trace"
+on_failure = ""
+on_success = "core/trace/read/success"
+required_capability = "core/inspect"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/equip_torch_light"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Equip torch and light location"
+on_failure = ""
+on_success = "core/equip_torch_light/success"
+required_capability = ""
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/equip_torch_light/affordance"
+bundle_id = "core"
+cost_time_ms = 500
+display_name = "Equip torch and light location"
+on_failure = ""
+on_success = "core/equip_torch_light/success"
+required_capability = ""
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "core/mark"
+bundle_id = "core"
+cost_time_ms = 100
+display_name = "Leave Mark"
+on_failure = ""
+on_success = "core/mark/success"
+required_capability = "core/mark"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/pickup"
+display_name = "Core Pickup"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/item"
+outcome_template_id = "core/pickup/outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/pickup") && target.has_niche("core.item") && target.state("core/grounded") == true'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/pickup/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/inspect"
+display_name = "Core Inspect"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/inspect"
+outcome_template_id = "core/inspect/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/inspect/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/drop"
+display_name = "Core Drop"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/drop"
+outcome_template_id = "core/drop/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/drop/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Core Walk Edge"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/passable_portal"
+outcome_template_id = "core/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && target.has_niche("core/passable_portal")'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/walk_edge"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Traverse Open Portal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/passable_portal"
+outcome_template_id = "core/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && target.has_niche("core/passable_portal")'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/affordance/traverse_open_portal"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Traverse Known Threshold"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/passable_portal"
+outcome_template_id = "core/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && target.has_niche("core/passable_portal")'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/affordance/traverse_known_threshold"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Traverse Locked Portal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/passable_portal"
+outcome_template_id = "core/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && target.has_niche("core/passable_portal") && actor.has_item($bindings.required_key)'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/affordance/traverse_locked_portal"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = ""
+display_name = "Perceive world object"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = ""
+outcome_template_id = ""
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/perceive_world_object"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = ""
+display_name = "Perceive grounded item"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = ""
+outcome_template_id = ""
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/perceive_item_grounded"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = ""
+display_name = "Look around (same substrate only)"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/sense_query"
+outcome_template_id = "core/sense/look/outcome"
+predicate_bool = false
+predicate_source = "actor.substrate_id == target.substrate_id"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/sense/look/same_substrate"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = ""
+display_name = "Look around"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/sense_query"
+outcome_template_id = "core/sense/look/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/sense/look/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/communicate"
+display_name = "Say what changed"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/social_communication"
+outcome_template_id = "core/assert/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/assert/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/inspect"
+display_name = "Read the fresh handling trace"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "trace:handled_item"
+outcome_template_id = "core/trace/read/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/trace/read/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/inspect"
+display_name = "Recall what was handled here"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/item"
+outcome_template_id = "core/inspect/outcome"
+predicate_bool = false
+predicate_source = 'target.trace("handled_item") == true'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/recall_handling/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Unconditional Edge Traversal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/traversable_edge"
+outcome_template_id = "core/traversal/move_outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/traversal/always"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Trace-Gated Edge Traversal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/traversable_edge"
+outcome_template_id = "core/traversal/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && target.trace("scrape_marks") == true'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/traversal/trace_present"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Known-Entity-Gated Edge Traversal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/traversable_edge"
+outcome_template_id = "core/traversal/move_outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/walk") && actor.knows_entity($bindings.required_entity_id)'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/traversal/entity_known"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/walk"
+display_name = "Stat-Check Edge Traversal"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/traversable_edge"
+outcome_template_id = "core/traversal/move_outcome"
+predicate_bool = false
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/traversal/stat_check"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/inspect"
+display_name = "Drop Loot Dagger"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/inspect"
+outcome_template_id = "core/loot/drop_dagger/outcome"
+predicate_bool = false
+predicate_source = 'target.has_niche("core/loot_site")'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/loot/drop_dagger/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = ""
+display_name = "core/equip_torch_light/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/item/torch"
+outcome_template_id = "core/equip_torch_light/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/equip_torch_light/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "core/mark"
+display_name = "Leave Mark"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/mark_surface"
+outcome_template_id = "core/mark/outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("core/mark")'
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/mark/affordance"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "frontier.apply_manifest"
+source = "manifest"
+tag = "frontier"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "frontier.apply_manifest"
+source = "manifest"
+tag = "authoring"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/pickup"
+source = "manifest"
+tag = "core.item"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/pickup"
+source = "manifest"
+tag = "inventory"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/pickup"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/inspect"
+source = "manifest"
+tag = "core.item"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/inspect"
+source = "manifest"
+tag = "inspection"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/inspect"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drop"
+source = "manifest"
+tag = "core.item"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drop"
+source = "manifest"
+tag = "inventory"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drop"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/sense"
+source = "manifest"
+tag = "perception"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/sense"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/communicate"
+source = "manifest"
+tag = "communication"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/communicate"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drink"
+source = "manifest"
+tag = "core.item"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drink"
+source = "manifest"
+tag = "consumable"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/drink"
+source = "manifest"
+tag = "actor"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/mark"
+source = "manifest"
+tag = "trace"
+
+[[capability_definition_tag]]
+bundle_id = "core"
+capability_id = "core/raw_trace_inscription"
+source = "manifest"
+tag = "authoring"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.read_hidden"
+default_visibility = "Public"
+description = "Defines authority to read hidden world rows inside a realized binding extent."
+display_name = "Read Hidden"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.read_internal"
+default_visibility = "Public"
+description = "Defines authority to read internal world rows inside a realized binding extent."
+display_name = "Read Internal"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.prune"
+default_visibility = "Public"
+description = "Defines authority to prune authored content inside a realized binding extent."
+display_name = "Prune Authored Content"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.escalate"
+default_visibility = "Public"
+description = "Defines authority to author a capability set beyond the caller’s own realized authority."
+display_name = "Escalate Authority"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.impersonate"
+default_visibility = "Public"
+description = "Defines authority to steer another actor inside a realized binding extent."
+display_name = "Impersonate Actor"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.drive"
+default_visibility = "Public"
+description = "Defines authority to assign durable Service drivers to unoffered NPC bodies inside a realized binding extent."
+display_name = "Assign NPC Driver"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.break_seal"
+default_visibility = "Public"
+description = "Defines authority to open a sealed extent inside a realized binding extent."
+display_name = "Break Seal"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.bind.viewer"
+default_visibility = "Public"
+description = "Defines authority to bind the viewer role inside a realized binding extent."
+display_name = "Bind viewer"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.bind.timekeeper"
+default_visibility = "Public"
+description = "Defines authority to bind the timekeeper role inside a realized binding extent."
+display_name = "Bind timekeeper"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.bind.dm"
+default_visibility = "Public"
+description = "Defines authority to bind the dm role inside a realized binding extent."
+display_name = "Bind dm"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.bind.adventure-author"
+default_visibility = "Public"
+description = "Defines authority to bind the adventure-author role inside a realized binding extent."
+display_name = "Bind adventure-author"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.bind.system-author"
+default_visibility = "Public"
+description = "Defines authority to bind the system-author role inside a realized binding extent."
+display_name = "Bind system-author"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.despawn"
+default_visibility = "Public"
+description = "Defines authority to remove an entity through an authored act inside a realized binding extent."
+display_name = "Despawn Entity"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.set_state"
+default_visibility = "Public"
+description = "Defines authority to change world state through an authored act inside a realized binding extent."
+display_name = "Set State"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.transfer"
+default_visibility = "Public"
+description = "Defines authority to transfer an entity through an authored act inside a realized binding extent."
+display_name = "Transfer Entity"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.afflict"
+default_visibility = "Public"
+description = "Defines authority to apply a condition through an authored act inside a realized binding extent."
+display_name = "Afflict Entity"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.inscribe"
+default_visibility = "Public"
+description = "Defines authority to inscribe a trace through an authored act inside a realized binding extent."
+display_name = "Inscribe Trace"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.deliver_private_hint"
+default_visibility = "Public"
+description = "Defines authority to deliver a private hint through an authored act inside a realized binding extent."
+display_name = "Deliver Private Hint"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.open_session"
+default_visibility = "Public"
+description = "Defines authority to open a session through an authored act inside a realized binding extent."
+display_name = "Open Session"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/walk"
+default_visibility = "Public"
+description = "Actor traverses a passable edge to an adjacent place-node."
+display_name = "Walk"
+
+[[capability_definitions]]
+actor_kind = "operator"
+bundle_id = "core"
+capability_id = "core/world_admin"
+default_visibility = "Public"
+description = "Authorizes operator/DM act-as through typed extent-bounded grants."
+display_name = "World admin"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.apply_manifest"
+default_visibility = "Public"
+description = "Authoring capability that allows a bound actor to apply manifest fragments after genesis."
+display_name = "Apply World Manifest"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.spawn_entity_definition"
+default_visibility = "Public"
+description = "Authoring capability that allows a bound actor to spawn a fresh instance of an entity_definition at runtime."
+display_name = "Spawn Entity Definition"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "frontier.pace_time"
+default_visibility = "Public"
+description = "Allows a bound embodied caller to pace the world clock regardless of grant extent."
+display_name = "Pace World Time"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/pickup"
+default_visibility = "Public"
+description = "Actor picks up a local grounded item into inventory."
+display_name = "Pick Up"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/inspect"
+default_visibility = "Public"
+description = "Actor inspects a local item or point of interest."
+display_name = "Inspect"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/drop"
+default_visibility = "Public"
+description = "Actor drops an inventory item at the current place node."
+display_name = "Drop"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/sense"
+default_visibility = "Public"
+description = "Actor asks the perception substrate for a bounded passive cue."
+display_name = "Sense"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/communicate"
+default_visibility = "Public"
+description = "Actor performs a deterministic speech act."
+display_name = "Communicate"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/drink"
+default_visibility = "Public"
+description = "Actor drinks from a grounded consumable item."
+display_name = "Drink"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/mark"
+default_visibility = "Public"
+description = "Create an authored mark at the actor's current place."
+display_name = "Leave Mark"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "core"
+capability_id = "core/raw_trace_inscription"
+default_visibility = "hidden"
+description = "Administrative capability for direct typed trace inscription."
+display_name = "Raw Trace Inscription"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/pickup/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "handled_item"
+location_kind = "binding"
+location_ref = "ActorSpatialRef"
+payload_json = '{"action":"pickup","expires_at_tick":null}'
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "core/pickup/success"
+
+[consequence_frame_writes.frame_write.PickupTargetItem]
+actor_ref = "Actor"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/drop/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "handled_item"
+location_kind = "binding"
+location_ref = "ActorSpatialRef"
+payload_json = '{"action":"drop","expires_at_tick":null}'
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/loot/drop_dagger"
+
+[consequence_frame_writes.frame_write.InsertItem]
+count = 1
+initial_item_state = []
+item_def_id = "core/item/loot_dagger"
+
+[consequence_frame_writes.frame_write.InsertItem.destination.Ground.spatial_ref]
+id = "TargetSpatialRef"
+kind = "binding"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/equip_torch_light/success"
+
+[consequence_frame_writes.frame_write.EquipItem]
+actor_ref = "Actor"
+slot_id = "core/main_hand"
+
+[consequence_frame_writes.frame_write.EquipItem.source.TargetItem]
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "core/equip_torch_light/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "core/light"
+location_kind = "binding"
+location_ref = "ActorSpatialRef"
+payload_json = '{"source":"torch","expires_at_tick":null}'
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/mark/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "scrape_marks"
+location_kind = "binding"
+location_ref = "TargetSpatialRef"
+payload_json = '{"action":"mark"}'
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/pickup/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/drop/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/trace/read/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/inspect/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/assert/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/loot/drop_dagger"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/equip_torch_light/success"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/mark/success"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/sword"
+source = "manifest"
+tag = "core.item"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/sword"
+source = "manifest"
+tag = "weapon"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/sword"
+source = "manifest"
+tag = "sword"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/torch"
+source = "manifest"
+tag = "core.item"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/torch"
+source = "manifest"
+tag = "torch"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/torch"
+source = "manifest"
+tag = "core.item.torch"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/loot_dagger"
+source = "manifest"
+tag = "core.item"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/loot_dagger"
+source = "manifest"
+tag = "weapon"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/loot_dagger"
+source = "manifest"
+tag = "dagger"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/loot_dagger"
+source = "manifest"
+tag = "loot"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/wayfarer_pack"
+source = "manifest"
+tag = "core.item"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/wayfarer_pack"
+source = "manifest"
+tag = "container"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "core/item/wayfarer_pack"
+source = "manifest"
+tag = "inventory"
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Role presence"
+entity_def_id = "core/presence"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Iron Sword"
+entity_def_id = "core/item/sword"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Pitch Torch"
+entity_def_id = "core/item/torch"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = 'slot_id == "core/main_hand"'
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Loot Dagger"
+entity_def_id = "core/item/loot_dagger"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = 'slot_id == "core/main_hand"'
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Wayfarer Pack"
+entity_def_id = "core/item/wayfarer_pack"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/item"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/item"
+source = "manifest"
+tag = "inventory"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/owned_item"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/owned_item"
+source = "manifest"
+tag = "inventory"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/item/torch"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/item/torch"
+source = "manifest"
+tag = "torch"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/pickup"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/pickup"
+source = "manifest"
+tag = "inventory"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/inspect"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/inspect"
+source = "manifest"
+tag = "inspection"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/drop"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/drop"
+source = "manifest"
+tag = "inventory"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/sense_query"
+source = "manifest"
+tag = "perception"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/social_communication"
+source = "manifest"
+tag = "communication"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/traversable_edge"
+source = "manifest"
+tag = "traversal"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/traversable_edge"
+source = "manifest"
+tag = "movement"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/loot_site"
+source = "manifest"
+tag = "inspection"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/drink"
+source = "manifest"
+tag = "core.item"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/drink"
+source = "manifest"
+tag = "consumable"
+
+[[niche_definition_tag]]
+bundle_id = "core"
+niche_id = "core/mark_surface"
+source = "manifest"
+tag = "trace"
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Entity tagged as a core item and currently grounded."
+display_name = "Core Item"
+niche_id = "core/item"
+predicate_source = 'target.has_niche("core.item") && target.state("core/grounded") == true'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Entity tagged as a core item and currently owned."
+display_name = "Core Owned Item"
+niche_id = "core/owned_item"
+predicate_source = 'target.has_niche("core.item") && target.state("core/owned") == true'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "The core torch item definition."
+display_name = "Core Torch"
+niche_id = "core/item/torch"
+predicate_source = 'target.has_niche("core.item.torch")'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Pick up an item from the current place node."
+display_name = "Pick Up Item"
+niche_id = "core/pickup"
+predicate_source = ""
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Inspect an item or local point of interest."
+display_name = "Inspect Item"
+niche_id = "core/inspect"
+predicate_source = 'target.state("core/owned") == true'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Drop an inventory item at the current place node."
+display_name = "Drop Item"
+niche_id = "core/drop"
+predicate_source = 'target.state("core/owned") == true'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "A bounded perception query against a visible place node."
+display_name = "Perception Query"
+niche_id = "core/sense_query"
+predicate_source = ""
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "A deterministic first communication primitive."
+display_name = "Communication"
+niche_id = "core/social_communication"
+predicate_source = 'target.state("core/grounded") == true'
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "A place edge that may be traversed by a walking entity."
+display_name = "Traversable Edge"
+niche_id = "core/traversable_edge"
+predicate_source = ""
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "A place where authored loot demos may spawn items. Attachment-only: no membership predicate, membership comes solely from spatial_niche_attachments."
+display_name = "Loot Site"
+niche_id = "core/loot_site"
+predicate_source = ""
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "Drink from a grounded consumable item."
+display_name = "Drink From Item"
+niche_id = "core/drink"
+predicate_source = ""
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "An authored place where an actor may leave a generic mark."
+display_name = "Mark Surface"
+niche_id = "core/mark_surface"
+predicate_source = ""
+
+[[outcome_template_tag]]
+bundle_id = "core"
+outcome_template_id = "core/pickup/outcome"
+source = "manifest"
+tag = "inventory.outcome=insert_item"
+
+[[outcome_template_tag]]
+bundle_id = "core"
+outcome_template_id = "core/inspect/outcome"
+source = "manifest"
+tag = "inspection.outcome=observe"
+
+[[outcome_template_tag]]
+bundle_id = "core"
+outcome_template_id = "core/drop/outcome"
+source = "manifest"
+tag = "inventory.outcome=drop_item"
+
+[[outcome_template_tag]]
+bundle_id = "core"
+outcome_template_id = "core/trace/read/outcome"
+source = "manifest"
+tag = "memory.outcome=read_trace"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Core Pickup"
+manipulation_action_id = "core/pickup"
+outcome_bool = true
+outcome_template_id = "core/pickup/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+description = "You look {target_name} over closely."
+display_name = "Core Inspect"
+manipulation_action_id = "core/inspect"
+outcome_bool = true
+outcome_template_id = "core/inspect/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Core Drop"
+manipulation_action_id = "core/drop"
+outcome_bool = true
+outcome_template_id = "core/drop/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Core Loot Drop Dagger"
+manipulation_action_id = "core/loot/drop_dagger"
+outcome_bool = true
+outcome_template_id = "core/loot/drop_dagger/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Core Move"
+movement_descriptor = "move"
+outcome_bool = true
+outcome_template_id = "core/move_outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+description = "You take in {place_name}, filing away every detail worth remembering."
+discovery_validated = true
+display_name = "Look Around"
+outcome_bool = true
+outcome_template_id = "core/sense/look/outcome"
+sense_query_kind = "look"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+communication_speech_act_id = "core/assert"
+consequence_template_id = ""
+display_name = "Assert"
+manipulation_action_id = "core/assert"
+outcome_bool = true
+outcome_template_id = "core/assert/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Read Fresh Trace"
+outcome_bool = true
+outcome_template_id = "core/trace/read/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Edge Traversal Move"
+movement_descriptor = "traverse_edge"
+outcome_bool = true
+outcome_template_id = "core/traversal/move_outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "core/equip_torch_light"
+manipulation_action_id = "core/equip_torch_light"
+outcome_bool = true
+outcome_template_id = "core/equip_torch_light/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Leave Mark"
+manipulation_action_id = "core/mark"
+outcome_bool = true
+outcome_template_id = "core/mark/outcome"
+sense_visibility = "local"

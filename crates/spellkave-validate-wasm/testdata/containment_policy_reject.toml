@@ -1,0 +1,15 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+[[bundles]]
+bundle_id = "parity"
+display_name = "Containment policy parity"
+author = "test"
+version = "1.0.0"
+
+[[containment_policy_definition]]
+bundle_id = "parity"
+policy_id = "parity/contents"
+# A false branch must not hide a forbidden stochastic read from admission.
+exposure_predicate_source = "(false == true) && (1d20 > 5)"
+access_predicate_source = "true == true"

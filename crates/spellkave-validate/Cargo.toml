@@ -1,0 +1,30 @@
+[package]
+name = "spellkave-validate"
+version = "0.1.0"
+edition = "2021"
+license = "PolyForm-Shield-1.0.0"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.11"
+spellkave-dsl = { path = "../spellkave-dsl" }
+spellkave-format = { path = "../spellkave-format" }
+spellkave-schema = { path = "../spellkave-schema" }
+toml = { version = "0.8", optional = true }
+
+[features]
+# Enables the `check-refs` binary (host-only; pulls in `toml` to load
+# bundle directories from disk). Off by default so the wasm target stays
+# minimal and `cargo check --target wasm32-unknown-unknown` does not try
+# to build a host-only binary.
+cli = ["dep:toml"]
+
+[[bin]]
+name = "check-refs"
+path = "src/bin/check_refs.rs"
+required-features = ["cli"]
+
+[dev-dependencies]
+spellkave-format = { path = "../spellkave-format" }
+toml = "0.8"

@@ -1,0 +1,31 @@
+[[niche_definitions]]
+bundle_id = "core"
+description = "A grounded creature carrying the core or SRD creature tag."
+display_name = "Creature"
+niche_id = "core/creature"
+predicate_source = "target.has_niche('core.creature') || target.has_niche('srd.creature')"
+provider = "entity"
+
+[[niche_definitions]]
+bundle_id = "core"
+description = "An object with an authored lockable surface."
+display_name = "Lockable object"
+niche_id = "core/lockable_object"
+predicate_source = "target.has_niche('core/lockable')"
+provider = "entity"
+
+[[trace_kind_definitions]]
+bundle_id = "core"
+description = "An explicit authored transition of a prepared place boundary."
+kind_id = "seal_break"
+location_kinds = "place_node"
+perceptible_for_ticks = 0
+schema_json = '{"sealing_graph":"string","reason":"string"}'
+
+[[trace_kind_definitions]]
+bundle_id = "core"
+description = "A change observed as it happens at this place; not a persistent physical scrape mark."
+kind_id = "core/observed_change"
+location_kinds = "place_node"
+perceptible_for_ticks = 0
+schema_json = '{"action":"string"}'

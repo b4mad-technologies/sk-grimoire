@@ -1,0 +1,6079 @@
+# GENERATED — do not hand-edit. Synthetic load-test fixture for issue #1381's
+# NPC connection-ceiling measurement harness. 200 generic, UNBOUND actor bodies:
+# each is embodied (entity + actor + spatial location) but carries NO
+# [[actor_identities]] block, so it is a claimable first-come player seat per
+# ADR-0067 (D-1 unclaimed, D-2 embodied). NOT narrative content.
+#
+# #1968: npc_ceiling authors its OWN single outdoor place node (core ships
+# no place nodes) — the phandelver-hero pattern applied to a fleet-of-bodies
+# bundle.
+#
+# #1968 backlog "B-1": also authors a second node ("relay") plus an
+# ungated bidirectional edge pair, purely so run-ceiling.ts's dispatch-
+# latency probe has a real round trip to r_move between (no fleet body
+# is ever placed at "relay" — it exists only as the round-trip partner).
+
+[[place_graphs]]
+place_graph_id = "npc_ceiling"
+bundle_id = "npc_ceiling"
+substrate_id = "outdoor"
+display_name = "NPC Ceiling Fleet Yard"
+anchor_node_id = "npc_ceiling/fleet"
+
+[[place_nodes]]
+node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+place_graph_id = "npc_ceiling"
+local_id = "fleet"
+substrate_id = "outdoor"
+display_name = "Fleet Yard"
+pos_x = 0
+pos_y = 0
+pos_present = true
+
+[[place_nodes]]
+node_id = "npc_ceiling/relay"
+bundle_id = "npc_ceiling"
+place_graph_id = "npc_ceiling"
+local_id = "relay"
+substrate_id = "outdoor"
+display_name = "Fleet Relay Point"
+pos_x = 1
+pos_y = 0
+pos_present = true
+
+[[place_edges]]
+bundle_id = "npc_ceiling"
+edge_key = "npc_ceiling/edge/fleet-relay"
+from_node_id = "npc_ceiling/fleet"
+place_graph_id = "npc_ceiling"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_node_id = "npc_ceiling/relay"
+
+[[place_edges]]
+bundle_id = "npc_ceiling"
+edge_key = "npc_ceiling/edge/relay-fleet"
+from_node_id = "npc_ceiling/relay"
+place_graph_id = "npc_ceiling"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_node_id = "npc_ceiling/fleet"
+
+# Traversal affordances (core's kernel-vocabulary `traverse_open_portal`
+# template — unconditional, ungated traversal both directions; see
+# packages/spellkave-mechanics/fixtures/core/base/spatial.toml for the same pattern).
+# Without one of these per edge, r_move has no affordance to resolve and
+# every move is rejected regardless of the edge existing.
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = ""
+edge_key = "npc_ceiling/edge/fleet-relay"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = ""
+edge_key = "npc_ceiling/edge/relay-fleet"
+
+[[entities]]
+entity_key = "npc_ceiling/body-000"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 000"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-000"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 000"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-000"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-000"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-000"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-001"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 001"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-001"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 001"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-001"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-001"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-001"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-002"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 002"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-002"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 002"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-002"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-002"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-002"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-003"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 003"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-003"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 003"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-003"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-003"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-003"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-004"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 004"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-004"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 004"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-004"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-004"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-004"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-005"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 005"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-005"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 005"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-005"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-005"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-005"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-006"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 006"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-006"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 006"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-006"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-006"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-006"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-007"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 007"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-007"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 007"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-007"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-007"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-007"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-008"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 008"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-008"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 008"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-008"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-008"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-008"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-009"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 009"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-009"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 009"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-009"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-009"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-009"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-010"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 010"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-010"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 010"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-010"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-010"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-010"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-011"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 011"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-011"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 011"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-011"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-011"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-011"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-012"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 012"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-012"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 012"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-012"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-012"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-012"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-013"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 013"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-013"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 013"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-013"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-013"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-013"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-014"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 014"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-014"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 014"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-014"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-014"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-014"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-015"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 015"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-015"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 015"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-015"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-015"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-015"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-016"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 016"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-016"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 016"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-016"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-016"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-016"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-017"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 017"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-017"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 017"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-017"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-017"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-017"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-018"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 018"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-018"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 018"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-018"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-018"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-018"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-019"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 019"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-019"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 019"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-019"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-019"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-019"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-020"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 020"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-020"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 020"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-020"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-020"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-020"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-021"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 021"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-021"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 021"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-021"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-021"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-021"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-022"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 022"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-022"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 022"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-022"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-022"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-022"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-023"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 023"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-023"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 023"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-023"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-023"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-023"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-024"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 024"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-024"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 024"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-024"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-024"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-024"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-025"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 025"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-025"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 025"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-025"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-025"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-025"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-026"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 026"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-026"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 026"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-026"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-026"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-026"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-027"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 027"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-027"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 027"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-027"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-027"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-027"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-028"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 028"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-028"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 028"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-028"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-028"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-028"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-029"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 029"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-029"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 029"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-029"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-029"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-029"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-030"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 030"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-030"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 030"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-030"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-030"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-030"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-031"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 031"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-031"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 031"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-031"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-031"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-031"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-032"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 032"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-032"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 032"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-032"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-032"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-032"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-033"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 033"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-033"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 033"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-033"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-033"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-033"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-034"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 034"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-034"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 034"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-034"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-034"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-034"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-035"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 035"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-035"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 035"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-035"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-035"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-035"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-036"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 036"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-036"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 036"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-036"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-036"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-036"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-037"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 037"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-037"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 037"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-037"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-037"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-037"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-038"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 038"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-038"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 038"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-038"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-038"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-038"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-039"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 039"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-039"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 039"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-039"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-039"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-039"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-040"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 040"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-040"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 040"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-040"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-040"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-040"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-041"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 041"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-041"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 041"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-041"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-041"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-041"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-042"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 042"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-042"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 042"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-042"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-042"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-042"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-043"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 043"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-043"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 043"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-043"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-043"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-043"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-044"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 044"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-044"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 044"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-044"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-044"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-044"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-045"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 045"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-045"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 045"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-045"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-045"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-045"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-046"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 046"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-046"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 046"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-046"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-046"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-046"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-047"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 047"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-047"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 047"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-047"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-047"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-047"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-048"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 048"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-048"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 048"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-048"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-048"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-048"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-049"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 049"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-049"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 049"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-049"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-049"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-049"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-050"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 050"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-050"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 050"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-050"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-050"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-050"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-051"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 051"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-051"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 051"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-051"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-051"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-051"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-052"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 052"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-052"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 052"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-052"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-052"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-052"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-053"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 053"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-053"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 053"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-053"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-053"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-053"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-054"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 054"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-054"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 054"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-054"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-054"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-054"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-055"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 055"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-055"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 055"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-055"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-055"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-055"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-056"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 056"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-056"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 056"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-056"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-056"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-056"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-057"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 057"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-057"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 057"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-057"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-057"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-057"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-058"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 058"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-058"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 058"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-058"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-058"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-058"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-059"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 059"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-059"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 059"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-059"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-059"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-059"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-060"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 060"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-060"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 060"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-060"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-060"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-060"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-061"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 061"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-061"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 061"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-061"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-061"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-061"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-062"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 062"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-062"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 062"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-062"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-062"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-062"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-063"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 063"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-063"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 063"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-063"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-063"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-063"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-064"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 064"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-064"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 064"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-064"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-064"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-064"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-065"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 065"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-065"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 065"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-065"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-065"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-065"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-066"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 066"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-066"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 066"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-066"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-066"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-066"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-067"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 067"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-067"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 067"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-067"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-067"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-067"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-068"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 068"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-068"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 068"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-068"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-068"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-068"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-069"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 069"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-069"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 069"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-069"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-069"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-069"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-070"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 070"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-070"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 070"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-070"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-070"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-070"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-071"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 071"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-071"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 071"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-071"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-071"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-071"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-072"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 072"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-072"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 072"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-072"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-072"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-072"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-073"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 073"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-073"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 073"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-073"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-073"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-073"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-074"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 074"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-074"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 074"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-074"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-074"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-074"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-075"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 075"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-075"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 075"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-075"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-075"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-075"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-076"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 076"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-076"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 076"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-076"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-076"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-076"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-077"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 077"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-077"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 077"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-077"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-077"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-077"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-078"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 078"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-078"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 078"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-078"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-078"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-078"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-079"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 079"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-079"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 079"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-079"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-079"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-079"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-080"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 080"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-080"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 080"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-080"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-080"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-080"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-081"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 081"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-081"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 081"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-081"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-081"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-081"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-082"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 082"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-082"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 082"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-082"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-082"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-082"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-083"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 083"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-083"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 083"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-083"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-083"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-083"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-084"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 084"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-084"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 084"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-084"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-084"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-084"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-085"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 085"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-085"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 085"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-085"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-085"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-085"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-086"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 086"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-086"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 086"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-086"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-086"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-086"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-087"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 087"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-087"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 087"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-087"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-087"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-087"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-088"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 088"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-088"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 088"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-088"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-088"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-088"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-089"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 089"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-089"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 089"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-089"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-089"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-089"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-090"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 090"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-090"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 090"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-090"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-090"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-090"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-091"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 091"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-091"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 091"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-091"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-091"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-091"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-092"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 092"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-092"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 092"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-092"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-092"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-092"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-093"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 093"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-093"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 093"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-093"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-093"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-093"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-094"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 094"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-094"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 094"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-094"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-094"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-094"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-095"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 095"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-095"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 095"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-095"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-095"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-095"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-096"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 096"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-096"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 096"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-096"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-096"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-096"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-097"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 097"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-097"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 097"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-097"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-097"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-097"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-098"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 098"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-098"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 098"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-098"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-098"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-098"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-099"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 099"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-099"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 099"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-099"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-099"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-099"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-100"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 100"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-100"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 100"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-100"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-100"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-100"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-101"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 101"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-101"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 101"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-101"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-101"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-101"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-102"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 102"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-102"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 102"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-102"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-102"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-102"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-103"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 103"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-103"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 103"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-103"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-103"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-103"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-104"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 104"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-104"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 104"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-104"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-104"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-104"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-105"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 105"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-105"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 105"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-105"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-105"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-105"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-106"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 106"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-106"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 106"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-106"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-106"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-106"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-107"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 107"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-107"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 107"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-107"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-107"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-107"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-108"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 108"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-108"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 108"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-108"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-108"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-108"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-109"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 109"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-109"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 109"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-109"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-109"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-109"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-110"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 110"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-110"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 110"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-110"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-110"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-110"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-111"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 111"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-111"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 111"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-111"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-111"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-111"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-112"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 112"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-112"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 112"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-112"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-112"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-112"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-113"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 113"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-113"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 113"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-113"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-113"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-113"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-114"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 114"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-114"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 114"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-114"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-114"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-114"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-115"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 115"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-115"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 115"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-115"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-115"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-115"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-116"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 116"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-116"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 116"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-116"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-116"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-116"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-117"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 117"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-117"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 117"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-117"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-117"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-117"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-118"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 118"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-118"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 118"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-118"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-118"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-118"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-119"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 119"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-119"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 119"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-119"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-119"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-119"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-120"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 120"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-120"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 120"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-120"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-120"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-120"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-121"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 121"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-121"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 121"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-121"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-121"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-121"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-122"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 122"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-122"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 122"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-122"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-122"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-122"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-123"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 123"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-123"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 123"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-123"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-123"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-123"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-124"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 124"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-124"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 124"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-124"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-124"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-124"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-125"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 125"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-125"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 125"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-125"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-125"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-125"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-126"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 126"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-126"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 126"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-126"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-126"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-126"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-127"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 127"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-127"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 127"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-127"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-127"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-127"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-128"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 128"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-128"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 128"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-128"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-128"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-128"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-129"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 129"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-129"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 129"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-129"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-129"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-129"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-130"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 130"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-130"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 130"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-130"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-130"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-130"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-131"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 131"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-131"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 131"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-131"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-131"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-131"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-132"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 132"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-132"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 132"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-132"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-132"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-132"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-133"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 133"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-133"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 133"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-133"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-133"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-133"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-134"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 134"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-134"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 134"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-134"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-134"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-134"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-135"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 135"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-135"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 135"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-135"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-135"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-135"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-136"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 136"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-136"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 136"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-136"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-136"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-136"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-137"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 137"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-137"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 137"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-137"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-137"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-137"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-138"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 138"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-138"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 138"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-138"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-138"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-138"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-139"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 139"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-139"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 139"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-139"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-139"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-139"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-140"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 140"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-140"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 140"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-140"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-140"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-140"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-141"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 141"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-141"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 141"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-141"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-141"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-141"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-142"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 142"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-142"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 142"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-142"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-142"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-142"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-143"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 143"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-143"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 143"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-143"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-143"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-143"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-144"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 144"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-144"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 144"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-144"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-144"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-144"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-145"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 145"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-145"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 145"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-145"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-145"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-145"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-146"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 146"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-146"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 146"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-146"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-146"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-146"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-147"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 147"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-147"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 147"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-147"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-147"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-147"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-148"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 148"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-148"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 148"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-148"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-148"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-148"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-149"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 149"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-149"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 149"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-149"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-149"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-149"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-150"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 150"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-150"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 150"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-150"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-150"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-150"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-151"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 151"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-151"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 151"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-151"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-151"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-151"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-152"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 152"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-152"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 152"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-152"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-152"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-152"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-153"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 153"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-153"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 153"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-153"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-153"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-153"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-154"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 154"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-154"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 154"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-154"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-154"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-154"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-155"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 155"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-155"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 155"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-155"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-155"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-155"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-156"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 156"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-156"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 156"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-156"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-156"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-156"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-157"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 157"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-157"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 157"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-157"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-157"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-157"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-158"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 158"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-158"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 158"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-158"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-158"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-158"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-159"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 159"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-159"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 159"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-159"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-159"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-159"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-160"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 160"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-160"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 160"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-160"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-160"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-160"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-161"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 161"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-161"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 161"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-161"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-161"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-161"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-162"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 162"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-162"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 162"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-162"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-162"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-162"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-163"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 163"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-163"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 163"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-163"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-163"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-163"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-164"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 164"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-164"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 164"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-164"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-164"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-164"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-165"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 165"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-165"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 165"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-165"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-165"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-165"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-166"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 166"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-166"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 166"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-166"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-166"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-166"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-167"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 167"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-167"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 167"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-167"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-167"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-167"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-168"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 168"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-168"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 168"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-168"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-168"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-168"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-169"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 169"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-169"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 169"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-169"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-169"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-169"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-170"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 170"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-170"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 170"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-170"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-170"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-170"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-171"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 171"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-171"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 171"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-171"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-171"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-171"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-172"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 172"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-172"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 172"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-172"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-172"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-172"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-173"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 173"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-173"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 173"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-173"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-173"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-173"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-174"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 174"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-174"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 174"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-174"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-174"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-174"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-175"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 175"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-175"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 175"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-175"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-175"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-175"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-176"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 176"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-176"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 176"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-176"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-176"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-176"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-177"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 177"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-177"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 177"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-177"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-177"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-177"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-178"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 178"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-178"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 178"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-178"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-178"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-178"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-179"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 179"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-179"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 179"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-179"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-179"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-179"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-180"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 180"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-180"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 180"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-180"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-180"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-180"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-181"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 181"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-181"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 181"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-181"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-181"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-181"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-182"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 182"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-182"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 182"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-182"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-182"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-182"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-183"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 183"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-183"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 183"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-183"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-183"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-183"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-184"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 184"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-184"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 184"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-184"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-184"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-184"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-185"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 185"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-185"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 185"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-185"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-185"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-185"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-186"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 186"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-186"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 186"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-186"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-186"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-186"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-187"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 187"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-187"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 187"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-187"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-187"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-187"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-188"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 188"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-188"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 188"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-188"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-188"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-188"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-189"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 189"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-189"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 189"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-189"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-189"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-189"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-190"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 190"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-190"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 190"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-190"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-190"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-190"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-191"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 191"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-191"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 191"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-191"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-191"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-191"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-192"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 192"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-192"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 192"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-192"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-192"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-192"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-193"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 193"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-193"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 193"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-193"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-193"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-193"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-194"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 194"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-194"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 194"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-194"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-194"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-194"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-195"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 195"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-195"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 195"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-195"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-195"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-195"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-196"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 196"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-196"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 196"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-196"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-196"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-196"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-197"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 197"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-197"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 197"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-197"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-197"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-197"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-198"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 198"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-198"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 198"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-198"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-198"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-198"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[entities]]
+entity_key = "npc_ceiling/body-199"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 199"
+kind = "npc"
+place_node_id = "npc_ceiling/fleet"
+
+[[actors]]
+entity_key = "npc_ceiling/body-199"
+bundle_id = "npc_ceiling"
+name = "NPC Fleet Body 199"
+
+[[actor_spatial_locations]]
+entity_key = "npc_ceiling/body-199"
+place_node_id = "npc_ceiling/fleet"
+bundle_id = "npc_ceiling"
+selection_path = "manifest:npc_ceiling/fleet"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-199"
+capability_id = "core/sense"
+source = "core"
+bundle_id = "npc_ceiling"
+
+[[actor_capabilities]]
+actor_entity_key = "npc_ceiling/body-199"
+capability_id = "core/walk"
+source = "core"
+bundle_id = "npc_ceiling"

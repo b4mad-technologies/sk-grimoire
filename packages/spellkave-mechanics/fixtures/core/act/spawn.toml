@@ -1,0 +1,60 @@
+[[action_definitions]]
+action_id = "core/act/spawn"
+bundle_id = "core"
+cost_time_ms = 0
+display_name = "Spawn a creature here"
+on_failure = ""
+on_success = "core/act/spawn/success"
+required_capability = "frontier.spawn_entity_definition"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "frontier.spawn_entity_definition"
+display_name = "Spawn a creature here"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/mark_surface"
+outcome_template_id = "core/act/spawn/outcome"
+predicate_bool = false
+predicate_source = "actor.has_capability('frontier.spawn_entity_definition')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/act/spawn/affordance"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/act/spawn/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "core/observed_change"
+location_kind = "binding"
+location_ref = "TargetSpatialRef"
+payload_json = '{"action":"core/act/spawn"}'
+
+[[consequence_templates]]
+bundle_id = "core"
+effect_refs_csv = "core/act/spawn/effect"
+template_id = "core/act/spawn/success"
+
+[[effect_definitions]]
+bundle_id = "core"
+effect_def_id = "core/act/spawn/effect"
+parameters_schema_json = '{"definition_from_args":true,"allowlist_tag":"core/spawnable","location_ref":{"kind":"binding","id":"TargetSpatialRef"}}'
+primitives_csv = "Spawn"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Spawn a creature here"
+manipulation_action_id = "core/act/spawn"
+outcome_bool = true
+outcome_template_id = "core/act/spawn/outcome"
+sense_visibility = "local"

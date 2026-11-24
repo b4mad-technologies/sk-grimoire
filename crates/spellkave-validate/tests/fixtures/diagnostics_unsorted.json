@@ -1,0 +1,20 @@
+[
+  {
+    "code": "MF-VAL-010",
+    "severity": "fatal",
+    "message": "later",
+    "path": "z.path",
+    "span": { "start_line": 9, "start_col": 1, "end_line": 9, "end_col": 5 },
+    "hint": null,
+    "details": null
+  },
+  {
+    "code": "MF-VAL-001",
+    "severity": "fatal",
+    "message": "earlier",
+    "path": "a.path",
+    "span": { "start_line": 1, "start_col": 2, "end_line": 1, "end_col": 7 },
+    "hint": null,
+    "details": null
+  }
+]

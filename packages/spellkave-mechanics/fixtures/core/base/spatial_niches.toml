@@ -1,0 +1,10 @@
+[[spatial_niche_attachments]]
+bundle_id = "core"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/passable_portal"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_edge_id = 0
+place_node_id = ""
+visibility = "Public"

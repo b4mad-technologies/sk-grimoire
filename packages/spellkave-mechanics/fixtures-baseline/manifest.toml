@@ -1,0 +1,27 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "core_baseline"
+
+[metadata]
+profile = "core_baseline"
+bundle = "core_baseline"
+
+[[bundles]]
+bundle_id = "core_baseline"
+display_name = "spellkave-core-baseline"
+author = "spellkave"
+version = "0.1.0"
+depends_on = ["core"]
+description = "Test bundle with indoor and outdoor place graphs, a connectable player actor, and a placed event-source actor."
+
+[[include]]
+path = "base/spatial.toml"
+
+[[include]]
+path = "base/spatial_niches.toml"
+
+[[include]]
+path = "base/actors.toml"
+
+[[include]]
+path = "base/items.toml"

@@ -1,0 +1,15 @@
+[package]
+name = "spellkave-dsl"
+version = "0.1.0"
+edition = "2021"
+license = "PolyForm-Shield-1.0.0"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+# Test-only: derives `Op::COUNT` to anchor the DSL-reference drift test to the
+# compiler (see `cfg_attr(test, derive(strum::EnumCount))` on `Op`). Not linked
+# into the wasm/production build.
+strum = { version = "0.26", features = ["derive"] }

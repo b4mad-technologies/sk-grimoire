@@ -1,0 +1,137 @@
+# Hand-authored (#1968). Restores, in a test-only bundle layered on top of
+# `core`, the §3.2 clause 3 (identity bootstrapping) and clause 5 (NPC/event
+# source) contracts. Both used to be satisfied by core's own `core/player`
+# entity + the `core/caravan`-standin `core_baseline/npc` — the later #1968
+# "retire Phandalin/village + core/player" slice removed core's structural
+# player entirely, so `core_baseline/player` now plays that role here (the
+# phandelver-hero pattern: this bundle defines its OWN connectable actor,
+# bound to `$sender` the same way `core/player` used to be).
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = ""
+entity_key = "core_baseline/player"
+kind = "player"
+name = "Baseline Player"
+owned_by_entity_key = ""
+place_node_id = "core_baseline_outdoor/plaza"
+quantity = 1
+
+[[actors]]
+bundle_id = "core_baseline"
+entity_key = "core_baseline/player"
+name = "Baseline Player"
+
+[[actor_identities]]
+bundle_id = "core_baseline"
+entity_key = "core_baseline/player"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "core_baseline"
+entity_key = "core_baseline/player"
+place_node_id = "core_baseline_outdoor/plaza"
+selection_path = "manifest:core_baseline/player"
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/player"
+bundle_id = "core_baseline"
+capability_id = "core/walk"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/player"
+bundle_id = "core_baseline"
+capability_id = "core/sense"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/player"
+bundle_id = "core_baseline"
+capability_id = "core/pickup"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/player"
+bundle_id = "core_baseline"
+capability_id = "core/inspect"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/player"
+bundle_id = "core_baseline"
+capability_id = "core/drop"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+# Publisher/genesis binds setup authority to the identity separately from its
+# character. Releasing or taking over the character does not transfer this role.
+[[role_bindings]]
+binding_id = "core_baseline/author"
+bundle_id = "core_baseline"
+subject = "$sender"
+role_id = "system-author"
+extent_kind_ref = "place_graph"
+extent_ref = "core_baseline_outdoor"
+description = "Baseline setup authority over the outdoor root graph."
+
+[[actor_equipment_slots]]
+actor_entity_key = "core_baseline/player"
+item_key = "core_baseline/horn_blade"
+slot_id = "homebrew/horn-sheath"
+
+# §3.2 clause 5: a generic NPC/event-source actor, narratively neutral,
+# standing in for the removed `core/caravan` row (8cf507681). Placed at
+# core-baseline's own `core_baseline_outdoor/market` node; grants only `core/sense`
+# (an observer/event source, not a player-controlled actor).
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = ""
+entity_key = "core_baseline/npc"
+kind = "npc"
+name = "Baseline Herald"
+owned_by_entity_key = ""
+place_node_id = "core_baseline_outdoor/market"
+quantity = 1
+
+[[actors]]
+bundle_id = "core_baseline"
+entity_key = "core_baseline/npc"
+name = "Baseline Herald"
+
+[[actor_capabilities]]
+actor_entity_key = "core_baseline/npc"
+bundle_id = "core_baseline"
+capability_id = "core/sense"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_spatial_locations]]
+bundle_id = "core_baseline"
+entity_key = "core_baseline/npc"
+place_node_id = "core_baseline_outdoor/market"
+selection_path = "manifest:core_baseline/npc"

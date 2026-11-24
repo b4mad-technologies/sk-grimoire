@@ -1,0 +1,63 @@
+# Hand-authored (#1968). core's own per-node niche attachments (core/item,
+# core/inspect, core/loot_site, core/drop, core/drink, core/mark_surface)
+# left core with the village place graph — they were scene wiring, not
+# vocabulary. This bundle re-attaches the ones it exercises (item
+# pickup/inspect/drop at its own grounded-item nodes, the §283 loot-site
+# demo, a drink/mark-surface anchor) at its OWN nodes, the same pattern any
+# depends_on = ["core"] bundle uses.
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/item"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/inspect"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/loot_site"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/drop"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/item"
+place_node_id = "core_baseline_outdoor/market"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/drink"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "core_baseline"
+condition_bool = true
+ecological_invariant = false
+niche_id = "core/mark_surface"
+place_node_id = "core_baseline_outdoor/plaza"
+visibility = "Public"

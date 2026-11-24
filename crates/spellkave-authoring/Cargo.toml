@@ -1,0 +1,19 @@
+[package]
+name = "spellkave-authoring"
+version = "0.1.0"
+edition = "2021"
+license = "PolyForm-Shield-1.0.0"
+
+# Rust-owned manifest authoring operations (#1968 R7 strangler migration,
+# ADR-0087): the eventual home of `@spellkave/world-author`'s `compose.ts`
+# (ActorBehavior cluster row-generation), `patch.ts` (13 manifest-mutation
+# ops), and `row-kinds.ts` (`ROW_KIND_NATURAL_KEY`) — ported incrementally,
+# one shape/op-group per slice. This crate is pure logic (no wasm-bindgen, no
+# fs) — `spellkave-authoring-wasm` is the thin wasm-bound wrapper, mirroring
+# `spellkave-validate`/`spellkave-validate-wasm`'s existing split.
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+spellkave-format = { path = "../spellkave-format" }
+spellkave-schema = { path = "../spellkave-schema" }
+spellkave-validate = { path = "../spellkave-validate" }

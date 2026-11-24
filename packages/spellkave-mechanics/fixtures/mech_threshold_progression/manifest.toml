@@ -1,0 +1,329 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_threshold_progression"
+
+[[action_definitions]]
+action_id = "mech_threshold_progression/open_gate"
+bundle_id = "mech_threshold_progression"
+cost_time_ms = 0
+display_name = "Open the threshold progression demo gate"
+on_failure = ""
+on_success = "mech_threshold_progression/open_gate/success"
+required_capability = "mech_threshold_progression/capability/open_gate"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_threshold_progression/progress"
+bundle_id = "mech_threshold_progression"
+cost_time_ms = 0
+display_name = "Advance to next stage"
+on_failure = ""
+on_success = "mech_threshold_progression/progress/success"
+required_capability = "mech_threshold_progression/capability/progress"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_threshold_progression/subject"
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/open_gate"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_threshold_progression/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_threshold_progression/subject"
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/progress"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_threshold_progression/subject"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_threshold_progression"
+entity_key = "mech_threshold_progression/subject"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_threshold_progression"
+entity_key = "mech_threshold_progression/subject"
+place_node_id = "mech_threshold_progression/arena"
+selection_path = "manifest:mech_threshold_progression/subject"
+
+[[actors]]
+bundle_id = "mech_threshold_progression"
+entity_key = "mech_threshold_progression/subject"
+name = "Threshold progression Demo Actor"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/open_gate"
+display_name = "Open the threshold progression demo gate"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_threshold_progression/capability/open_gate"
+outcome_template_id = "mech_threshold_progression/open_gate/hit"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_threshold_progression/open_gate/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/progress"
+display_name = "Advance to next stage"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_threshold_progression/capability/progress"
+outcome_template_id = "mech_threshold_progression/progress/hit"
+predicate_bool = false
+predicate_source = "actor.stat('mech_threshold_progression/gate') >= 1"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_threshold_progression/progress/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_threshold_progression"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_threshold_progression'."
+display_name = "Mech Threshold Progression"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_threshold_progression"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/open_gate"
+default_visibility = "Public"
+description = "Neutral mechanism (threshold progression.toml content/open_threshold progression_demo_gate)."
+display_name = "Open the threshold progression demo gate"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_threshold_progression"
+capability_id = "mech_threshold_progression/capability/progress"
+default_visibility = "Public"
+description = "Neutral mechanism (threshold progression.toml content/progress)."
+display_name = "Advance to next stage"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_threshold_progression/open_gate/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "1"
+resource = "mech_threshold_progression/gate"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_threshold_progression/progress/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "1"
+resource = "mech_threshold_progression/stage"
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "mech_threshold_progression/progress/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "6"
+resource = "mech_threshold_progression/capacity"
+
+[[consequence_templates]]
+bundle_id = "mech_threshold_progression"
+template_id = "mech_threshold_progression/open_gate/success"
+
+[[consequence_templates]]
+bundle_id = "mech_threshold_progression"
+template_id = "mech_threshold_progression/progress/success"
+
+[[entities]]
+bundle_id = "mech_threshold_progression"
+entity_def_id = ""
+entity_key = "mech_threshold_progression/subject"
+kind = "npc"
+name = "Threshold progression Demo Actor"
+owned_by_entity_key = ""
+place_node_id = "mech_threshold_progression/arena"
+quantity = 1
+
+[[niche_definitions]]
+bundle_id = "mech_threshold_progression"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Open gate (place-provided)"
+niche_id = "capability:mech_threshold_progression/capability/open_gate"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "mech_threshold_progression"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Progress (place-provided)"
+niche_id = "capability:mech_threshold_progression/capability/progress"
+predicate_source = ""
+provider = "place"
+
+[[object_state]]
+bundle_id = "mech_threshold_progression"
+entity_key = "mech_threshold_progression/subject"
+expires_at_tick = 0
+source_template_id = "mech_threshold_progression/subject"
+state_id = "mech_threshold_progression/stage"
+value_bool = true
+value_int = 1
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_threshold_progression"
+entity_key = "mech_threshold_progression/subject"
+expires_at_tick = 0
+source_template_id = "mech_threshold_progression/subject"
+state_id = "mech_threshold_progression/capacity"
+value_bool = true
+value_int = 10
+visibility = "Public"
+
+[[outcome_templates]]
+bundle_id = "mech_threshold_progression"
+consequence_template_id = ""
+display_name = "Open the threshold progression demo gate"
+manipulation_action_id = "mech_threshold_progression/open_gate"
+outcome_bool = true
+outcome_template_id = "mech_threshold_progression/open_gate/hit"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_threshold_progression"
+consequence_template_id = ""
+display_name = "Advance to next stage"
+manipulation_action_id = "mech_threshold_progression/progress"
+outcome_bool = true
+outcome_template_id = "mech_threshold_progression/progress/hit"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_threshold_progression/arena"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_threshold_progression"
+description = "Single-node arena for the threshold progression fast-lane twin (#1968) — no movement needed."
+display_name = "Mech Threshold Progression"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_threshold_progression"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_threshold_progression"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Threshold progression Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "arena"
+node_id = "mech_threshold_progression/arena"
+place_graph_id = "mech_threshold_progression"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_threshold_progression"
+description = "Generic progress stage advanced after the authored threshold opens."
+display_name = "Progress Stage"
+initial_value = 1
+max_value = 20
+min_value = 1
+recovery_rule = "persistent"
+resource_definition_id = "mech_threshold_progression/stage"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_threshold_progression"
+description = "Threshold progression fast-lane demo actor capacity."
+display_name = "Capacity"
+initial_value = 10
+max_value = 999
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_threshold_progression/capacity"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_threshold_progression"
+description = "Neutral mechanism (threshold progression.toml content/progress_demo_gate)."
+display_name = "Progression gate"
+initial_value = 0
+max_value = 1
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_threshold_progression/gate"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_threshold_progression/author"
+bundle_id = "mech_threshold_progression"
+description = "Fixture setup system-author authority over mech_threshold_progression."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_threshold_progression"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_threshold_progression"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_threshold_progression/capability/open_gate"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_threshold_progression/arena"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_threshold_progression"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_threshold_progression/capability/progress"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_threshold_progression/arena"
+visibility = "Public"

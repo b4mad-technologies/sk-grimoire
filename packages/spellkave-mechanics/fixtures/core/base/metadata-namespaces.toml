@@ -1,0 +1,41 @@
+[[metadata_namespaces]]
+audience = "frontier.apply_manifest"
+bundle_id = "core"
+description = "Source attribution and reconstruction provenance for authoring and audit tools."
+namespace = "provenance.source"
+
+[[metadata_namespaces]]
+audience = "frontier.apply_manifest"
+bundle_id = "core"
+description = "Author-only notes, TODOs, and editorial annotations."
+namespace = "editorial.note"
+
+[[metadata_namespaces]]
+audience = "hidden"
+bundle_id = "core"
+description = "Observer-facing summaries consumed by non-player observer clients."
+namespace = "observer.summary"
+
+[[metadata_namespaces]]
+audience = "public"
+bundle_id = "core"
+description = "Public art-generation prompts or display hints."
+namespace = "art.prompt"
+
+[[metadata_namespaces]]
+audience = "frontier.apply_manifest"
+bundle_id = "core"
+description = "Author-facing image asset references and reconstruction notes."
+namespace = "art.image"
+
+[[metadata_namespaces]]
+audience = "internal"
+bundle_id = "core"
+description = "DM-facing read-aloud narration blocks."
+namespace = "narration.read_aloud"
+
+[[metadata_namespaces]]
+audience = "owned"
+bundle_id = "core"
+description = "Driver-facing persona guidance scoped to the attached target."
+namespace = "driver.persona"

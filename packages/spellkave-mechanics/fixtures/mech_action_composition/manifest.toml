@@ -1,0 +1,297 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_action_composition"
+
+[[action_definitions]]
+action_id = "mech_action_composition/strike_a"
+bundle_id = "mech_action_composition"
+cost_time_ms = 500
+display_name = "Strike A (multiattack child)"
+on_failure = ""
+on_success = "mech_action_composition/strike_a/consequence"
+required_capability = "mech_action_composition/capability/multiattack"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_action_composition/strike_b"
+bundle_id = "mech_action_composition"
+cost_time_ms = 500
+display_name = "Strike B (multiattack child)"
+on_failure = ""
+on_success = "mech_action_composition/strike_b/consequence"
+required_capability = "mech_action_composition/capability/multiattack"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_action_composition/multiattack"
+bundle_id = "mech_action_composition"
+cost_time_ms = 1000
+display_name = "Multiattack (two strikes)"
+on_failure = ""
+on_success = "mech_action_composition/multiattack/consequence"
+required_capability = "mech_action_composition/capability/multiattack"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_action_composition/attacker"
+bundle_id = "mech_action_composition"
+capability_id = "mech_action_composition/capability/multiattack"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_action_composition/attacker"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_action_composition"
+entity_key = "mech_action_composition/attacker"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_action_composition"
+entity_key = "mech_action_composition/attacker"
+place_node_id = "mech_action_composition/arena"
+selection_path = "manifest:mech_action_composition/attacker"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_action_composition"
+entity_key = "mech_action_composition/target"
+place_node_id = "mech_action_composition/arena"
+selection_path = "manifest:mech_action_composition/target"
+
+[[actors]]
+bundle_id = "mech_action_composition"
+entity_key = "mech_action_composition/attacker"
+name = "Multiattack Attacker"
+
+[[actors]]
+bundle_id = "mech_action_composition"
+entity_key = "mech_action_composition/target"
+name = "Multiattack Target"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_action_composition"
+capability_id = "mech_action_composition/capability/multiattack"
+display_name = "mech_action_composition/strike_a/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_action_composition/capability/multiattack"
+outcome_template_id = "mech_action_composition/strike_a/success"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_action_composition/strike_a/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_action_composition"
+capability_id = "mech_action_composition/capability/multiattack"
+display_name = "mech_action_composition/strike_b/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_action_composition/capability/multiattack"
+outcome_template_id = "mech_action_composition/strike_b/success"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_action_composition/strike_b/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_action_composition"
+capability_id = "mech_action_composition/capability/multiattack"
+composes = [
+    "mech_action_composition/strike_a/affordance",
+    "mech_action_composition/strike_b/affordance",
+]
+display_name = "mech_action_composition/multiattack/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_action_composition/capability/multiattack"
+outcome_template_id = "mech_action_composition/multiattack/success"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_action_composition/multiattack/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_action_composition"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_action_composition'."
+display_name = "Mech Action Composition"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_action_composition"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_action_composition"
+capability_id = "mech_action_composition/capability/multiattack"
+default_visibility = "Public"
+description = "Generic composition-unroll carrier — proves affordance_template.composes fires children."
+display_name = "Multiattack (two strikes)"
+
+[[consequence_templates]]
+bundle_id = "mech_action_composition"
+template_id = "mech_action_composition/strike_a/consequence"
+
+[[consequence_templates]]
+bundle_id = "mech_action_composition"
+template_id = "mech_action_composition/strike_b/consequence"
+
+[[consequence_templates]]
+bundle_id = "mech_action_composition"
+template_id = "mech_action_composition/multiattack/consequence"
+
+[[entities]]
+bundle_id = "mech_action_composition"
+entity_def_id = "mech_action_composition/generic_target_def"
+entity_key = "mech_action_composition/attacker"
+kind = "npc"
+name = "Multiattack Attacker"
+owned_by_entity_key = ""
+place_node_id = "mech_action_composition/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_action_composition"
+entity_def_id = "mech_action_composition/generic_target_def"
+entity_key = "mech_action_composition/target"
+kind = "npc"
+name = "Multiattack Target"
+owned_by_entity_key = ""
+place_node_id = "mech_action_composition/arena"
+quantity = 1
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_action_composition"
+display_name = "Generic action-composition entity"
+entity_def_id = "mech_action_composition/generic_target_def"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definitions]]
+bundle_id = "mech_action_composition"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Multiattack (place-provided)"
+niche_id = "capability:mech_action_composition/capability/multiattack"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "mech_action_composition"
+consequence_template_id = ""
+display_name = "mech_action_composition/strike_a/success"
+manipulation_action_id = "mech_action_composition/strike_a"
+outcome_bool = true
+outcome_template_id = "mech_action_composition/strike_a/success"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_action_composition"
+consequence_template_id = ""
+display_name = "mech_action_composition/strike_b/success"
+manipulation_action_id = "mech_action_composition/strike_b"
+outcome_bool = true
+outcome_template_id = "mech_action_composition/strike_b/success"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_action_composition"
+consequence_template_id = ""
+display_name = "mech_action_composition/multiattack/success"
+manipulation_action_id = "mech_action_composition/multiattack"
+outcome_bool = true
+outcome_template_id = "mech_action_composition/multiattack/success"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_action_composition/arena"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_action_composition"
+description = "Single-node arena for the action-composition mechanic fixture (world-fixtures-retirement Phase D) — no movement needed."
+display_name = "Mech Action Composition"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_action_composition"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_action_composition"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Action-composition Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "arena"
+node_id = "mech_action_composition/arena"
+place_graph_id = "mech_action_composition"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[role_bindings]]
+binding_id = "mech_action_composition/author"
+bundle_id = "mech_action_composition"
+description = "Fixture setup system-author authority over mech_action_composition."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_action_composition"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_action_composition"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_action_composition/capability/multiattack"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_action_composition/arena"
+visibility = "Public"

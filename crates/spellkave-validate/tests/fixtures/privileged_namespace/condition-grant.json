@@ -1,0 +1,11 @@
+[
+  {
+    "code": "MF-VAL-364",
+    "severity": "fatal",
+    "message": "condition_definitions.grants_capability_while_active 'privileged_namespace_bridge/fictional_authority' cannot derive reserved capability 'frontier.pace_time'; use an explicit publisher-authorized actor_capabilities grant",
+    "path": "condition_definitions.grants_capability_while_active",
+    "span": null,
+    "hint": null,
+    "details": null
+  }
+]

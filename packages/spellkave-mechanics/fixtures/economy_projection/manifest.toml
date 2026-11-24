@@ -1,0 +1,703 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "economy_projection"
+
+[[action_definitions]]
+action_id = "economy_projection/grant-primary"
+bundle_id = "economy_projection"
+cost_time_ms = 0
+display_name = "Grant primary economy"
+on_failure = ""
+on_success = "economy_projection/grant-primary/success"
+required_capability = "economy_projection/capability/grant"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = true
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "economy_projection/suppress-primary"
+bundle_id = "economy_projection"
+cost_time_ms = 0
+display_name = "Suppress primary economy"
+on_failure = ""
+on_success = "economy_projection/suppress-primary/success"
+required_capability = "economy_projection/capability/suppress"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = true
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "economy_projection/unsuppress-primary"
+bundle_id = "economy_projection"
+cost_time_ms = 0
+display_name = "Restore primary economy"
+on_failure = ""
+on_success = "economy_projection/unsuppress-primary/success"
+required_capability = "economy_projection/capability/unsuppress"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = true
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "economy_projection/strike"
+bundle_id = "economy_projection"
+cost_time_ms = 1000
+display_name = "Economy projection strike"
+on_failure = ""
+on_success = "economy_projection/strike/success"
+required_capability = "economy_projection/capability/strike"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "economy_projection/never-strike"
+bundle_id = "economy_projection"
+cost_time_ms = 700
+display_name = "Economy projection never-strike"
+on_failure = ""
+on_success = "economy_projection/never-strike/success"
+required_capability = "economy_projection/capability/never"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/subject"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/strike"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "economy_projection/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/subject"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/grant"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "economy_projection/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/subject"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/suppress"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "economy_projection/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/subject"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/unsuppress"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "economy_projection/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/subject"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/never"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "economy_projection/subject"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "economy_projection/extent-viewer"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/oversee"
+elevation_class = ""
+extent_kind_ref = "place_graph"
+extent_ref = "economy_projection/arena"
+source = "economy_projection/extent-viewer"
+source_args_hash = ""
+
+[[actor_spatial_locations]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/subject"
+place_node_id = "economy_projection/arena/ring"
+selection_path = "manifest:economy_projection/subject"
+
+[[actor_spatial_locations]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/target"
+place_node_id = "economy_projection/arena/ring"
+selection_path = "manifest:economy_projection/target"
+
+[[actor_spatial_locations]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/extent-viewer"
+place_node_id = "economy_projection/arena/ring"
+selection_path = "manifest:economy_projection/extent-viewer"
+
+[[actor_spatial_locations]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/session-peer"
+place_node_id = "economy_projection/arena/ring"
+selection_path = "manifest:economy_projection/session-peer"
+
+[[actor_spatial_locations]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/unrelated"
+place_node_id = "economy_projection/outside/ring"
+selection_path = "manifest:economy_projection/unrelated"
+
+[[actors]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/subject"
+name = "Economy Subject"
+
+[[actors]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/target"
+name = "Economy Target"
+
+[[actors]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/extent-viewer"
+name = "Economy Extent Viewer"
+
+[[actors]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/session-peer"
+name = "Economy Session Peer"
+
+[[actors]]
+bundle_id = "economy_projection"
+entity_key = "economy_projection/unrelated"
+name = "Economy Unrelated"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/grant"
+display_name = "Grant primary economy"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:economy_projection/capability/grant"
+outcome_template_id = "economy_projection/grant-primary/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "economy_projection/grant-primary/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/suppress"
+display_name = "Suppress primary economy"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:economy_projection/capability/suppress"
+outcome_template_id = "economy_projection/suppress-primary/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "economy_projection/suppress-primary/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/unsuppress"
+display_name = "Restore primary economy"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:economy_projection/capability/unsuppress"
+outcome_template_id = "economy_projection/unsuppress-primary/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "economy_projection/unsuppress-primary/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/strike"
+display_name = "Economy projection strike"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:economy_projection/capability/strike"
+outcome_template_id = "economy_projection/strike/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+spends_channel = "core/action_class/primary"
+stratification_ok = true
+template_id = "economy_projection/strike/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/never"
+display_name = "Economy projection never-strike"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:economy_projection/capability/never"
+outcome_template_id = "economy_projection/never-strike/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+spends_channel = "economy_projection/channel/never"
+stratification_ok = true
+template_id = "economy_projection/never-strike/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "economy_projection"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'economy_projection'."
+display_name = "Economy Projection"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "economy_projection"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/strike"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection strike"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/grant"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection grant"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/suppress"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection suppress"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/unsuppress"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection unsuppress"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/never"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection never"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "economy_projection"
+capability_id = "economy_projection/capability/oversee"
+default_visibility = "Public"
+description = "Neutral #3390 proof capability."
+display_name = "Economy projection oversee"
+
+[[condition_definitions]]
+bundle_id = "economy_projection"
+condition_definition_id = "economy_projection/primary-suppressed"
+display_name = "Primary economy suppressed"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = "economy_projection/primary-suppressed/modifier"
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "economy_projection/grant-primary/success"
+
+[consequence_frame_writes.frame_write.ModifyChannel]
+actor = "Actor"
+channel = "core/action_class/primary"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "economy_projection/suppress-primary/success"
+
+[consequence_frame_writes.frame_write.ApplyStatus]
+condition_definition_id = "economy_projection/primary-suppressed"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "economy_projection/unsuppress-primary/success"
+
+[consequence_frame_writes.frame_write.RemoveCondition]
+condition_definition_id = "economy_projection/primary-suppressed"
+source_match = "Any"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_templates]]
+bundle_id = "economy_projection"
+template_id = "economy_projection/grant-primary/success"
+
+[[consequence_templates]]
+bundle_id = "economy_projection"
+template_id = "economy_projection/suppress-primary/success"
+
+[[consequence_templates]]
+bundle_id = "economy_projection"
+template_id = "economy_projection/unsuppress-primary/success"
+
+[[consequence_templates]]
+bundle_id = "economy_projection"
+template_id = "economy_projection/strike/success"
+
+[[consequence_templates]]
+bundle_id = "economy_projection"
+template_id = "economy_projection/never-strike/success"
+
+[[economy_channel_definitions]]
+bundle_id = "economy_projection"
+id = "economy_projection/channel/never"
+off_turn_eligible = false
+pool_ms_per_round = 700
+resets_on = "never"
+
+[[entities]]
+bundle_id = "economy_projection"
+entity_def_id = ""
+entity_key = "economy_projection/subject"
+kind = "player"
+name = "Economy Subject"
+owned_by_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+quantity = 1
+
+[[entities]]
+bundle_id = "economy_projection"
+entity_def_id = ""
+entity_key = "economy_projection/target"
+kind = "npc"
+name = "Economy Target"
+owned_by_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+quantity = 1
+
+[[entities]]
+bundle_id = "economy_projection"
+entity_def_id = ""
+entity_key = "economy_projection/extent-viewer"
+kind = "player"
+name = "Economy Extent Viewer"
+owned_by_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+quantity = 1
+
+[[entities]]
+bundle_id = "economy_projection"
+entity_def_id = ""
+entity_key = "economy_projection/session-peer"
+kind = "player"
+name = "Economy Session Peer"
+owned_by_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+quantity = 1
+
+[[entities]]
+bundle_id = "economy_projection"
+entity_def_id = ""
+entity_key = "economy_projection/unrelated"
+kind = "player"
+name = "Economy Unrelated"
+owned_by_entity_key = ""
+place_node_id = "economy_projection/outside/ring"
+quantity = 1
+
+[[modifier_target_definitions]]
+bundle_id = "economy_projection"
+display_name = "Action economy: primary channel"
+shape = "Numeric"
+target_id = "core/action_class/primary"
+
+[[modifier_templates]]
+applies_to = "core/action_class/primary"
+bundle_id = "economy_projection"
+delta_kind = "FlatSet"
+display_name = "Suppress primary economy"
+modifier_expression_source = "let unused = 0; unused"
+modifier_template_id = "economy_projection/primary-suppressed/modifier"
+predicate_source = ""
+priority = 100
+
+[[niche_definitions]]
+bundle_id = "economy_projection"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Economy projection strike"
+niche_id = "capability:economy_projection/capability/strike"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "economy_projection"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Economy projection grant"
+niche_id = "capability:economy_projection/capability/grant"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "economy_projection"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Economy projection suppress"
+niche_id = "capability:economy_projection/capability/suppress"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "economy_projection"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Economy projection unsuppress"
+niche_id = "capability:economy_projection/capability/unsuppress"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "economy_projection"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Economy projection never"
+niche_id = "capability:economy_projection/capability/never"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "economy_projection"
+consequence_template_id = ""
+display_name = "Grant primary economy"
+manipulation_action_id = "economy_projection/grant-primary"
+outcome_bool = true
+outcome_template_id = "economy_projection/grant-primary/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "economy_projection"
+consequence_template_id = ""
+display_name = "Suppress primary economy"
+manipulation_action_id = "economy_projection/suppress-primary"
+outcome_bool = true
+outcome_template_id = "economy_projection/suppress-primary/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "economy_projection"
+consequence_template_id = ""
+display_name = "Restore primary economy"
+manipulation_action_id = "economy_projection/unsuppress-primary"
+outcome_bool = true
+outcome_template_id = "economy_projection/unsuppress-primary/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "economy_projection"
+consequence_template_id = ""
+display_name = "Economy projection strike"
+manipulation_action_id = "economy_projection/strike"
+outcome_bool = true
+outcome_template_id = "economy_projection/strike/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "economy_projection"
+consequence_template_id = ""
+display_name = "Economy projection never-strike"
+manipulation_action_id = "economy_projection/never-strike"
+outcome_bool = true
+outcome_template_id = "economy_projection/never-strike/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "economy_projection/arena/ring"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "economy_projection"
+description = "Arena for economy projection proof actors."
+display_name = "Arena"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "economy_projection/arena"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "economy_projection/outside/ring"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "economy_projection"
+description = "Disconnected cell for the unrelated-reader privacy proof."
+display_name = "Outside"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "economy_projection/outside"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "economy_projection"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Economy projection arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "ring"
+node_id = "economy_projection/arena/ring"
+place_graph_id = "economy_projection/arena"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "economy_projection"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Economy projection outside"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "ring"
+node_id = "economy_projection/outside/ring"
+place_graph_id = "economy_projection/outside"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "economy_projection"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = "{}"
+grid_edge_affordance_template_id = ""
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 6000
+session_def_id = "economy_projection/session"
+stakes_required = ""
+termination_pred = ""
+turn_rule = "Sequential"
+turn_scheduler_id = "economy_projection/turn/round-robin"
+visibility_policy = "Public"
+winner_predicate = ""
+
+[[spatial_niche_attachments]]
+bundle_id = "economy_projection"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:economy_projection/capability/strike"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "economy_projection"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:economy_projection/capability/grant"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "economy_projection"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:economy_projection/capability/suppress"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "economy_projection"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:economy_projection/capability/unsuppress"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "economy_projection"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:economy_projection/capability/never"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "economy_projection/arena/ring"
+visibility = "Public"
+
+[[turn_scheduler]]
+active = true
+bundle_id = "economy_projection"
+id = "economy_projection/turn/round-robin"
+scheduler_kind = "round_robin"

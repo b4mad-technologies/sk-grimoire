@@ -1,0 +1,264 @@
+# pattern: lingering-hazard-zone
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_burning_room"
+
+[[actor_identities]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/occupant"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/occupant"
+place_node_id = "mech_burning_room/room"
+selection_path = "manifest:mech_burning_room/occupant"
+
+[[actors]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/occupant"
+name = "Burning Room Occupant"
+
+[[autonomy_jobs]]
+anchor_place_node_id = "mech_burning_room/room"
+bundle_id = "mech_burning_room"
+description = "Burning room hazard pulse (authored-hazard-pulses, sk-aao): damages every occupant of the room every 6s for 3 pulses, attributed to the fire entity, no cast involved."
+dsl_function = "mech_burning_room/pulse"
+enabled = true
+fire_at_boundary = ""
+frequency_ms = 6000
+job_id = "mech_burning_room/fire_pulse"
+next_fire_at_ms = 0
+notable = false
+owner_actor = 0
+payload_json = ""
+priority = 0
+repeats_remaining = 3
+requires_subject_alive = false
+source = "manifest"
+subject_entity_key = "mech_burning_room/fire"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-mechanics"
+bundle_id = "mech_burning_room"
+default_extent_params_json = '{"extent_m": 4.5}'
+default_extent_shape_id = "core/area/cube"
+depends_on = ["core"]
+description = "Generic burning-room mechanic fixture (authored-hazard-pulses, sk-aao): a node-scoped, manifest-authored hazard pulse, no cast involved."
+display_name = "Mech Burning Room"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_burning_room"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_burning_room/pulse"
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius]
+center_ref = "TargetSpatialRef"
+predicate_source = ""
+shape_id = "core/area/node_ball"
+shape_params_json = '{"ball_radius": 0}'
+
+[[consequence_frame_writes.frame_write.ForEachActorInRadius.body]]
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius.body.ModifyResource]
+actor = "Actor"
+delta_source = "-3"
+resource = "mech_burning_room/hp"
+
+[[consequence_templates]]
+bundle_id = "mech_burning_room"
+template_id = "mech_burning_room/pulse"
+
+[[entities]]
+bundle_id = "mech_burning_room"
+entity_def_id = "mech_burning_room/fire"
+entity_key = "mech_burning_room/fire"
+kind = "item"
+name = "Burning Room Fire"
+owned_by_entity_key = ""
+place_node_id = "mech_burning_room/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_burning_room"
+entity_def_id = ""
+entity_key = "mech_burning_room/occupant"
+kind = "npc"
+name = "Burning Room Occupant"
+owned_by_entity_key = ""
+place_node_id = "mech_burning_room/room"
+quantity = 1
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_burning_room"
+display_name = "Burning Room Fire"
+entity_def_id = "mech_burning_room/fire"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[entity_tag]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/fire"
+source = "manifest"
+tag = "mech_burning_room.hazard"
+
+[[entity_tag]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/fire"
+source = "manifest"
+tag = "mech_burning_room.fixed"
+
+[[movement_defaults]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_burning_room/speed","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+bundle_id = "mech_burning_room"
+mode_id = ""
+place_graph_id = ""
+
+[[object_state]]
+bundle_id = "mech_burning_room"
+entity_key = "mech_burning_room/occupant"
+expires_at_tick = 0
+source_template_id = "mech_burning_room/occupant"
+state_id = "mech_burning_room/hp"
+value_bool = true
+value_int = 20
+visibility = "Public"
+
+[[place_edges]]
+bundle_id = "mech_burning_room"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_burning_room/room->mech_burning_room/hallway"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_burning_room/room"
+inherit_movement_default = true
+place_graph_id = "mech_burning_room"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_burning_room/hallway"
+
+[[place_edges]]
+bundle_id = "mech_burning_room"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_burning_room/hallway->mech_burning_room/room"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_burning_room/hallway"
+inherit_movement_default = true
+place_graph_id = "mech_burning_room"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_burning_room/room"
+
+[[place_graphs]]
+anchor_node_id = "mech_burning_room/room"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_burning_room"
+description = "Two-node topology for the authored-hazard-pulses (sk-aao) content proof: the room the fire pulse anchors on, plus a safe neighbour proving the pulse is node-scoped, not world-wide."
+display_name = "Mech Burning Room"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_burning_room"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_burning_room"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Burning Room"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "room"
+node_id = "mech_burning_room/room"
+place_graph_id = "mech_burning_room"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_burning_room"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Burning Room — Safe Hallway"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "hallway"
+node_id = "mech_burning_room/hallway"
+place_graph_id = "mech_burning_room"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_burning_room"
+description = "Generic burning-room mechanic fixture: the occupant's hit points."
+display_name = "Hit Points"
+initial_value = 20
+max_value = 100
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_burning_room/hp"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_burning_room"
+description = "Generic burning-room mechanic fixture: the occupant's base movement reach (backs the bundle-scoped movement default above; this fixture's own proof never exercises traversal, only the hazard pulse)."
+display_name = "Movement reach (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_burning_room/speed"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_burning_room/author"
+bundle_id = "mech_burning_room"
+description = "Fixture setup system-author authority over mech_burning_room."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_burning_room"
+role_id = "system-author"
+subject = "$sender"

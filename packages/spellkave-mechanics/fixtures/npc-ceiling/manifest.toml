@@ -1,0 +1,18 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "npc_ceiling"
+
+[metadata]
+profile = "npc_ceiling"
+bundle = "npc_ceiling"
+
+[[bundles]]
+bundle_id = "npc_ceiling"
+display_name = "spellkave-npc_ceiling"
+author = "spellkave"
+version = "0.1.0"
+depends_on = ["core"]
+description = "Synthetic load-test fixture for issue #1381's NPC connection-ceiling measurement harness. Supplies 200 generic, UNBOUND (claimable, ADR-0067) embodied actor bodies for the harness to adopt via r_claim_actor. NOT narrative content; non-default, loaded only via explicit `just seed packages/spellkave-mechanics/fixtures/npc-ceiling`."
+
+[[include]]
+path = "base/actors.toml"

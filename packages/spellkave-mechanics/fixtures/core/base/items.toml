@@ -1,0 +1,44 @@
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "homebrew/item/horn_blade"
+source = "manifest"
+tag = "core.item"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "homebrew/item/horn_blade"
+source = "manifest"
+tag = "weapon"
+
+[[entity_definition_tag]]
+bundle_id = "core"
+entity_def_id = "homebrew/item/horn_blade"
+source = "manifest"
+tag = "homebrew"
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "core"
+display_name = "Horn Blade"
+entity_def_id = "homebrew/item/horn_blade"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = 'slot_id == "homebrew/horn-sheath"'
+stackable = false
+
+[[equipment_slot_definitions]]
+bundle_id = "core"
+default_compatibility_predicate = "true"
+label = "Horn Sheath"
+slot_id = "homebrew/horn-sheath"
+
+[[equipment_slot_definitions]]
+bundle_id = "core"
+default_compatibility_predicate = "true"
+label = "Main Hand"
+slot_id = "core/main_hand"

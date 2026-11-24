@@ -1,0 +1,194 @@
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/controlled"
+source = "manifest"
+tag = "core"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/controlled"
+source = "manifest"
+tag = "condition"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/controlled"
+source = "manifest"
+tag = "steering"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/controlled"
+source = "manifest"
+tag = "claim"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+source = "manifest"
+tag = "core"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+source = "manifest"
+tag = "condition"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+source = "manifest"
+tag = "srd"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+source = "manifest"
+tag = "cascade_target"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+source = "manifest"
+tag = "axes=action_admission_GAP+concentration_GAP+speech_GAP+initiative_event_kind_GAP"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/disengaged"
+source = "manifest"
+tag = "core"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/disengaged"
+source = "manifest"
+tag = "condition"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/disengaged"
+source = "manifest"
+tag = "cascade_target"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/prone"
+source = "manifest"
+tag = "core"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/prone"
+source = "manifest"
+tag = "condition"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/prone"
+source = "manifest"
+tag = "srd"
+
+[[condition_definition_tag]]
+bundle_id = "core"
+condition_definition_id = "core/condition/prone"
+source = "manifest"
+tag = "cascade_target"
+
+[[condition_definitions]]
+bundle_id = "core"
+condition_definition_id = "core/condition/controlled"
+description = "Steering claim-lock (Item 20): applied to a remotely-steered entity while an autonomy claim holds it; the world_tick autonomy dispatcher skips any entity carrying an active instance of this condition. Not a PLAYER-facing condition (sk-eky) — infrastructure for claim/autonomy only."
+display_name = "Controlled"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = false
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "core"
+condition_definition_id = "core/condition/incapacitated"
+description = "Identity-only cascade target for SRD conditions (Paralyzed/Unconscious/Petrified imply this) — lives in core, not srd, because multiple SRD-family conditions point at it. The SRD-canonical behavioural payload (action-admission, concentration, speech, initiative axes) is substrate-absent today; this row's load-bearing job for now is only to exist as the cascade target."
+display_name = "Incapacitated"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = ["core/condition/disengaged"]
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "core"
+condition_definition_id = "core/condition/disengaged"
+description = "Session-scoped 'left the fight without being incapacitated' carrier for Phandelver P5's mixed-roster combat endings; session termination predicates exclude by this OR incapacitated so both a defeat and a flee reach the same umbrella tag. Identity-only: no modifier_template, no hooks."
+display_name = "Disengaged"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "core"
+condition_definition_id = "core/condition/prone"
+description = "Cascade target for SRD Unconscious (Paralyzed/Unconscious imply Prone)."
+display_name = "Prone"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_remove_policy_definitions]]
+bundle_id = "core"
+display_name = "Independent lifetime"
+policy_id = "core/remove_policy/independent_lifetime"
+remove_predicate_source = "0 == 1"
+
+[[condition_remove_policy_definitions]]
+bundle_id = "core"
+display_name = "Owning parent"
+policy_id = "core/remove_policy/owning_parent"
+remove_predicate_source = "0 <= 1"
+
+[[condition_remove_policy_definitions]]
+bundle_id = "core"
+display_name = "Reference counted"
+policy_id = "core/remove_policy/reference_counted"
+remove_predicate_source = "implied_by_count() == 0"
+
+[[stacking_discipline_definitions]]
+bundle_id = "core"
+discipline_id = "core/stacking/single"
+display_name = "Single active row"
+expires_at_tick_outcome_source = "-1"
+stack_count_outcome_source = "stack_count"
+
+[[stacking_discipline_definitions]]
+bundle_id = "core"
+discipline_id = "core/stacking/increment"
+display_name = "Increment stack count"
+expires_at_tick_outcome_source = "-1"
+stack_count_outcome_source = "stack_count + 1"
+
+[[stacking_discipline_definitions]]
+bundle_id = "core"
+discipline_id = "core/stacking/refresh"
+display_name = "Refresh expiry"
+expires_at_tick_outcome_source = "max(expires_at_tick, world_tick)"
+stack_count_outcome_source = "stack_count"

@@ -1,0 +1,261 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "privileged_namespace_controls"
+
+[[bundles]]
+bundle_id = "privileged_namespace_controls"
+display_name = "Legacy namespace controls"
+author = "spellkave"
+version = "1.0.0"
+depends_on = ["core", "privileged_namespace_bridge", "test_lab_live_on_demand_gatekeeper"]
+allow_flat_tags = true
+tag_prefixes = [{prefix = "namespace32"}, {prefix = "frontier"}]
+
+[[condition_definitions]]
+bundle_id = "privileged_namespace_controls"
+condition_definition_id = "privileged_namespace_controls/suppress_authority"
+display_name = "Fictional suppression"
+modifier_template_id = ""
+gate_predicate_source = ""
+observable = true
+stacking_rule = "core/stacking/single"
+remove_time_policy = "core/remove_policy/independent_lifetime"
+grants_capability_while_active = []
+suppresses_capability_while_active = ["frontier.pace_time"]
+
+[[entity_definitions]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/suppressed_body"
+display_name = "Explicit authority with fictional suppression"
+
+[[entity_definition_initial_condition]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/suppressed_body"
+condition_definition_id = "privileged_namespace_controls/suppress_authority"
+duration_ticks = 0
+
+[[entity_definitions]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/equipment"
+display_name = "Fictional authority equipment"
+grants_capability_while_equipped = "frontier.pace_time"
+
+[[entity_definitions]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/seeded_authority"
+display_name = "Forbidden legacy seed"
+
+[[entity_definition_initial_capability]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/seeded_authority"
+capability_id = "frontier.pace_time"
+
+[[tag_capability_grant]]
+bundle_id = "privileged_namespace_controls"
+tag = "namespace32.authority"
+capability_id = "frontier.pace_time"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/tagged"
+entity_def_id = ""
+name = "Namespace tagged"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/tagged"
+name = "Namespace tagged"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/tagged"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/equipped"
+entity_def_id = ""
+name = "Namespace equipped"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/equipped"
+name = "Namespace equipped"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/equipped"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/carried"
+entity_def_id = ""
+name = "Namespace carried"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/carried"
+name = "Namespace carried"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/carried"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/suppressed"
+entity_def_id = "privileged_namespace_controls/suppressed_body"
+name = "Namespace suppressed"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/suppressed"
+name = "Namespace suppressed"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/suppressed"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[actor_capabilities]]
+bundle_id = "privileged_namespace_controls"
+actor_entity_key = "privileged_namespace_controls/suppressed"
+capability_id = "frontier.pace_time"
+source = "namespace32/explicit"
+visibility = "public"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/apply_holder"
+entity_def_id = ""
+name = "Namespace apply_holder"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/apply_holder"
+name = "Namespace apply_holder"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/apply_holder"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[actor_capabilities]]
+bundle_id = "privileged_namespace_controls"
+actor_entity_key = "privileged_namespace_controls/apply_holder"
+capability_id = "frontier.apply_manifest"
+source = "namespace32/explicit"
+visibility = "public"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/clone_holder"
+entity_def_id = ""
+name = "Namespace clone_holder"
+kind = "player"
+place_node_id = "privileged_namespace_bridge/region/room"
+
+[[actors]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/clone_holder"
+name = "Namespace clone_holder"
+
+[[actor_spatial_locations]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/clone_holder"
+place_node_id = "privileged_namespace_bridge/region/room"
+selection_path = "namespace32:manifest"
+
+[[actor_capabilities]]
+bundle_id = "privileged_namespace_controls"
+actor_entity_key = "privileged_namespace_controls/clone_holder"
+capability_id = "frontier.pace_time"
+source = "namespace32/explicit"
+visibility = "public"
+
+[[entity_tag]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/tagged"
+tag = "namespace32.authority"
+source = "manifest"
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/equipment_item"
+entity_def_id = "privileged_namespace_controls/equipment"
+name = "Namespace equipment_item"
+kind = "item"
+place_node_id = ""
+owned_by_entity_key = "privileged_namespace_controls/equipped"
+
+[[entity_containment]]
+container_entity_key = "privileged_namespace_controls/equipped"
+entity_key = "privileged_namespace_controls/equipment_item"
+slot_id = ""
+direction = ""
+
+[[entities]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/carried_item"
+entity_def_id = "privileged_namespace_controls/carried_definition"
+name = "Namespace carried_item"
+kind = "item"
+place_node_id = ""
+owned_by_entity_key = "privileged_namespace_controls/carried"
+
+[[entity_containment]]
+container_entity_key = "privileged_namespace_controls/carried"
+entity_key = "privileged_namespace_controls/carried_item"
+slot_id = ""
+direction = ""
+
+[[actor_equipment_slots]]
+actor_entity_key = "privileged_namespace_controls/equipped"
+item_key = "privileged_namespace_controls/equipment_item"
+slot_id = "core/main_hand"
+
+[[entity_tag]]
+bundle_id = "privileged_namespace_controls"
+entity_key = "privileged_namespace_controls/carried_item"
+tag = "frontier.pace_time"
+source = "manifest"
+
+[[actor_capabilities]]
+bundle_id = "privileged_namespace_controls"
+actor_entity_key = "test_lab_live_on_demand_gatekeeper:test_lab_live_on_demand_gatekeeper/actor"
+capability_id = "frontier.spawn_entity_definition"
+source = "namespace32/setup"
+
+[[actor_capabilities]]
+bundle_id = "privileged_namespace_controls"
+actor_entity_key = "privileged_namespace_controls/clone_holder"
+capability_id = "privileged_namespace_bridge/mark"
+source = "namespace32/ordinary"
+
+[[entity_definitions]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/carried_definition"
+display_name = "Carried fact authority tag"
+
+[[entity_definition_tag]]
+bundle_id = "privileged_namespace_controls"
+entity_def_id = "privileged_namespace_controls/carried_definition"
+tag = "frontier.pace_time"
+source = "manifest"

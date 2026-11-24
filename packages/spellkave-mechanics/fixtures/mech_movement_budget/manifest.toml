@@ -1,0 +1,370 @@
+# pattern: condition-grant-and-suppression
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_movement_budget"
+
+[[action_definitions]]
+action_id = "mech_movement_budget/apply_movement_slow"
+bundle_id = "mech_movement_budget"
+cost_time_ms = 0
+display_name = "Apply movement-budget slow"
+on_failure = ""
+on_success = "mech_movement_budget/apply_movement_slow/consequence"
+required_capability = "mech_movement_budget/capability/apply_movement_slow"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_movement_budget/runner"
+bundle_id = "mech_movement_budget"
+capability_id = "core/walk"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_movement_budget/runner"
+bundle_id = "mech_movement_budget"
+capability_id = "mech_movement_budget/capability/apply_movement_slow"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_movement_budget/runner"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_movement_budget"
+entity_key = "mech_movement_budget/runner"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_movement_budget"
+entity_key = "mech_movement_budget/runner"
+place_node_id = "mech_movement_budget/cell_a"
+selection_path = "manifest:mech_movement_budget/runner"
+
+[[actors]]
+bundle_id = "mech_movement_budget"
+entity_key = "mech_movement_budget/runner"
+name = "Movement Budget Runner"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_movement_budget"
+capability_id = "mech_movement_budget/capability/apply_movement_slow"
+display_name = "mech_movement_budget/apply_movement_slow/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_movement_budget/capability/apply_movement_slow"
+outcome_template_id = "mech_movement_budget/apply_movement_slow/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_movement_budget/apply_movement_slow/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_movement_budget"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_movement_budget'."
+display_name = "Mech Movement Budget"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_movement_budget"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_movement_budget"
+capability_id = "mech_movement_budget/capability/apply_movement_slow"
+default_visibility = "Public"
+description = "Applies the speed-halving condition used by the #2049 movement-budget proof."
+display_name = "Apply movement-budget slow"
+
+[[condition_definitions]]
+bundle_id = "mech_movement_budget"
+condition_definition_id = "mech_movement_budget/slowed"
+display_name = "Movement budget: slowed"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = "mech_movement_budget/slowed/half_speed"
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_movement_budget/apply_movement_slow/consequence"
+
+[consequence_frame_writes.frame_write.ApplyStatus]
+condition_definition_id = "mech_movement_budget/slowed"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_templates]]
+bundle_id = "mech_movement_budget"
+template_id = "mech_movement_budget/apply_movement_slow/consequence"
+
+[[entities]]
+bundle_id = "mech_movement_budget"
+entity_def_id = ""
+entity_key = "mech_movement_budget/runner"
+kind = "npc"
+name = "Movement Budget Runner"
+owned_by_entity_key = ""
+place_node_id = "mech_movement_budget/cell_a"
+quantity = 1
+
+[[modifier_target_definitions]]
+bundle_id = "mech_movement_budget"
+display_name = "Movement reach (cells)"
+shape = "Numeric"
+target_id = "mech_movement_budget/speed"
+
+[[modifier_templates]]
+applies_to = "mech_movement_budget/speed"
+bundle_id = "mech_movement_budget"
+delta_kind = "FlatSet"
+display_name = "Movement budget: half speed (6 -> 3 cells)"
+modifier_expression_source = "let half_speed_cells = 3; half_speed_cells"
+modifier_template_id = "mech_movement_budget/slowed/half_speed"
+predicate_source = ""
+priority = 0
+
+[[niche_definitions]]
+bundle_id = "mech_movement_budget"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Apply movement slow (place-provided)"
+niche_id = "capability:mech_movement_budget/capability/apply_movement_slow"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "mech_movement_budget"
+consequence_template_id = ""
+display_name = "Apply movement-budget slow"
+manipulation_action_id = "mech_movement_budget/apply_movement_slow"
+outcome_bool = true
+outcome_template_id = "mech_movement_budget/apply_movement_slow/outcome"
+sense_visibility = "local"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_budget/speed","movement_channel":"core/action_class/movement","movement_cost_cells":"1","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_budget/cell_a->mech_movement_budget/normal"
+mode_id = ""
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_budget/speed","movement_channel":"core/action_class/movement","movement_cost_cells":"1","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_budget/normal->mech_movement_budget/cell_a"
+mode_id = ""
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_budget/speed","movement_channel":"core/action_class/movement","movement_cost_cells":"2","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_budget/cell_a->mech_movement_budget/rough"
+mode_id = ""
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_budget/speed","movement_channel":"core/action_class/movement","movement_cost_cells":"2","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_budget/rough->mech_movement_budget/cell_a"
+mode_id = ""
+
+[[place_edges]]
+bundle_id = "mech_movement_budget"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_budget/cell_a->mech_movement_budget/normal"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_budget/cell_a"
+inherit_movement_default = true
+place_graph_id = "mech_movement_budget"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_budget/normal"
+
+[[place_edges]]
+bundle_id = "mech_movement_budget"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_budget/normal->mech_movement_budget/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_budget/normal"
+inherit_movement_default = true
+place_graph_id = "mech_movement_budget"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_budget/cell_a"
+
+[[place_edges]]
+bundle_id = "mech_movement_budget"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_budget/cell_a->mech_movement_budget/rough"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_budget/cell_a"
+inherit_movement_default = true
+place_graph_id = "mech_movement_budget"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_budget/rough"
+
+[[place_edges]]
+bundle_id = "mech_movement_budget"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_budget/rough->mech_movement_budget/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_budget/rough"
+inherit_movement_default = true
+place_graph_id = "mech_movement_budget"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_budget/cell_a"
+
+[[place_graphs]]
+anchor_node_id = "mech_movement_budget/cell_a"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_movement_budget"
+description = "Isolated three-cell topology for the cumulative per-turn movement budget mechanic fixture (#2049, world-fixtures-retirement Phase D)."
+display_name = "Mech Movement Budget"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_movement_budget"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_budget"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Budget — Home Cell"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_a"
+node_id = "mech_movement_budget/cell_a"
+place_graph_id = "mech_movement_budget"
+pos_present = true
+pos_x = 0
+pos_y = 10
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_budget"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Budget — Normal Ground"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "normal"
+node_id = "mech_movement_budget/normal"
+place_graph_id = "mech_movement_budget"
+pos_present = true
+pos_x = -9
+pos_y = -5
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_budget"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Budget — Difficult Ground"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "rough"
+node_id = "mech_movement_budget/rough"
+place_graph_id = "mech_movement_budget"
+pos_present = true
+pos_x = 9
+pos_y = -5
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_movement_budget"
+description = "Generic movement-budget mechanic fixture: the runner's base movement reach."
+display_name = "Movement reach (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_movement_budget/speed"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_movement_budget/author"
+bundle_id = "mech_movement_budget"
+description = "Fixture setup system-author authority over mech_movement_budget."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_movement_budget"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_movement_budget"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_movement_budget/capability/apply_movement_slow"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_movement_budget/cell_a"
+visibility = "Public"

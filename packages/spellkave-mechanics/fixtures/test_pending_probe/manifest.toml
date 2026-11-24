@@ -1,0 +1,138 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "test_pending_probe"
+
+[[action_definitions]]
+action_id = "test_pending_probe/roll"
+bundle_id = "test_pending_probe"
+cost_time_ms = 0
+display_name = "Probe roll"
+on_failure = "test_pending_probe/success"
+on_success = "test_pending_probe/success"
+required_capability = "test_pending_probe/probe"
+resolution_mode = "Stochastic"
+resolution_predicate_source = "d20 + actor.equipped_item('test_pending_probe/grip').stat('test_pending_probe/budget') > 0"
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "test_pending_probe/intervene"
+bundle_id = "test_pending_probe"
+cost_time_ms = 0
+display_name = "Probe intervention"
+on_failure = ""
+on_success = "test_pending_probe/spend"
+reaction_eligibility = "actor.stat('test_pending_probe/budget') > 0"
+reaction_trigger = "$event.kind == 'r_manipulate' && $event.detail.phase == 'resolution' && $event.detail.stochastic == 'true'"
+reaction_window_ms = 1800000
+required_capability = "test_pending_probe/probe"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "test_pending_probe"
+capability_id = "test_pending_probe/probe"
+display_name = "Probe roll"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:test_pending_probe/probe"
+outcome_template_id = "test_pending_probe/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "test_pending_probe/offer"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-test"
+bundle_id = "test_pending_probe"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = ""
+display_name = "Pending probe"
+tag_prefixes = []
+version = "0.1.0"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "test_pending_probe"
+capability_id = "test_pending_probe/probe"
+default_visibility = "Public"
+description = "Local pending probe"
+display_name = "Probe"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "test_pending_probe/spend"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "Actor"
+delta_source = "-1"
+resource = "test_pending_probe/budget"
+
+[[consequence_templates]]
+bundle_id = "test_pending_probe"
+template_id = "test_pending_probe/success"
+
+[[consequence_templates]]
+bundle_id = "test_pending_probe"
+template_id = "test_pending_probe/spend"
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "test_pending_probe"
+display_name = "Probe instrument"
+entity_def_id = "test_pending_probe/instrument"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = 'slot_id == "test_pending_probe/grip"'
+stackable = false
+
+[[equipment_slot_definitions]]
+bundle_id = "test_pending_probe"
+default_compatibility_predicate = "true"
+label = "Probe grip"
+slot_id = "test_pending_probe/grip"
+
+[[niche_definitions]]
+bundle_id = "test_pending_probe"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Probe roll"
+niche_id = "capability:test_pending_probe/probe"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "test_pending_probe"
+consequence_template_id = ""
+display_name = "Probe roll"
+manipulation_action_id = "test_pending_probe/roll"
+outcome_bool = true
+outcome_template_id = "test_pending_probe/outcome"
+sense_visibility = "local"
+
+[[resource_definitions]]
+bundle_id = "test_pending_probe"
+description = "Local reaction eligibility"
+display_name = "Budget"
+initial_value = 1
+max_value = 1
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "test_pending_probe/budget"
+value_kind = "int"

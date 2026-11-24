@@ -1,0 +1,62 @@
+[[action_definitions]]
+action_id = "core/act/lock"
+bundle_id = "core"
+cost_time_ms = 0
+display_name = "Lock this object"
+on_failure = ""
+on_success = "core/act/lock/success"
+required_capability = "frontier.set_state"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "frontier.set_state"
+display_name = "Lock this object"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/lockable_object"
+outcome_template_id = "core/act/lock/outcome"
+predicate_bool = false
+predicate_source = "actor.has_capability('frontier.set_state')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/act/lock/affordance"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/act/lock/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "core/observed_change"
+location_kind = "binding"
+location_ref = "TargetSpatialRef"
+payload_json = '{"action":"core/act/lock"}'
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "core/act/lock/success"
+
+[consequence_frame_writes.frame_write.SetEntityFlag]
+entity = "TargetEntity"
+flag = "core/locked"
+value = true
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/act/lock/success"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Lock this object"
+manipulation_action_id = "core/act/lock"
+outcome_bool = true
+outcome_template_id = "core/act/lock/outcome"
+sense_visibility = "local"

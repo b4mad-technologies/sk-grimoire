@@ -1,0 +1,107 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "test_lab_live_on_demand_gatekeeper"
+
+[[actor_identities]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+entity_key = "test_lab_live_on_demand_gatekeeper/actor"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+entity_key = "test_lab_live_on_demand_gatekeeper/actor"
+place_node_id = "test_lab_live_on_demand_gatekeeper/root"
+selection_path = "manifest:test_lab_live_on_demand_gatekeeper/actor"
+
+[[actors]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+entity_key = "test_lab_live_on_demand_gatekeeper/actor"
+name = "Live-on-demand Gatekeeper"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave"
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Publisher-bound actor for local test-lab manifest admission, independent of test run order."
+display_name = "Live-on-demand apply-manifest gatekeeper"
+tag_prefixes = []
+version = "1.0.0"
+
+[[coordinate_kind_definitions]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+coordinate_kind_id = "test_lab_live_on_demand_gatekeeper/cartesian"
+description = ""
+
+[[entities]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+entity_def_id = ""
+entity_key = "test_lab_live_on_demand_gatekeeper/actor"
+kind = "player"
+name = "Live-on-demand Gatekeeper"
+owned_by_entity_key = ""
+place_node_id = "test_lab_live_on_demand_gatekeeper/root"
+quantity = 1
+
+[[place_graphs]]
+anchor_node_id = "test_lab_live_on_demand_gatekeeper/root"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+description = "Single-node bootstrap graph for the SDK manifest-apply gatekeeper."
+display_name = "Gatekeeper Graph"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "test_lab_live_on_demand_gatekeeper"
+substrate_id = "test_lab_live_on_demand_gatekeeper/plane"
+
+[[place_nodes]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Gatekeeper Root"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "root"
+node_id = "test_lab_live_on_demand_gatekeeper/root"
+place_graph_id = "test_lab_live_on_demand_gatekeeper"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "test_lab_live_on_demand_gatekeeper/plane"
+
+[[role_bindings]]
+binding_id = "test_lab_live_on_demand_gatekeeper/author"
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+description = "Fixture setup system-author authority over test_lab_live_on_demand_gatekeeper."
+extent_kind_ref = "place_graph"
+extent_ref = "test_lab_live_on_demand_gatekeeper"
+role_id = "system-author"
+subject = "$sender"
+
+[[role_bindings]]
+binding_id = "test_lab_live_on_demand_gatekeeper/timekeeper"
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+description = "Fixture setup timekeeper authority over test_lab_live_on_demand_gatekeeper."
+extent_kind_ref = "place_graph"
+extent_ref = "test_lab_live_on_demand_gatekeeper"
+role_id = "timekeeper"
+subject = "$sender"
+
+[[substrate_definitions]]
+bundle_id = "test_lab_live_on_demand_gatekeeper"
+coordinate_kind_id = "test_lab_live_on_demand_gatekeeper/cartesian"
+description = ""
+substrate_id = "test_lab_live_on_demand_gatekeeper/plane"

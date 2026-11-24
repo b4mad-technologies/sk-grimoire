@@ -1,0 +1,47 @@
+[[area_shape_definitions]]
+bundle_id = "core"
+description = "Sphere/ellipsoid centred on origin. radius_m is the required fallback; optional per-axis radii override it."
+parameter_schema_json = '{"radius_m": "f32", "radius_x_m": "f32?", "radius_y_m": "f32?", "radius_z_m": "f32?"}'
+shape_id = "core/area/sphere"
+
+[[area_shape_definitions]]
+bundle_id = "core"
+description = "Conical AoE. half_angle_deg is half the opening angle; range_m is the depth."
+parameter_schema_json = '{"half_angle_deg": "f32", "range_m": "f32"}'
+shape_id = "core/area/cone"
+
+[[area_shape_definitions]]
+bundle_id = "core"
+description = "Line AoE (a rectangle aligned along the casting direction)."
+parameter_schema_json = '{"length_m": "f32", "width_m": "f32"}'
+shape_id = "core/area/line"
+
+[[area_shape_definitions]]
+bundle_id = "core"
+description = "Cube/cuboid AoE. extent_m is the required fallback half-extent; optional per-axis half-extents override it."
+parameter_schema_json = '{"extent_m": "f32", "extent_x_m": "f32?", "extent_y_m": "f32?", "extent_z_m": "f32?"}'
+shape_id = "core/area/cube"
+
+[[area_shape_definitions]]
+bundle_id = "core"
+description = "Topological AoE: centre node plus all nodes within ball_radius graph-edges. Works on non-metric graphs."
+parameter_schema_json = '{"ball_radius": "u32"}'
+shape_id = "core/area/node_ball"
+
+[[distance_metric_definitions]]
+bundle_id = "core"
+description = "Straight-line distance: sqrt(dx^2 + dy^2) cells. The kernel default for a graph that names no metric (ADR-0053 D-2)."
+metric_id = "core/metric/euclidean"
+metric_shape = "Euclidean"
+
+[[distance_metric_definitions]]
+bundle_id = "core"
+description = "King-move distance: max(|dx|, |dy|) cells. Every straight or diagonal step is one cell (SRD 5.2 grid rule)."
+metric_id = "core/metric/chebyshev"
+metric_shape = "Chebyshev"
+
+[[distance_metric_definitions]]
+bundle_id = "core"
+description = "Taxicab distance: |dx| + |dy| cells. No diagonal shortcut."
+metric_id = "core/metric/manhattan"
+metric_shape = "Manhattan"

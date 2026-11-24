@@ -1,0 +1,185 @@
+# Hand-authored (#1968). Restores, in a test-only bundle layered on top of
+# `core`, the full §3.2 clause 1 spatial contract that the core-cleanup
+# commit (8cf507681) excised from `world-fixtures/core` along with the rest
+# of the hidden inn scene, AND that the later #1968 "retire Phandalin/village
+# + core/player" slice removed core's ability to help satisfy at all: core
+# now ships ZERO place_graphs/place_nodes, so this bundle owns clause 1
+# outright — ≥3 connected place_nodes, ≥2 place_graphs (outdoor + indoor), an
+# interaction loop (bidirectional edge pair), and a substrate-crossing edge —
+# entirely on its own nodes (the phandelver-hero pattern applied to a
+# baseline-contract bundle, not a scene).
+
+[[place_graphs]]
+anchor_node_id = "core_baseline_outdoor/plaza"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "core_baseline"
+description = "Baseline outdoor graph (§3.2 clause 1: outdoor half of substrate coverage, plus the interaction loop). Two neutral outdoor nodes, deliberately unfurnished."
+display_name = "Baseline Plaza"
+is_ephemeral_instance = false
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "core_baseline_outdoor"
+metres_per_unit = 1.0
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "core_baseline/interior"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "core_baseline"
+description = "Baseline indoor graph (§3.2 clause 1: indoor half of the substrate-crossing edge). One neutral room, deliberately unfurnished."
+display_name = "Baseline Interior"
+is_ephemeral_instance = false
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "core_baseline"
+metres_per_unit = 1.0
+substrate_id = "indoor"
+
+[[place_nodes]]
+bundle_id = "core_baseline"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = "Baseline contract (#1968): outdoor anchor node — the identity-bootstrap actor's start position and one endpoint of both the interaction loop and the substrate-crossing edge."
+display_name = "Baseline Plaza"
+is_ephemeral = false
+local_id = "plaza"
+node_id = "core_baseline_outdoor/plaza"
+place_graph_id = "core_baseline_outdoor"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "core_baseline"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = "Baseline contract (#1968): second outdoor node — the other endpoint of the §3.2 clause 1 interaction loop, and the NPC/event-source actor's placement."
+display_name = "Baseline Market"
+is_ephemeral = false
+local_id = "market"
+node_id = "core_baseline_outdoor/market"
+place_graph_id = "core_baseline_outdoor"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "core_baseline"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = "Baseline contract (#1968): the single indoor node satisfying §3.2 clause 1's outdoor/indoor substrate-coverage requirement. Deliberately unfurnished."
+display_name = "Baseline Interior"
+is_ephemeral = false
+local_id = "interior"
+node_id = "core_baseline/interior"
+place_graph_id = "core_baseline"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "indoor"
+
+# Interaction loop (§3.2 clause 1): bidirectional edge pair within the
+# outdoor graph, plaza <-> market.
+
+[[place_edges]]
+bundle_id = "core_baseline"
+edge_key = "core_baseline/edge/plaza-market"
+from_node_id = "core_baseline_outdoor/plaza"
+place_graph_id = "core_baseline_outdoor"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_node_id = "core_baseline_outdoor/market"
+
+[[place_edges]]
+bundle_id = "core_baseline"
+edge_key = "core_baseline/edge/market-plaza"
+from_node_id = "core_baseline_outdoor/market"
+place_graph_id = "core_baseline_outdoor"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_node_id = "core_baseline_outdoor/plaza"
+
+# Substrate-crossing edge pair (§3.2 clause 1): cross-graph edges carry no
+# `place_graph_id` and use anchor/side fields instead of a shared graph
+# placement. Both endpoints are now owned by core_baseline itself — core
+# ships no place nodes to stitch onto since #1968.
+
+[[place_edges]]
+bundle_id = "core_baseline"
+cell_anchor = 1
+cell_anchor_present = true
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "core_baseline/edge/plaza-interior"
+from_anchor_offset = 0.5
+from_anchor_side = "north"
+from_node_id = "core_baseline_outdoor/plaza"
+place_graph_id = ""
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = true
+to_anchor_offset = 0.5
+to_anchor_side = "south"
+to_node_id = "core_baseline/interior"
+
+[[place_edges]]
+bundle_id = "core_baseline"
+cell_anchor = 1
+cell_anchor_present = true
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "core_baseline/edge/interior-plaza"
+from_anchor_offset = 0.5
+from_anchor_side = "south"
+from_node_id = "core_baseline/interior"
+place_graph_id = ""
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = true
+to_anchor_offset = 0.5
+to_anchor_side = "north"
+to_node_id = "core_baseline_outdoor/plaza"
+
+# Traversal affordances, reusing core's kernel-vocabulary
+# `traverse_open_portal` template (unconditional traversal — `core/passable_portal`
+# is a global niche attachment in core/base/spatial_niches.toml, so no
+# per-node niche row is needed here).
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_known_threshold"
+bindings_json = ""
+edge_key = "core_baseline/edge/plaza-market"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = ""
+edge_key = "core_baseline/edge/market-plaza"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = ""
+edge_key = "core_baseline/edge/plaza-interior"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = ""
+edge_key = "core_baseline/edge/interior-plaza"

@@ -1,0 +1,769 @@
+# pattern: condition-grant-and-suppression
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_failure_recovery"
+
+[[action_definitions]]
+action_id = "mech_failure_recovery/apply_pressure"
+bundle_id = "mech_failure_recovery"
+cost_time_ms = 1000
+display_name = "Failure-recovery Fast-lane Attack"
+on_failure = ""
+on_success = "mech_failure_recovery/apply_pressure/consequence"
+required_capability = ""
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_failure_recovery/risk_check/roll"
+bundle_id = "mech_failure_recovery"
+cost_time_ms = 1000
+display_name = "Roll a Risk Check (DC 10, fast-lane)"
+on_failure = ""
+on_success = "mech_failure_recovery/risk_check/roll/consequence"
+required_capability = "mech_failure_recovery/capability/risk_check"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_failure_recovery/assist_recovery"
+bundle_id = "mech_failure_recovery"
+cost_time_ms = 1000
+display_name = "Assist Recovery (DC 10)"
+on_failure = ""
+on_success = "mech_failure_recovery/assist_recovery/consequence"
+required_capability = "mech_failure_recovery/capability/assist_recovery"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_failure_recovery/subject-a"
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/risk_check"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_failure_recovery/subject-a"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_failure_recovery/subject-b"
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/risk_check"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_failure_recovery/subject-b"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_failure_recovery/recovery-agent"
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/assist_recovery"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_failure_recovery/recovery-agent"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+identity = "$sender"
+role = "primary"
+
+[[actor_identities]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+identity = "$sender"
+role = "primary"
+
+[[actor_identities]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+identity = "$sender"
+role = "primary"
+
+[[actor_identities]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+place_node_id = "mech_failure_recovery/arena"
+selection_path = "manifest:mech_failure_recovery/subject-a"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+place_node_id = "mech_failure_recovery/arena"
+selection_path = "manifest:mech_failure_recovery/subject-b"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+place_node_id = "mech_failure_recovery/arena"
+selection_path = "manifest:mech_failure_recovery/pressure-agent"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+place_node_id = "mech_failure_recovery/arena"
+selection_path = "manifest:mech_failure_recovery/recovery-agent"
+
+[[actors]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+name = "Failure-recovery Victim"
+
+[[actors]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+name = "Failure-recovery Victim B"
+
+[[actors]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+name = "Failure-recovery Attacker"
+
+[[actors]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+name = "Failure-recovery Healer"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_failure_recovery"
+capability_id = ""
+display_name = "Failure-recovery Fast-lane Attack"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_failure_recovery/niche/strikeable_target"
+outcome_template_id = "mech_failure_recovery/apply_pressure/hit"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+spends_channel = "core/action_class/primary"
+stratification_ok = true
+template_id = "mech_failure_recovery/apply_pressure/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/risk_check"
+display_name = "Roll a Risk Check (DC 10, fast-lane)"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_failure_recovery/capability/risk_check"
+outcome_template_id = "mech_failure_recovery/risk_check/roll/hit"
+predicate_bool = false
+predicate_source = "actor.status('mech_failure_recovery/at_risk') == true && actor.status('mech_failure_recovery/recovered') == false && actor.status('mech_failure_recovery/failed') == false"
+range_m = 0.0
+reads_occupancy = false
+spends_channel = "core/action_class/primary"
+stratification_ok = true
+template_id = "mech_failure_recovery/risk_check/roll/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/assist_recovery"
+display_name = "Assist Recovery (DC 10)"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_failure_recovery/niche/strikeable_target"
+outcome_template_id = "mech_failure_recovery/assist_recovery/hit"
+predicate_bool = false
+predicate_source = "target.status('mech_failure_recovery/at_risk') == true && target.status('mech_failure_recovery/recovered') == false && target.status('mech_failure_recovery/failed') == false && d20 + (actor.stat('wis') - 10) / 2 + cond(actor.has_tag('actor.skill_proficiency.assistance'), 2, 0) >= 10"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_failure_recovery/assist_recovery/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_failure_recovery"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_failure_recovery'."
+display_name = "Mech Failure Recovery"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_failure_recovery"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/risk_check"
+default_visibility = "Public"
+description = "Generic risk check: three negative or positive results reach the corresponding terminal condition."
+display_name = "Roll a Risk Check"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_failure_recovery"
+capability_id = "mech_failure_recovery/capability/assist_recovery"
+default_visibility = "Public"
+description = "Neutral mechanism (failure-recovery.toml): assistance check DC 10 tend_sildar shape."
+display_name = "Assist an At-Risk Subject"
+
+[[condition_definitions]]
+bundle_id = "mech_failure_recovery"
+condition_definition_id = "mech_failure_recovery/at_risk"
+display_name = "At Risk (rolling checks toward failure or recovery)"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/reference_counted"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "mech_failure_recovery"
+condition_definition_id = "mech_failure_recovery/recovered"
+display_name = "Recovered (risk clock stopped)"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/reference_counted"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "mech_failure_recovery"
+condition_definition_id = "mech_failure_recovery/failed"
+display_name = "Failed (terminal risk outcome)"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/reference_counted"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_failure_recovery/apply_pressure/consequence"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "-4"
+resource = "mech_failure_recovery/capacity"
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "mech_failure_recovery/apply_pressure/consequence"
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius]
+center_ref = "TargetSpatialRef"
+predicate_source = "actor.stat('mech_failure_recovery/capacity') <= 0 && actor.has_capability('mech_failure_recovery/capability/risk_check')"
+shape_id = "core/area/node_ball"
+shape_params_json = '{"ball_radius": 0}'
+
+[[consequence_frame_writes.frame_write.ForEachActorInRadius.body]]
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius.body.ApplyStatus]
+condition_definition_id = "mech_failure_recovery/at_risk"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "Actor"
+delta_source = "d20 - actor.stat('mech_failure_recovery/last_roll')"
+resource = "mech_failure_recovery/last_roll"
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "Actor"
+delta_source = "cond(actor.stat('mech_failure_recovery/last_roll') >= 10, 1, 0)"
+resource = "mech_failure_recovery/recovery_tally"
+
+[[consequence_frame_writes]]
+ordinal = 2
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "Actor"
+delta_source = "cond(actor.stat('mech_failure_recovery/last_roll') < 10, 1, 0)"
+resource = "mech_failure_recovery/failure_tally"
+
+[[consequence_frame_writes]]
+ordinal = 3
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius]
+center_ref = "ActorSpatialRef"
+predicate_source = "actor.stat('mech_failure_recovery/recovery_tally') >= 3"
+shape_id = "core/area/node_ball"
+shape_params_json = '{"ball_radius": 0}'
+
+[[consequence_frame_writes.frame_write.ForEachActorInRadius.body]]
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius.body.ApplyStatus]
+condition_definition_id = "mech_failure_recovery/recovered"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_frame_writes]]
+ordinal = 4
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius]
+center_ref = "ActorSpatialRef"
+predicate_source = "actor.stat('mech_failure_recovery/failure_tally') >= 3"
+shape_id = "core/area/node_ball"
+shape_params_json = '{"ball_radius": 0}'
+
+[[consequence_frame_writes.frame_write.ForEachActorInRadius.body]]
+
+[consequence_frame_writes.frame_write.ForEachActorInRadius.body.ApplyStatus]
+condition_definition_id = "mech_failure_recovery/failed"
+target_kind = "entity"
+target_ref = "Actor"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_failure_recovery/assist_recovery/consequence"
+
+[consequence_frame_writes.frame_write.ApplyStatus]
+condition_definition_id = "mech_failure_recovery/recovered"
+target_kind = "entity"
+target_ref = "TargetActor"
+
+[[consequence_templates]]
+bundle_id = "mech_failure_recovery"
+template_id = "mech_failure_recovery/apply_pressure/consequence"
+
+[[consequence_templates]]
+bundle_id = "mech_failure_recovery"
+template_id = "mech_failure_recovery/risk_check/roll/consequence"
+
+[[consequence_templates]]
+bundle_id = "mech_failure_recovery"
+template_id = "mech_failure_recovery/assist_recovery/consequence"
+
+[[entities]]
+bundle_id = "mech_failure_recovery"
+entity_def_id = ""
+entity_key = "mech_failure_recovery/subject-a"
+kind = "npc"
+name = "Failure-recovery Victim"
+owned_by_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_failure_recovery"
+entity_def_id = ""
+entity_key = "mech_failure_recovery/subject-b"
+kind = "npc"
+name = "Failure-recovery Victim B"
+owned_by_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_failure_recovery"
+entity_def_id = ""
+entity_key = "mech_failure_recovery/pressure-agent"
+kind = "npc"
+name = "Failure-recovery Attacker"
+owned_by_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_failure_recovery"
+entity_def_id = ""
+entity_key = "mech_failure_recovery/recovery-agent"
+kind = "npc"
+name = "Failure-recovery Healer"
+owned_by_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+quantity = 1
+
+[[entity_tag]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+source = "manifest"
+tag = "actor.skill_proficiency.assistance"
+
+[[niche_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "Any co-located target in this fast-lane arena."
+display_name = "Strikeable target (fast-lane)"
+niche_id = "mech_failure_recovery/niche/strikeable_target"
+predicate_source = 'target.state("core/grounded") == true'
+
+[[niche_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Risk check (place-provided)"
+niche_id = "capability:mech_failure_recovery/capability/risk_check"
+predicate_source = ""
+provider = "place"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-a"
+state_id = "mech_failure_recovery/capacity"
+value_bool = true
+value_int = 4
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-a"
+state_id = "mech_failure_recovery/failure_tally"
+value_bool = true
+value_int = 2
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-a"
+state_id = "mech_failure_recovery/recovery_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-a"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-a"
+state_id = "mech_failure_recovery/last_roll"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-b"
+state_id = "mech_failure_recovery/capacity"
+value_bool = true
+value_int = 4
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-b"
+state_id = "mech_failure_recovery/failure_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-b"
+state_id = "mech_failure_recovery/recovery_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/subject-b"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/subject-b"
+state_id = "mech_failure_recovery/last_roll"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/pressure-agent"
+state_id = "mech_failure_recovery/capacity"
+value_bool = true
+value_int = 20
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/pressure-agent"
+state_id = "mech_failure_recovery/failure_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/pressure-agent"
+state_id = "mech_failure_recovery/recovery_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/pressure-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/pressure-agent"
+state_id = "mech_failure_recovery/last_roll"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/recovery-agent"
+state_id = "mech_failure_recovery/capacity"
+value_bool = true
+value_int = 10
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/recovery-agent"
+state_id = "mech_failure_recovery/failure_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/recovery-agent"
+state_id = "mech_failure_recovery/recovery_tally"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/recovery-agent"
+state_id = "mech_failure_recovery/last_roll"
+value_bool = true
+value_int = 0
+visibility = "Public"
+
+[[object_state]]
+bundle_id = "mech_failure_recovery"
+entity_key = "mech_failure_recovery/recovery-agent"
+expires_at_tick = 0
+source_template_id = "mech_failure_recovery/recovery-agent"
+state_id = "wis"
+value_bool = true
+value_int = 16
+visibility = "Public"
+
+[[outcome_templates]]
+bundle_id = "mech_failure_recovery"
+consequence_template_id = ""
+display_name = "Failure-recovery Fast-lane Attack"
+manipulation_action_id = "mech_failure_recovery/apply_pressure"
+outcome_bool = true
+outcome_template_id = "mech_failure_recovery/apply_pressure/hit"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_failure_recovery"
+consequence_template_id = ""
+display_name = "Roll a Risk Check (DC 10, fast-lane)"
+manipulation_action_id = "mech_failure_recovery/risk_check/roll"
+outcome_bool = true
+outcome_template_id = "mech_failure_recovery/risk_check/roll/hit"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_failure_recovery"
+consequence_template_id = ""
+display_name = "Assist Recovery (DC 10)"
+manipulation_action_id = "mech_failure_recovery/assist_recovery"
+outcome_bool = true
+outcome_template_id = "mech_failure_recovery/assist_recovery/hit"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_failure_recovery/arena"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_failure_recovery"
+description = "Single-node arena for the failure-recovery fast-lane twin (#1968) — no movement needed."
+display_name = "Mech Failure Recovery"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_failure_recovery"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_failure_recovery"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Failure-recovery Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "arena"
+node_id = "mech_failure_recovery/arena"
+place_graph_id = "mech_failure_recovery"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "Capacity used to enter the at-risk state."
+display_name = "Capacity"
+initial_value = 10
+max_value = 30
+min_value = -20
+recovery_rule = "long_rest"
+resource_definition_id = "mech_failure_recovery/capacity"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "Neutral mechanism scratch cell (failure-recovery.toml) capturing one d20 per roll."
+display_name = "Risk check — last d20 draw (scratch cell)"
+initial_value = 0
+max_value = 20
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_failure_recovery/last_roll"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "Neutral mechanism (failure-recovery.toml)."
+display_name = "Risk check successes"
+initial_value = 0
+max_value = 3
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_failure_recovery/recovery_tally"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_failure_recovery"
+description = "Neutral mechanism (failure-recovery.toml)."
+display_name = "Risk check failures"
+initial_value = 0
+max_value = 3
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_failure_recovery/failure_tally"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_failure_recovery/author"
+bundle_id = "mech_failure_recovery"
+description = "Fixture setup system-author authority over mech_failure_recovery."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_failure_recovery"
+role_id = "system-author"
+subject = "$sender"
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "mech_failure_recovery"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = "{}"
+grid_edge_affordance_template_id = ""
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 6000
+session_def_id = "mech_failure_recovery/session/rounds"
+stakes_required = ""
+termination_pred = ""
+turn_rule = "Sequential"
+turn_scheduler_id = "mech_failure_recovery/turn/round_robin"
+visibility_policy = "Public"
+winner_predicate = ""
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_failure_recovery"
+condition_bool = true
+ecological_invariant = false
+niche_id = "mech_failure_recovery/niche/strikeable_target"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_failure_recovery"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_failure_recovery/capability/risk_check"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_failure_recovery/arena"
+visibility = "Public"
+
+[[turn_scheduler]]
+active = false
+bundle_id = "mech_failure_recovery"
+id = "mech_failure_recovery/turn/round_robin"
+scheduler_kind = "round_robin"

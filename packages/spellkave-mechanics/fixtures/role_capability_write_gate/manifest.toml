@@ -1,0 +1,668 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "role_capability_write_gate"
+
+[[action_definitions]]
+action_id = "role_capability_write_gate/mark"
+bundle_id = "role_capability_write_gate"
+cost_time_ms = 0
+display_name = "DM Mark"
+on_failure = ""
+on_success = "role_capability_write_gate/mark/success"
+required_capability = "role_capability_write_gate/mark"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "region_dm"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = "place_graph"
+extent_ref = "role_capability_write_gate/region"
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "region_dm"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/read_only_oversee"
+elevation_class = ""
+extent_kind_ref = "place_graph"
+extent_ref = "role_capability_write_gate/broad_read_only"
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "party_dm"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = "party"
+extent_ref = "role_capability_write_gate.party"
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "empty_extent_dm"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "region_target"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "outside_target"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "read_only_broad_target"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "party_member"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "party_combatant"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "role_capability_write_gate"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_dm"
+identity = "0000000000000000000000000000000000000000000000000000000000001246"
+role = "dm"
+
+[[actor_identities]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_dm"
+identity = "0000000000000000000000000000000000000000000000000000000000001247"
+role = "dm"
+
+[[actor_identities]]
+bundle_id = "role_capability_write_gate"
+entity_key = "empty_extent_dm"
+identity = "0000000000000000000000000000000000000000000000000000000000001248"
+role = "dm"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_dm"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/region_dm"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_dm"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/party_dm"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "empty_extent_dm"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/empty_extent_dm"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_target"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/region_target"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_probe"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/region_probe"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "outside_target"
+place_node_id = "role_capability_write_gate/outside/field"
+selection_path = "manifest:role_capability_write_gate/outside_target"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "outside_probe"
+place_node_id = "role_capability_write_gate/outside/field"
+selection_path = "manifest:role_capability_write_gate/outside_probe"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "read_only_broad_target"
+place_node_id = "role_capability_write_gate/broad_read_only/field"
+selection_path = "manifest:role_capability_write_gate/read_only_broad_target"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "read_only_broad_probe"
+place_node_id = "role_capability_write_gate/broad_read_only/field"
+selection_path = "manifest:role_capability_write_gate/read_only_broad_probe"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_member"
+place_node_id = "role_capability_write_gate/outside/field"
+selection_path = "manifest:role_capability_write_gate/party_member"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_combatant"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/party_combatant"
+
+[[actor_spatial_locations]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_combat_probe"
+place_node_id = "role_capability_write_gate/region/room"
+selection_path = "manifest:role_capability_write_gate/party_combat_probe"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_dm"
+name = "Region DM Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_dm"
+name = "Party DM Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "empty_extent_dm"
+name = "Empty Extent DM Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "region_target"
+name = "Region Target Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "outside_target"
+name = "Outside Target Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "read_only_broad_target"
+name = "Read-Only Broad Target Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_member"
+name = "Party Member Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_combatant"
+name = "Party Combatant Actor"
+
+[[actors]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_combat_probe"
+name = "Party Combat Probe Actor"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+display_name = "DM Mark"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "role_capability_write_gate/markable"
+outcome_template_id = "role_capability_write_gate/mark/outcome"
+predicate_bool = false
+predicate_source = 'actor.has_capability("role_capability_write_gate/mark")'
+range_m = 10.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "role_capability_write_gate/mark/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave"
+bundle_id = "role_capability_write_gate"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Live-proof fixture for role/capability write-gate + typed extent (#1246)."
+display_name = "Role Capability Write Gate"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "role_capability_write_gate"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/mark"
+default_visibility = "public"
+description = "Allows the fixture's authored state-edit action."
+display_name = "DM Mark"
+
+[[capability_definitions]]
+actor_kind = "dm"
+bundle_id = "role_capability_write_gate"
+capability_id = "role_capability_write_gate/read_only_oversee"
+default_visibility = "public"
+description = "A broad non-admin extent used to prove read-only capability extents do not confer write authority."
+display_name = "Read-only Oversight"
+
+[[combat_grid_blueprints]]
+accepts_stacked_occupancy = true
+blueprint_id = "role_capability_write_gate/combat-grid"
+bundle_id = "role_capability_write_gate"
+cell_size_m = 1.0
+edge_affordance_bindings_json = "{}"
+edge_affordance_template_id = "core/affordance/traverse_open_portal"
+edge_overrides_json = "[]"
+height = 1
+topology = "4"
+width = 3
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "role_capability_write_gate/mark/success"
+
+[consequence_frame_writes.frame_write.SetEntityFlag]
+entity = "TargetEntity"
+flag = "role_capability_write_gate/dm_marked"
+value = true
+
+[[consequence_templates]]
+bundle_id = "role_capability_write_gate"
+template_id = "role_capability_write_gate/mark/success"
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "region_dm"
+kind = "player"
+name = "Region DM"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "party_dm"
+kind = "player"
+name = "Party DM"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "empty_extent_dm"
+kind = "player"
+name = "Empty Extent DM"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "region_target"
+kind = "npc"
+name = "Region Target"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "region_probe"
+kind = "npc"
+name = "Region Probe"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "outside_target"
+kind = "npc"
+name = "Outside Target"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/outside/field"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "outside_probe"
+kind = "npc"
+name = "Outside Probe"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/outside/field"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "read_only_broad_target"
+kind = "npc"
+name = "Read-Only Broad Target"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/broad_read_only/field"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "read_only_broad_probe"
+kind = "npc"
+name = "Read-Only Broad Probe"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/broad_read_only/field"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "party_member"
+kind = "player"
+name = "Party Member"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/outside/field"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "region_dm_item"
+kind = "item"
+name = "Region DM Ledger"
+owned_by_entity_key = ""
+place_node_id = ""
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "region_target_item"
+kind = "item"
+name = "Region Target Secret"
+owned_by_entity_key = ""
+place_node_id = ""
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "party_member_item"
+kind = "item"
+name = "Party Member Token"
+owned_by_entity_key = ""
+place_node_id = ""
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "party_combatant"
+kind = "npc"
+name = "Party Combatant"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "role_capability_write_gate"
+entity_def_id = ""
+entity_key = "party_combat_probe"
+kind = "npc"
+name = "Party Combat Probe"
+owned_by_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+quantity = 1
+
+[[entity_containment]]
+container_entity_key = "region_dm"
+direction = ""
+entity_key = "region_dm_item"
+slot_id = ""
+
+[[entity_containment]]
+container_entity_key = "region_target"
+direction = ""
+entity_key = "region_target_item"
+slot_id = ""
+
+[[entity_containment]]
+container_entity_key = "party_member"
+direction = ""
+entity_key = "party_member_item"
+slot_id = ""
+
+[[entity_tag]]
+bundle_id = "role_capability_write_gate"
+entity_key = "party_member"
+source = "manifest"
+tag = "role_capability_write_gate.party"
+
+[[niche_definitions]]
+bundle_id = "role_capability_write_gate"
+description = "Targets that can be marked by the authored DM write-gate action."
+display_name = "DM Markable"
+niche_id = "role_capability_write_gate/markable"
+predicate_source = ""
+
+[[object_state_definitions]]
+bundle_id = "role_capability_write_gate"
+default_visibility = "public"
+display_name = "DM Marked"
+state_id = "role_capability_write_gate/dm_marked"
+target_kind = "entity"
+
+[[outcome_templates]]
+bundle_id = "role_capability_write_gate"
+consequence_template_id = ""
+display_name = "DM Mark Outcome"
+manipulation_action_id = "role_capability_write_gate/mark"
+outcome_bool = true
+outcome_template_id = "role_capability_write_gate/mark/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "role_capability_write_gate/region/room"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "role_capability_write_gate"
+description = ""
+display_name = "Write-Gate Region"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "role_capability_write_gate/region"
+substrate_id = "indoor"
+
+[[place_graphs]]
+anchor_node_id = "role_capability_write_gate/outside/field"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "role_capability_write_gate"
+description = ""
+display_name = "Outside Write-Gate Region"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "role_capability_write_gate/outside"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "role_capability_write_gate/broad_read_only/field"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "role_capability_write_gate"
+description = ""
+display_name = "Broad Read-Only Region"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "role_capability_write_gate/broad_read_only"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "role_capability_write_gate"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Region Room"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "room"
+node_id = "role_capability_write_gate/region/room"
+place_graph_id = "role_capability_write_gate/region"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "indoor"
+
+[[place_nodes]]
+bundle_id = "role_capability_write_gate"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Outside Field"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "field"
+node_id = "role_capability_write_gate/outside/field"
+place_graph_id = "role_capability_write_gate/outside"
+pos_present = true
+pos_x = 20
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "role_capability_write_gate"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Broad Read-Only Field"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "field"
+node_id = "role_capability_write_gate/broad_read_only/field"
+place_graph_id = "role_capability_write_gate/broad_read_only"
+pos_present = true
+pos_x = 40
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "role_capability_write_gate"
+combat_grid_blueprint_id = "role_capability_write_gate/combat-grid"
+grid_edge_affordance_bindings_json = "{}"
+grid_edge_affordance_template_id = "core/affordance/traverse_open_portal"
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 0
+session_def_id = "role_capability_write_gate/session/combat"
+stakes_required = ""
+termination_pred = ""
+turn_rule = "Sequential"
+turn_scheduler_id = ""
+visibility_policy = "Public"
+winner_predicate = ""
+
+[[spatial_niche_attachments]]
+bundle_id = "role_capability_write_gate"
+condition_bool = true
+ecological_invariant = false
+niche_id = "role_capability_write_gate/markable"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "role_capability_write_gate/region/room"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "role_capability_write_gate"
+condition_bool = true
+ecological_invariant = false
+niche_id = "role_capability_write_gate/markable"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "role_capability_write_gate/outside/field"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "role_capability_write_gate"
+condition_bool = true
+ecological_invariant = false
+niche_id = "role_capability_write_gate/markable"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "role_capability_write_gate/broad_read_only/field"
+visibility = "Public"

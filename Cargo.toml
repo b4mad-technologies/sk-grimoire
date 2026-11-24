@@ -1,0 +1,11 @@
+[workspace]
+members = [
+    "crates/spellkave-dsl",
+    "crates/spellkave-schema",
+    "crates/spellkave-format",
+    "crates/spellkave-validate",
+    "crates/spellkave-authoring",
+    "crates/spellkave-validate-wasm",
+    "crates/spellkave-authoring-wasm",
+]
+resolver = "2"

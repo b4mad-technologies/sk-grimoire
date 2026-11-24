@@ -1,0 +1,64 @@
+[[action_definitions]]
+action_id = "core/act/give"
+bundle_id = "core"
+cost_time_ms = 0
+display_name = "Give this creature a dagger"
+on_failure = ""
+on_success = "core/act/give/success"
+required_capability = "frontier.transfer"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "core"
+capability_id = "frontier.transfer"
+display_name = "Give this creature a dagger"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "core/creature"
+outcome_template_id = "core/act/give/outcome"
+predicate_bool = false
+predicate_source = "actor.has_capability('frontier.transfer')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "core/act/give/affordance"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "core/act/give/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "core/observed_change"
+location_kind = "binding"
+location_ref = "TargetSpatialRef"
+payload_json = '{"action":"core/act/give"}'
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "core/act/give/success"
+
+[consequence_frame_writes.frame_write.InsertItem]
+count = 1
+item_def_id = "core/item/loot_dagger"
+
+[consequence_frame_writes.frame_write.InsertItem.destination.ActorInventory]
+actor_ref = "TargetActor"
+
+[[consequence_templates]]
+bundle_id = "core"
+template_id = "core/act/give/success"
+
+[[outcome_templates]]
+bundle_id = "core"
+consequence_template_id = ""
+display_name = "Give this creature a dagger"
+manipulation_action_id = "core/act/give"
+outcome_bool = true
+outcome_template_id = "core/act/give/outcome"
+sense_visibility = "local"

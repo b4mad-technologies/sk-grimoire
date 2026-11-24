@@ -1,0 +1,580 @@
+# pattern: condition-grant-and-suppression
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_kernel_convergence"
+
+[[action_definitions]]
+action_id = "mech_kernel_convergence/cast_damage"
+bundle_id = "mech_kernel_convergence"
+cost_time_ms = 1000
+display_name = "Cast Kernel-convergence Damage"
+on_failure = ""
+on_success = "mech_kernel_convergence/cast_damage/success"
+required_capability = "mech_kernel_convergence/capability/damage"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_kernel_convergence/cast_buff"
+bundle_id = "mech_kernel_convergence"
+cost_time_ms = 0
+display_name = "Cast Kernel-convergence Buff"
+on_failure = ""
+on_success = "mech_kernel_convergence/cast_buff/success"
+required_capability = "mech_kernel_convergence/capability/buff"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "mech_kernel_convergence/cast_cure"
+bundle_id = "mech_kernel_convergence"
+cost_time_ms = 1000
+display_name = "Cast Kernel-convergence Cure"
+on_failure = ""
+on_success = "mech_kernel_convergence/cast_cure/success"
+required_capability = "mech_kernel_convergence/capability/cure"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_kernel_convergence/caster"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/damage"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_kernel_convergence/caster"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_kernel_convergence/caster"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/buff"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_kernel_convergence/caster"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_kernel_convergence/caster"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/cure"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_kernel_convergence/caster"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/caster"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/caster"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/caster"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/observer"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/observer"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/damage-target"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/damage-target"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/damage-control"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/damage-control"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/ally"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/ally"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/cure-target"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/cure-target"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/cure-control"
+place_node_id = "mech_kernel_convergence/arena"
+selection_path = "manifest:mech_kernel_convergence/cure-control"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/caster"
+name = "caster"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/observer"
+name = "observer"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/damage-target"
+name = "damage-target"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/damage-control"
+name = "damage-control"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/ally"
+name = "ally"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/cure-target"
+name = "cure-target"
+
+[[actors]]
+bundle_id = "mech_kernel_convergence"
+entity_key = "mech_kernel_convergence/cure-control"
+name = "cure-control"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/damage"
+display_name = "mech_kernel_convergence/cast_damage/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_kernel_convergence/capability/damage"
+outcome_template_id = "mech_kernel_convergence/cast_damage/outcome"
+predicate_bool = false
+predicate_source = "d20 >= 1"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_kernel_convergence/cast_damage/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/buff"
+display_name = "mech_kernel_convergence/cast_buff/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_kernel_convergence/capability/buff"
+outcome_template_id = "mech_kernel_convergence/cast_buff/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_kernel_convergence/cast_buff/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/cure"
+display_name = "mech_kernel_convergence/cast_cure/affordance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:mech_kernel_convergence/capability/cure"
+outcome_template_id = "mech_kernel_convergence/cast_cure/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_kernel_convergence/cast_cure/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_kernel_convergence"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_kernel_convergence'."
+display_name = "Mech Kernel Convergence"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_kernel_convergence"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/damage"
+default_visibility = "Public"
+description = "Deterministic, no-dice damage — the auto-hit-damage twin's vehicle."
+display_name = "Cast Kernel-convergence Damage"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/buff"
+default_visibility = "Public"
+description = "Applies an identity-only condition — the condition-modified-roll twin's vehicle."
+display_name = "Cast Kernel-convergence Buff"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_kernel_convergence"
+capability_id = "mech_kernel_convergence/capability/cure"
+default_visibility = "Public"
+description = "RemoveCondition(poisoned_equiv) — the remove-condition twin's vehicle."
+display_name = "Cast Kernel-convergence Cure"
+
+[[condition_definitions]]
+bundle_id = "mech_kernel_convergence"
+condition_definition_id = "mech_kernel_convergence/poisoned_equiv"
+display_name = "Kernel-convergence: poisoned-equivalent (removable)"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[condition_definitions]]
+bundle_id = "mech_kernel_convergence"
+condition_definition_id = "mech_kernel_convergence/buffed"
+display_name = "Kernel-convergence: buffed (identity-only)"
+gate_predicate_source = ""
+grants_capability_while_active = []
+hooks = []
+implies = []
+modifier_template_id = ""
+observable = true
+remove_time_policy = "core/remove_policy/independent_lifetime"
+stacking_rule = "core/stacking/single"
+suppresses_capability_while_active = []
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_kernel_convergence/cast_damage/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "0 - (1d10 + 5)"
+resource = "mech_kernel_convergence/hp"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_kernel_convergence/cast_buff/success"
+
+[consequence_frame_writes.frame_write.ApplyStatus]
+condition_definition_id = "mech_kernel_convergence/buffed"
+target_kind = "entity"
+target_ref = "TargetActor"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_kernel_convergence/cast_cure/success"
+
+[consequence_frame_writes.frame_write.RemoveCondition]
+condition_definition_id = "mech_kernel_convergence/poisoned_equiv"
+source_match = "Any"
+target_kind = "entity"
+target_ref = "TargetActor"
+
+[[consequence_templates]]
+bundle_id = "mech_kernel_convergence"
+template_id = "mech_kernel_convergence/cast_damage/success"
+
+[[consequence_templates]]
+bundle_id = "mech_kernel_convergence"
+template_id = "mech_kernel_convergence/cast_buff/success"
+
+[[consequence_templates]]
+bundle_id = "mech_kernel_convergence"
+template_id = "mech_kernel_convergence/cast_cure/success"
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/generic_target_def"
+entity_key = "mech_kernel_convergence/caster"
+kind = "player"
+name = "Kernel-convergence Caster"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/generic_target_def"
+entity_key = "mech_kernel_convergence/observer"
+kind = "npc"
+name = "Kernel-convergence Observer"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/hp_seeded_target_def"
+entity_key = "mech_kernel_convergence/damage-target"
+kind = "npc"
+name = "Kernel-convergence Damage Target"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/hp_seeded_target_def"
+entity_key = "mech_kernel_convergence/damage-control"
+kind = "npc"
+name = "Kernel-convergence Damage Control"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/generic_target_def"
+entity_key = "mech_kernel_convergence/ally"
+kind = "npc"
+name = "Kernel-convergence Ally"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/poisoned_equiv_target_def"
+entity_key = "mech_kernel_convergence/cure-target"
+kind = "npc"
+name = "Kernel-convergence Cure Target"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/poisoned_equiv_target_def"
+entity_key = "mech_kernel_convergence/cure-control"
+kind = "npc"
+name = "Kernel-convergence Cure Control"
+owned_by_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+quantity = 1
+
+[[entity_definition_initial_condition]]
+bundle_id = "mech_kernel_convergence"
+condition_definition_id = "mech_kernel_convergence/poisoned_equiv"
+duration_ticks = 0
+entity_def_id = "mech_kernel_convergence/poisoned_equiv_target_def"
+
+[[entity_definition_initial_state]]
+bundle_id = "mech_kernel_convergence"
+entity_def_id = "mech_kernel_convergence/hp_seeded_target_def"
+state_id = "mech_kernel_convergence/hp"
+value_bool = true
+value_int = 50
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_kernel_convergence"
+display_name = "Poisoned-equivalent kernel-convergence target"
+entity_def_id = "mech_kernel_convergence/poisoned_equiv_target_def"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_kernel_convergence"
+display_name = "Generic kernel-convergence entity"
+entity_def_id = "mech_kernel_convergence/generic_target_def"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_kernel_convergence"
+display_name = "HP-seeded kernel-convergence target"
+entity_def_id = "mech_kernel_convergence/hp_seeded_target_def"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definitions]]
+bundle_id = "mech_kernel_convergence"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Damage (place-provided)"
+niche_id = "capability:mech_kernel_convergence/capability/damage"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "mech_kernel_convergence"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Buff (place-provided)"
+niche_id = "capability:mech_kernel_convergence/capability/buff"
+predicate_source = ""
+provider = "place"
+
+[[niche_definitions]]
+bundle_id = "mech_kernel_convergence"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Cure (place-provided)"
+niche_id = "capability:mech_kernel_convergence/capability/cure"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "mech_kernel_convergence"
+consequence_template_id = ""
+display_name = "Cast Kernel-convergence Damage"
+manipulation_action_id = "mech_kernel_convergence/cast_damage"
+outcome_bool = true
+outcome_template_id = "mech_kernel_convergence/cast_damage/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_kernel_convergence"
+consequence_template_id = ""
+display_name = "Cast Kernel-convergence Buff"
+manipulation_action_id = "mech_kernel_convergence/cast_buff"
+outcome_bool = true
+outcome_template_id = "mech_kernel_convergence/cast_buff/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_kernel_convergence"
+consequence_template_id = ""
+display_name = "Cast Kernel-convergence Cure"
+manipulation_action_id = "mech_kernel_convergence/cast_cure"
+outcome_bool = true
+outcome_template_id = "mech_kernel_convergence/cast_cure/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_kernel_convergence/arena"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_kernel_convergence"
+description = "Single-node arena for the kernel-convergence twins' mechanic fixtures (world-fixtures-retirement Phase D) — no movement needed."
+display_name = "Mech Kernel Convergence"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_kernel_convergence"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_kernel_convergence"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Kernel-convergence Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "arena"
+node_id = "mech_kernel_convergence/arena"
+place_graph_id = "mech_kernel_convergence"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_kernel_convergence"
+display_name = "Hit Points"
+initial_value = 50
+max_value = 100
+min_value = 0
+recovery_rule = "none"
+resource_definition_id = "mech_kernel_convergence/hp"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_kernel_convergence/author"
+bundle_id = "mech_kernel_convergence"
+description = "Fixture setup system-author authority over mech_kernel_convergence."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_kernel_convergence"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_kernel_convergence"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_kernel_convergence/capability/damage"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_kernel_convergence"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_kernel_convergence/capability/buff"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_kernel_convergence"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:mech_kernel_convergence/capability/cure"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_kernel_convergence/arena"
+visibility = "Public"

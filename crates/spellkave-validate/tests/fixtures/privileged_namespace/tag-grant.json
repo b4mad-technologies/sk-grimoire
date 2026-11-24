@@ -1,0 +1,11 @@
+[
+  {
+    "code": "MF-VAL-364",
+    "severity": "fatal",
+    "message": "tag_capability_grant 'ordinary' cannot derive reserved capability 'frontier.pace_time'; use an explicit publisher-authorized actor_capabilities grant",
+    "path": "tag_capability_grant",
+    "span": null,
+    "hint": null,
+    "details": null
+  }
+]

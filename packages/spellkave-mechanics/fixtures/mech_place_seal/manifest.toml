@@ -1,0 +1,448 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_place_seal"
+
+[[action_definitions]]
+action_id = "seal_lab/open_door"
+bundle_id = "seal_lab"
+cost_time_ms = 0
+display_name = "open_door"
+on_failure = ""
+on_success = "seal_lab/open_door"
+required_capability = "seal_lab/open_door"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "seal_lab/spawn_vault"
+bundle_id = "seal_lab"
+cost_time_ms = 0
+display_name = "spawn_vault"
+on_failure = ""
+on_success = "seal_lab/spawn_vault"
+required_capability = "seal_lab/spawn_vault"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = false
+session_def_id = ""
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "seal_lab"
+capability_id = "seal_lab/open_door"
+display_name = "open_door"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "seal_lab/door_niche"
+outcome_template_id = "seal_lab/open_door"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "seal_lab/open_door"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "seal_lab"
+capability_id = "seal_lab/spawn_vault"
+display_name = "spawn_vault"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "seal_lab/door_niche"
+outcome_template_id = "seal_lab/spawn_vault"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "seal_lab/spawn_vault"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave"
+bundle_id = "seal_lab"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = ""
+display_name = "Prepared place laboratory"
+tag_prefixes = []
+version = "1.0.0"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "seal_lab"
+capability_id = "seal_lab/open_door"
+default_visibility = "Public"
+description = "Ordinary fixture act"
+display_name = "open_door"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "seal_lab"
+capability_id = "seal_lab/spawn_vault"
+default_visibility = "Public"
+description = "Ordinary fixture act"
+display_name = "spawn_vault"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "seal_lab/open_door"
+
+[consequence_frame_writes.frame_write.Inscribe]
+kind = "spatial_environment_state"
+location_kind = "binding"
+location_ref = "ActorIncidentEdges"
+payload_json = '{"state_id":"seal_lab/door_open","value":true,"visibility":"Public"}'
+
+[[consequence_templates]]
+bundle_id = "seal_lab"
+template_id = "seal_lab/open_door"
+
+[[consequence_templates]]
+bundle_id = "seal_lab"
+effect_refs_csv = "seal_lab/spawn_vault"
+template_id = "seal_lab/spawn_vault"
+
+[[effect_definitions]]
+bundle_id = "seal_lab"
+effect_def_id = "seal_lab/spawn_vault"
+parameters_schema_json = '{"blueprint_id":"seal_lab/vault","location_ref":{"kind":"place_node","id":"seal_lab/dungeon/root"}}'
+primitives_csv = "Spawn"
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "seal_lab"
+display_name = "Synthetic prop"
+entity_def_id = "seal_lab/prop"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definitions]]
+bundle_id = "seal_lab"
+description = "Ordinary door interaction"
+display_name = "Door"
+niche_id = "seal_lab/door_niche"
+predicate_source = ""
+
+[[outcome_templates]]
+bundle_id = "seal_lab"
+consequence_template_id = ""
+display_name = "open_door"
+manipulation_action_id = "seal_lab/open_door"
+outcome_bool = true
+outcome_template_id = "seal_lab/open_door"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "seal_lab"
+consequence_template_id = ""
+display_name = "spawn_vault"
+manipulation_action_id = "seal_lab/spawn_vault"
+outcome_bool = true
+outcome_template_id = "seal_lab/spawn_vault"
+sense_visibility = "local"
+
+[[place_edges]]
+bundle_id = "seal_lab"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "seal_lab/door"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "seal_lab/dungeon/root"
+inherit_movement_default = true
+place_graph_id = "seal_lab/dungeon"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "seal_lab/dungeon/end"
+
+[[place_graph_instances]]
+blueprint_id = "seal_lab/vault"
+bundle_id = "seal_lab"
+instance_id = "seal_lab/vault#authored"
+parent_graph_id = "seal_lab/region"
+
+[place_graph_instances.anchor]
+id = "seal_lab/village/root"
+kind = "place_node"
+
+[[place_graphs]]
+anchor_node_id = "seal_lab/region/root"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "seal_lab"
+description = ""
+display_name = "region"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "seal_lab/region"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "seal_lab/dungeon/root"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "seal_lab"
+description = ""
+display_name = "dungeon"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = "seal_lab/region"
+place_graph_id = "seal_lab/dungeon"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "seal_lab/village/root"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "seal_lab"
+description = ""
+display_name = "village"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = "seal_lab/region"
+place_graph_id = "seal_lab/village"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "seal_lab/vault/root"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "seal_lab"
+description = ""
+display_name = "vault"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "seal_lab/vault"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "seal_lab"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "region landing"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "root"
+node_id = "seal_lab/region/root"
+place_graph_id = "seal_lab/region"
+pos_present = false
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "seal_lab"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "dungeon landing"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "root"
+node_id = "seal_lab/dungeon/root"
+place_graph_id = "seal_lab/dungeon"
+pos_present = false
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "seal_lab"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "village landing"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "root"
+node_id = "seal_lab/village/root"
+place_graph_id = "seal_lab/village"
+pos_present = false
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "seal_lab"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "vault landing"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "root"
+node_id = "seal_lab/vault/root"
+place_graph_id = "seal_lab/vault"
+pos_present = false
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "seal_lab"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Beyond the door"
+extent_params_json = '{"extent_m":1.0}'
+extent_shape_id = "core/area/cube"
+is_ephemeral = false
+local_id = "end"
+node_id = "seal_lab/dungeon/end"
+place_graph_id = "seal_lab/dungeon"
+pos_present = false
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = false
+substrate_id = "outdoor"
+
+[[place_seals]]
+bundle_id = "seal_lab"
+description = "Prepared region; ordinary play remains available."
+place_graph_id = "seal_lab/dungeon"
+
+[[place_seals]]
+bundle_id = "seal_lab"
+description = "Prepared region; ordinary play remains available."
+place_graph_id = "seal_lab/vault"
+
+[[role_bindings]]
+binding_id = "seal_lab/dm"
+bundle_id = "seal_lab"
+description = "Replace subject with the proof DM identity."
+extent_kind_ref = "place_graph"
+extent_ref = "seal_lab/region"
+role_id = "seal_lab/regional-dm"
+subject = "$sender"
+
+[[role_bindings]]
+binding_id = "seal_lab/author"
+bundle_id = "seal_lab"
+description = "Replace subject with the proof author identity."
+extent_kind_ref = "bundle"
+extent_ref = "seal_lab"
+role_id = "seal_lab/bundle-author"
+subject = "$sender"
+
+[[role_definitions]]
+bundle_id = "seal_lab"
+capability_ids = [
+    "frontier.apply_manifest",
+    "frontier.spawn_entity_definition",
+]
+description = "Privileged landing test."
+display_name = "Regional DM"
+role_id = "seal_lab/regional-dm"
+
+[[role_definitions]]
+bundle_id = "seal_lab"
+capability_ids = [
+    "frontier.apply_manifest",
+    "frontier.spawn_entity_definition",
+]
+description = "Owner exemption test."
+display_name = "Bundle author"
+role_id = "seal_lab/bundle-author"
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "seal_lab"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = ""
+grid_edge_affordance_template_id = "seal_lab/open_door"
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 0
+session_def_id = "seal_lab/grid"
+stakes_required = ""
+termination_pred = ""
+turn_rule = ""
+turn_scheduler_id = ""
+visibility_policy = ""
+winner_predicate = ""
+
+[[spatial_environment_state]]
+bundle_id = "seal_lab"
+location_def_id = ""
+place_edge_key = "seal_lab/door"
+place_node_id = ""
+state_id = "seal_lab/door_open"
+updated_tick = 0
+value_bool = false
+visibility = "Public"
+
+[[spatial_niche_attachments]]
+bundle_id = "seal_lab"
+condition_bool = true
+ecological_invariant = false
+niche_id = "seal_lab/door_niche"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "seal_lab/dungeon/root"
+visibility = "Public"
+
+[[spatial_state_definitions]]
+bundle_id = "seal_lab"
+description = "Ordinary door state"
+freshness_rule = "persistent"
+lod_policy = "retain_latest"
+merge_rule = "replace"
+state_id = "seal_lab/door_open"
+value_type = "Bool"
+writer_policy = "world_interaction"

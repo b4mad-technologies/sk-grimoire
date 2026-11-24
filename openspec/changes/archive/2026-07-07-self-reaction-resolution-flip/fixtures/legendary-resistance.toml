@@ -1,0 +1,75 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+[metadata]
+profile = "self_reaction_resolution_flip"
+
+[[bundles]]
+bundle_id = "demo_legres"
+display_name = "Legendary Resistance Demo"
+author = "spellkave"
+version = "1.0.0"
+description = "Driver fixture for self-eligible reaction windows."
+
+[[resource_definitions]]
+resource_definition_id = "demo_legres/legendary_resistance"
+bundle_id = "demo_legres"
+display_name = "Legendary Resistance Uses"
+value_kind = "int"
+min_value = 0
+max_value = 3
+recovery_rule = "long_rest"
+initial_value = 3
+
+[[consequence_templates]]
+template_id = "demo_legres/save/failure"
+bundle_id = "demo_legres"
+
+[[consequence_templates]]
+template_id = "demo_legres/save/success"
+bundle_id = "demo_legres"
+
+[[consequence_templates]]
+template_id = "demo_legres/legendary_resistance/flip"
+bundle_id = "demo_legres"
+
+[[consequence_frame_writes]]
+template_id = "demo_legres/legendary_resistance/flip"
+ordinal = 0
+frame_write = { ModifyResource = { actor = "Actor", resource = "demo_legres/legendary_resistance", delta_source = "-1" } }
+
+[[consequence_frame_writes]]
+template_id = "demo_legres/legendary_resistance/flip"
+ordinal = 1
+frame_write = { InsertModifier = { modifier_id = "demo_legres/legendary_resistance/replace_failure/live", applies_when_handle = "", affects_what_handle = "demo_legres/save_outcome", delta_handle = "Replace(demo_legres/save/success)", visibility_handle = "hidden" } }
+
+[[modifier_target_definitions]]
+target_id = "demo_legres/save_outcome"
+bundle_id = "demo_legres"
+shape = "Reference"
+display_name = "Save Outcome"
+
+[[modifier_templates]]
+modifier_template_id = "demo_legres/legendary_resistance/replace_failure"
+bundle_id = "demo_legres"
+applies_to = "demo_legres/save_outcome"
+display_name = "Legendary Resistance replaces failed save"
+predicate_source = "1 == 1"
+modifier_expression_source = "1 == 1"
+priority = 100
+delta_kind = "Replace"
+replace_template_id = "demo_legres/save/success"
+
+[[action_definitions]]
+action_id = "demo_legres/dragon_save"
+bundle_id = "demo_legres"
+required_capability = ""
+on_success = "demo_legres/legendary_resistance/flip"
+on_failure = "demo_legres/save/failure"
+resolution_mode = "Deterministic"
+display_name = "Legendary Resistance"
+cost_time_ms = 0
+reaction_eligibility = "1 == 1"
+reaction_window_ms = 0
+reaction_trigger = "$event.kind == 'layer2:frame'"
+self_eligible = true

@@ -1,0 +1,57 @@
+# Rendered through `sk render` from the typed manifest schema.
+
+# `schema_json` maps each payload key to its type name. A `?` suffix
+# marks an optional key.
+[[trace_kind_definitions]]
+kind_id = "core/interrupted_work"
+bundle_id = "core"
+location_kinds = "any"
+description = "Perceivable evidence that a promoted action was interrupted before completion."
+schema_json = '{"tags":"array"}'
+
+# Describes the payload emitted for departures.
+[[trace_kind_definitions]]
+kind_id = "core/departure"
+bundle_id = "core"
+location_kinds = "place_node"
+description = "Someone left this place through an exit, and the way they went is still readable here."
+schema_json = '{"mover":"integer","via_place_edge_id":"string","exit_label":"string"}'
+perceptible_for_ticks = 6
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "core"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = ""
+grid_edge_affordance_template_id = ""
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 6000
+session_def_id = "core/long_running_action"
+stakes_required = ""
+termination_pred = "world.tick - session.stat('opened_at') >= session.stat('promoted_duration_ticks')"
+turn_rule = "Sequential"
+turn_scheduler_id = ""
+visibility_policy = "Public"
+winner_predicate = ""
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "core"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = ""
+grid_edge_affordance_template_id = ""
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 6000
+session_def_id = "core/long_running_move"
+stakes_required = ""
+termination_pred = "world.tick - session.stat('opened_at') >= session.stat('promoted_duration_ticks')"
+turn_rule = "Sequential"
+turn_scheduler_id = ""
+visibility_policy = "Public"
+winner_predicate = ""

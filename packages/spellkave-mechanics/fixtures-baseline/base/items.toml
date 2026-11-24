@@ -1,0 +1,70 @@
+# Hand-authored (#1968). Restores, in a test-only bundle layered on top of
+# `core`, the §3.2 clause 6 (seeded inventory + grounded item fixtures)
+# contract. Core still ships the item TYPE vocabulary (entity_definitions
+# `core/item/sword`/`core/item/torch`/`core/item/wayfarer_pack`,
+# `homebrew/item/horn_blade`) — the #1968 "retire Phandalin/village +
+# core/player" slice removed only the grounded/carried INSTANCE rows core
+# used to seed (they were scene data: grounded at village place nodes, or
+# carried by core/player). This bundle re-instantiates them against its own
+# nodes/actor, referencing core's entity_def_ids across the bundle boundary
+# (legitimate: core_baseline depends_on = ["core"]).
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = "core/item/sword"
+entity_key = "core_baseline/sword"
+kind = "item"
+name = "Iron Sword"
+owned_by_entity_key = ""
+place_node_id = "core_baseline_outdoor/plaza"
+quantity = 1
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = "core/item/torch"
+entity_key = "core_baseline/torch"
+kind = "item"
+name = "Pitch Torch"
+owned_by_entity_key = ""
+place_node_id = "core_baseline_outdoor/market"
+quantity = 1
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = "core/item/wayfarer_pack"
+entity_key = "core_baseline/wayfarer_pack"
+kind = "item"
+name = "Wayfarer Pack"
+owned_by_entity_key = ""
+place_node_id = ""
+quantity = 1
+
+[[entities]]
+bundle_id = "core_baseline"
+entity_def_id = "homebrew/item/horn_blade"
+entity_key = "core_baseline/horn_blade"
+kind = "item"
+name = "Horn Blade"
+owned_by_entity_key = ""
+place_node_id = ""
+quantity = 1
+
+# Homes (sk-5e6.8 / doctor entity_has_location + item_home_consistent):
+#   sword  — ground at plaza
+#   torch  — ground at market
+#   pack   — player's inventory (containment; empty place_node_id on purpose)
+#   blade  — player's inventory + horn-sheath slot (same containment home)
+# Ground and bag are mutually exclusive (ADR-0028). Do not also set
+# place_node_id on the carried two — apply would delete the location row.
+
+[[entity_containment]]
+container_entity_key = "core_baseline/player"
+direction = ""
+entity_key = "core_baseline/wayfarer_pack"
+slot_id = ""
+
+[[entity_containment]]
+container_entity_key = "core_baseline/player"
+direction = ""
+entity_key = "core_baseline/horn_blade"
+slot_id = ""

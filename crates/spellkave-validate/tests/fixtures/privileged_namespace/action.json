@@ -1,0 +1,11 @@
+[
+  {
+    "code": "MF-VAL-375",
+    "severity": "warning",
+    "message": "action_definitions.required_capability 'role_capability_write_gate/mark' names reserved capability 'frontier.pace_time'; applying this authority-bearing row requires bundle-scoped escalation",
+    "path": "action_definitions.required_capability",
+    "span": null,
+    "hint": null,
+    "details": null
+  }
+]

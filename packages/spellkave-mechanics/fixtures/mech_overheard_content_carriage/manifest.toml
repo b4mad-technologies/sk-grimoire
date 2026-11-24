@@ -1,0 +1,246 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_overheard_content_carriage"
+
+[[action_definitions]]
+action_id = "mech_overheard_content_carriage/speak"
+bundle_id = "mech_overheard_content_carriage"
+cost_time_ms = 100
+display_name = "Speak Test Utterance"
+on_failure = ""
+on_success = "mech_overheard_content_carriage/speak/success"
+required_capability = "core/communicate"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_overheard_content_carriage/speaker"
+bundle_id = "mech_overheard_content_carriage"
+capability_id = "core/communicate"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_overheard_content_carriage/speaker"
+bundle_id = "mech_overheard_content_carriage"
+capability_id = "core/raw_trace_inscription"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_overheard_content_carriage"
+entity_key = "mech_overheard_content_carriage/speaker"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_overheard_content_carriage"
+entity_key = "mech_overheard_content_carriage/speaker"
+place_node_id = "mech_overheard_content_carriage/near"
+selection_path = "manifest:mech_overheard_content_carriage/speaker"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_overheard_content_carriage"
+entity_key = "mech_overheard_content_carriage/hearer"
+place_node_id = "mech_overheard_content_carriage/near"
+selection_path = "manifest:mech_overheard_content_carriage/hearer"
+
+[[actors]]
+bundle_id = "mech_overheard_content_carriage"
+entity_key = "mech_overheard_content_carriage/speaker"
+name = "Speaker"
+
+[[actors]]
+bundle_id = "mech_overheard_content_carriage"
+entity_key = "mech_overheard_content_carriage/hearer"
+name = "Hearer"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_overheard_content_carriage"
+capability_id = "core/communicate"
+display_name = "Speak Test Utterance"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:core/communicate"
+outcome_template_id = "mech_overheard_content_carriage/speak/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_overheard_content_carriage/speak/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_overheard_content_carriage"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_overheard_content_carriage'."
+display_name = "Mech Overheard Content Carriage"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_overheard_content_carriage"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_overheard_content_carriage/speak/success"
+
+[consequence_frame_writes.frame_write.Inscribe]
+expires_after_ticks = 1
+kind = "mech_overheard_content_carriage/utterance"
+location_kind = "binding"
+location_ref = "ActorSpatialRef"
+payload_json = '{"speech":"the cellar door is open"}'
+
+[[consequence_templates]]
+bundle_id = "mech_overheard_content_carriage"
+template_id = "mech_overheard_content_carriage/speak/success"
+
+[[entities]]
+bundle_id = "mech_overheard_content_carriage"
+entity_def_id = "mech_overheard_content_carriage/participant"
+entity_key = "mech_overheard_content_carriage/speaker"
+kind = "npc"
+name = "Speaker"
+owned_by_entity_key = ""
+place_node_id = "mech_overheard_content_carriage/near"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_overheard_content_carriage"
+entity_def_id = "mech_overheard_content_carriage/participant"
+entity_key = "mech_overheard_content_carriage/hearer"
+kind = "npc"
+name = "Hearer"
+owned_by_entity_key = ""
+place_node_id = "mech_overheard_content_carriage/near"
+quantity = 1
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_overheard_content_carriage"
+display_name = "Trace observer"
+entity_def_id = "mech_overheard_content_carriage/participant"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definitions]]
+bundle_id = "mech_overheard_content_carriage"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Communicate (place-provided)"
+niche_id = "capability:core/communicate"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "mech_overheard_content_carriage"
+communication_speech_act_id = "mech_overheard_content_carriage/speak"
+consequence_template_id = ""
+display_name = "Speak Test Utterance"
+manipulation_action_id = "mech_overheard_content_carriage/speak"
+outcome_bool = true
+outcome_template_id = "mech_overheard_content_carriage/speak/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_overheard_content_carriage/near"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_overheard_content_carriage"
+description = "Two isolated observation sites for trace inscription, decay, and later perception."
+display_name = "Overheard Content Carriage"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_overheard_content_carriage"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_overheard_content_carriage"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Near"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "near"
+node_id = "mech_overheard_content_carriage/near"
+place_graph_id = "mech_overheard_content_carriage"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_overheard_content_carriage"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Away"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "away"
+node_id = "mech_overheard_content_carriage/away"
+place_graph_id = "mech_overheard_content_carriage"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[role_bindings]]
+binding_id = "mech_overheard_content_carriage/author"
+bundle_id = "mech_overheard_content_carriage"
+description = "Fixture setup system-author authority over mech_overheard_content_carriage."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_overheard_content_carriage"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_overheard_content_carriage"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:core/communicate"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_overheard_content_carriage/near"
+visibility = "Public"
+
+[[trace_kind_definitions]]
+bundle_id = "mech_overheard_content_carriage"
+description = "Opaque speech payload for durable overheard-content carriage."
+kind_id = "mech_overheard_content_carriage/utterance"
+location_kinds = "place_node"
+schema_json = ""

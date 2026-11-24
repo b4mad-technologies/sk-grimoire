@@ -1,0 +1,248 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "fastlane"
+
+[[action_definition_tag]]
+action_id = "fastlane/attack_strike"
+bundle_id = "fastlane"
+source = "manifest"
+tag = "combat"
+
+[[action_definitions]]
+action_id = "fastlane/attack_strike"
+bundle_id = "fastlane"
+cost_time_ms = 1000
+display_name = "Fast-lane Strike"
+on_failure = ""
+on_success = "fastlane/attack_strike/success"
+required_capability = "fastlane/combat/strike"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "fastlane/hero"
+bundle_id = "fastlane"
+capability_id = "fastlane/combat/strike"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "fastlane/hero"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "fastlane"
+entity_key = "fastlane/foe"
+identity = "$sender"
+role = "primary"
+
+[[actor_identities]]
+bundle_id = "fastlane"
+entity_key = "fastlane/hero"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "fastlane"
+entity_key = "fastlane/hero"
+place_node_id = "fastlane/arena/ring"
+selection_path = "manifest:fastlane/hero"
+
+[[actor_spatial_locations]]
+bundle_id = "fastlane"
+entity_key = "fastlane/foe"
+place_node_id = "fastlane/arena/ring"
+selection_path = "manifest:fastlane/foe"
+
+[[actors]]
+bundle_id = "fastlane"
+entity_key = "fastlane/hero"
+name = "Fast-lane Hero"
+
+[[actors]]
+bundle_id = "fastlane"
+entity_key = "fastlane/foe"
+name = "Fast-lane Foe"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "fastlane"
+capability_id = "fastlane/combat/strike"
+display_name = "Fast-lane Strike"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:fastlane/combat/strike"
+outcome_template_id = "fastlane/attack_strike/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+spends_channel = "core/action_class/primary"
+stratification_ok = true
+template_id = "fastlane/attack_strike/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "fastlane"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'fastlane'."
+display_name = "Fastlane"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "fastlane"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "fastlane"
+capability_id = "fastlane/combat/strike"
+default_visibility = "Public"
+description = ""
+display_name = "Fast-lane Strike"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "fastlane/attack_strike/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "TargetActor"
+delta_source = "-1"
+resource = "fastlane/hp"
+
+[[consequence_templates]]
+bundle_id = "fastlane"
+template_id = "fastlane/attack_strike/success"
+
+[[entities]]
+bundle_id = "fastlane"
+entity_def_id = ""
+entity_key = "fastlane/hero"
+kind = "player"
+name = "Fast-lane Hero"
+owned_by_entity_key = ""
+place_node_id = "fastlane/arena/ring"
+quantity = 1
+
+[[entities]]
+bundle_id = "fastlane"
+entity_def_id = ""
+entity_key = "fastlane/foe"
+kind = "npc"
+name = "Fast-lane Foe"
+owned_by_entity_key = ""
+place_node_id = "fastlane/arena/ring"
+quantity = 1
+
+[[niche_definitions]]
+bundle_id = "fastlane"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Strike (place-provided)"
+niche_id = "capability:fastlane/combat/strike"
+predicate_source = ""
+provider = "place"
+
+[[outcome_templates]]
+bundle_id = "fastlane"
+consequence_template_id = ""
+display_name = "fastlane/attack_strike"
+manipulation_action_id = "fastlane/attack_strike"
+outcome_bool = true
+outcome_template_id = "fastlane/attack_strike/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "fastlane/arena/ring"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "fastlane"
+description = "Single-node arena for the session-lifecycle fast-lane twin (#1968) — no movement needed."
+display_name = "Arena"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "fastlane/arena"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "fastlane"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Fast-lane Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "ring"
+node_id = "fastlane/arena/ring"
+place_graph_id = "fastlane/arena"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "fastlane"
+description = "Fast-lane combatant hit points."
+display_name = "Hit Points"
+initial_value = 100
+max_value = 100
+min_value = 0
+recovery_rule = "long_rest"
+resource_definition_id = "fastlane/hp"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "fastlane/author"
+bundle_id = "fastlane"
+description = "Fixture setup system-author authority over fastlane/arena."
+extent_kind_ref = "place_graph"
+extent_ref = "fastlane/arena"
+role_id = "system-author"
+subject = "$sender"
+
+[[session_definitions]]
+auto_join_on_targeting = false
+bundle_id = "fastlane"
+combat_grid_blueprint_id = ""
+grid_edge_affordance_bindings_json = "{}"
+grid_edge_affordance_template_id = ""
+initial_state = ""
+legal_moves_csv = ""
+on_terminate = ""
+participants_pred = ""
+round_duration_ms = 6000
+session_def_id = "fastlane/session/combat"
+stakes_required = ""
+termination_pred = ""
+turn_rule = "Sequential"
+turn_scheduler_id = "fastlane/turn/round_robin"
+visibility_policy = "Public"
+winner_predicate = ""
+
+[[spatial_niche_attachments]]
+bundle_id = "fastlane"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:fastlane/combat/strike"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "fastlane/arena/ring"
+visibility = "Public"
+
+[[turn_scheduler]]
+active = true
+bundle_id = "fastlane"
+id = "fastlane/turn/round_robin"
+scheduler_kind = "round_robin"

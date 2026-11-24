@@ -1,0 +1,262 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_priced_exchange"
+
+[[action_definitions]]
+action_id = "mech_priced_exchange/exchange"
+bundle_id = "mech_priced_exchange"
+cost_time_ms = 0
+display_name = "Exchange credits for output"
+on_failure = ""
+on_success = "mech_priced_exchange/exchange/success"
+required_capability = "mech_priced_exchange/capability/exchange"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = false
+self_only = false
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "mech_priced_exchange/buyer"
+bundle_id = "mech_priced_exchange"
+capability_id = "mech_priced_exchange/capability/exchange"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "mech_priced_exchange/buyer"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_priced_exchange"
+entity_key = "mech_priced_exchange/buyer"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_priced_exchange"
+entity_key = "mech_priced_exchange/buyer"
+place_node_id = "mech_priced_exchange/arena"
+selection_path = "manifest:mech_priced_exchange/buyer"
+
+[[actors]]
+bundle_id = "mech_priced_exchange"
+entity_key = "mech_priced_exchange/buyer"
+name = "Priced exchange Demo Buyer"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_priced_exchange"
+capability_id = "mech_priced_exchange/capability/exchange"
+display_name = "Exchange credits for output"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_priced_exchange/niche/exchange_terminal"
+outcome_template_id = "mech_priced_exchange/exchange/hit"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_priced_exchange/exchange/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_priced_exchange"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_priced_exchange'."
+display_name = "Mech Priced Exchange"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_priced_exchange"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_priced_exchange"
+capability_id = "mech_priced_exchange/capability/exchange"
+default_visibility = "Public"
+description = "Neutral mechanism (retired trade fixture content/commerce/purchasing)."
+display_name = "Purchasing"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "mech_priced_exchange/exchange/success"
+
+[consequence_frame_writes.frame_write.RemoveItem]
+count = 3
+
+[consequence_frame_writes.frame_write.RemoveItem.source.SelectedInputItems]
+binding = "inputs.credit"
+item_def_id = "mech_priced_exchange/item/credit"
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "mech_priced_exchange/exchange/success"
+
+[consequence_frame_writes.frame_write.InsertItem]
+count = 1
+item_def_id = "mech_priced_exchange/item/output"
+
+[consequence_frame_writes.frame_write.InsertItem.destination.ActorInventory]
+actor_ref = "Actor"
+
+[[consequence_templates]]
+bundle_id = "mech_priced_exchange"
+template_id = "mech_priced_exchange/exchange/success"
+
+[[entities]]
+bundle_id = "mech_priced_exchange"
+entity_def_id = "mech_priced_exchange/item/credit"
+entity_key = "mech_priced_exchange/item/credit-stack"
+kind = "item"
+name = "Credit Purse"
+owned_by_entity_key = ""
+place_node_id = "mech_priced_exchange/arena"
+quantity = 10
+
+[[entities]]
+bundle_id = "mech_priced_exchange"
+entity_def_id = "mech_priced_exchange/item/credit"
+entity_key = "mech_priced_exchange/item/credit-pinch"
+kind = "item"
+name = "A Single Credit"
+owned_by_entity_key = ""
+place_node_id = "mech_priced_exchange/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_priced_exchange"
+entity_def_id = ""
+entity_key = "mech_priced_exchange/buyer"
+kind = "npc"
+name = "Priced exchange Demo Buyer"
+owned_by_entity_key = ""
+place_node_id = "mech_priced_exchange/arena"
+quantity = 1
+
+[[entities]]
+bundle_id = "mech_priced_exchange"
+entity_def_id = ""
+entity_key = "mech_priced_exchange/terminal"
+kind = "npc"
+name = "Priced exchange Demo Stall"
+owned_by_entity_key = ""
+place_node_id = "mech_priced_exchange/arena"
+quantity = 1
+
+[[entity_containment]]
+container_entity_key = "mech_priced_exchange/buyer"
+direction = ""
+entity_key = "mech_priced_exchange/item/credit-stack"
+slot_id = ""
+
+[[entity_containment]]
+container_entity_key = "mech_priced_exchange/buyer"
+direction = ""
+entity_key = "mech_priced_exchange/item/credit-pinch"
+slot_id = ""
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_priced_exchange"
+display_name = "Credit Token"
+entity_def_id = "mech_priced_exchange/item/credit"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = true
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "mech_priced_exchange"
+display_name = "Exchange Output"
+entity_def_id = "mech_priced_exchange/item/output"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = false
+
+[[niche_definitions]]
+bundle_id = "mech_priced_exchange"
+description = "Spatial niche provided by the generic exchange terminal."
+display_name = "Exchange Terminal"
+niche_id = "mech_priced_exchange/niche/exchange_terminal"
+predicate_source = ""
+
+[[outcome_templates]]
+bundle_id = "mech_priced_exchange"
+consequence_template_id = ""
+display_name = "Exchange credits for output"
+manipulation_action_id = "mech_priced_exchange/exchange"
+outcome_bool = true
+outcome_template_id = "mech_priced_exchange/exchange/hit"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "mech_priced_exchange/arena"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_priced_exchange"
+description = "Single-node arena for the priced exchange fast-lane twin (#1968) — no movement needed."
+display_name = "Mech Priced Exchange"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_priced_exchange"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_priced_exchange"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Priced exchange Arena"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "arena"
+node_id = "mech_priced_exchange/arena"
+place_graph_id = "mech_priced_exchange"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[role_bindings]]
+binding_id = "mech_priced_exchange/author"
+bundle_id = "mech_priced_exchange"
+description = "Fixture setup system-author authority over mech_priced_exchange."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_priced_exchange"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "mech_priced_exchange"
+condition_bool = true
+ecological_invariant = false
+niche_id = "mech_priced_exchange/niche/exchange_terminal"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "mech_priced_exchange/arena"
+visibility = "Public"

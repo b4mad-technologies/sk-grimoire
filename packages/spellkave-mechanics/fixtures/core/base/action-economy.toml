@@ -1,0 +1,34 @@
+[[boundary_definitions]]
+bundle_id = "core"
+description = "Start of the actor's turn (fired by the turn scheduler)."
+id = "turn_start"
+
+[[boundary_definitions]]
+bundle_id = "core"
+description = "End of the actor's turn (fired by the turn scheduler)."
+id = "turn_end"
+
+[[boundary_definitions]]
+bundle_id = "core"
+description = "Budget never auto-resets; the class is spent until re-granted explicitly."
+id = "never"
+
+[[economy_channel_definitions]]
+bundle_id = "core"
+id = "core/action_class/primary"
+off_turn_eligible = false
+pool_ms_per_round = 1000
+resets_on = "turn_start"
+
+[[economy_channel_definitions]]
+bundle_id = "core"
+id = "core/action_class/movement"
+off_turn_eligible = false
+pool_ms_per_round = 6000
+resets_on = "turn_start"
+
+[[turn_scheduler]]
+active = true
+bundle_id = "core"
+id = "core/turn/round_robin_scheduler"
+scheduler_kind = "round_robin"

@@ -1,0 +1,485 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_movement_modes"
+
+[[actor_capabilities]]
+actor_entity_key = "mech_movement_modes/runner"
+bundle_id = "mech_movement_modes"
+capability_id = "core/walk"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_movement_modes"
+entity_key = "mech_movement_modes/runner"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_movement_modes"
+entity_key = "mech_movement_modes/runner"
+place_node_id = "mech_movement_modes/cell_a"
+selection_path = "manifest:mech_movement_modes/runner"
+
+[[actors]]
+bundle_id = "mech_movement_modes"
+entity_key = "mech_movement_modes/runner"
+name = "Movement Modes Runner"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_movement_modes"
+capability_id = "mech_movement_modes/capability/swim"
+display_name = "Swim"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_movement_modes/niche/traversable-water"
+outcome_template_id = "mech_movement_modes/outcome/swim"
+predicate_bool = false
+predicate_source = "actor.has_capability('mech_movement_modes/capability/swim') && target.has_niche('mech_movement_modes/niche/traversable-water')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_movement_modes/affordance/swim"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_movement_modes"
+capability_id = "mech_movement_modes/capability/fly"
+display_name = "Fly"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_movement_modes/niche/traversable-air"
+outcome_template_id = "mech_movement_modes/outcome/fly"
+predicate_bool = false
+predicate_source = "actor.has_capability('mech_movement_modes/capability/fly') && target.has_niche('mech_movement_modes/niche/traversable-air')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_movement_modes/affordance/fly"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_movement_modes"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_movement_modes'."
+display_name = "Mech Movement Modes"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_movement_modes"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_movement_modes"
+capability_id = "mech_movement_modes/capability/swim"
+default_visibility = "Public"
+description = "Swimming capability the movement-modes Swim edge affordance gates on."
+display_name = "Swim"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_movement_modes"
+capability_id = "mech_movement_modes/capability/fly"
+default_visibility = "Public"
+description = "Flying capability the movement-modes Fly edge affordance gates on."
+display_name = "Fly"
+
+[[entities]]
+bundle_id = "mech_movement_modes"
+entity_def_id = ""
+entity_key = "mech_movement_modes/runner"
+kind = "npc"
+name = "Movement Modes Runner"
+owned_by_entity_key = ""
+place_node_id = "mech_movement_modes/cell_a"
+quantity = 1
+
+[[movement_defaults]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-walk","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+bundle_id = "mech_movement_modes"
+mode_id = ""
+place_graph_id = ""
+
+[[outcome_templates]]
+bundle_id = "mech_movement_modes"
+consequence_template_id = ""
+display_name = "Swim"
+movement_descriptor = "move"
+outcome_bool = true
+outcome_template_id = "mech_movement_modes/outcome/swim"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "mech_movement_modes"
+consequence_template_id = ""
+display_name = "Fly"
+movement_descriptor = "move"
+outcome_bool = true
+outcome_template_id = "mech_movement_modes/outcome/fly"
+sense_visibility = "local"
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_movement_modes/affordance/fly"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-fly","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_chasm"
+mode_id = "fly"
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_movement_modes/affordance/fly"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-fly","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_modes/cell_chasm->mech_movement_modes/cell_a"
+mode_id = "fly"
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_movement_modes/affordance/swim"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-swim","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_ford"
+mode_id = "swim"
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_movement_modes/affordance/swim"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-swim","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+edge_key = "mech_movement_modes/cell_ford->mech_movement_modes/cell_a"
+mode_id = "swim"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-walk","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move","movement_cost_cells":"3"}'
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_distance"
+mode_id = "detour"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-walk","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move","movement_cost_cells":"3"}'
+edge_key = "mech_movement_modes/cell_distance->mech_movement_modes/cell_a"
+mode_id = "detour"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-walk","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move","movement_priority":"0"}'
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_tie"
+mode_id = "tie"
+
+[[place_edge_affordance]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_movement_modes/speed-walk","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move","movement_priority":"0"}'
+edge_key = "mech_movement_modes/cell_tie->mech_movement_modes/cell_a"
+mode_id = "tie"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_ford"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_a"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_ford"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_ford->mech_movement_modes/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_ford"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_a"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_distance"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_a"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_distance"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_distance->mech_movement_modes/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_distance"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_a"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_tie"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_a"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_tie"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_tie->mech_movement_modes/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_tie"
+inherit_movement_default = true
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_a"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_a->mech_movement_modes/cell_chasm"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_a"
+inherit_movement_default = false
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_chasm"
+
+[[place_edges]]
+bundle_id = "mech_movement_modes"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_movement_modes/cell_chasm->mech_movement_modes/cell_a"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_movement_modes/cell_chasm"
+inherit_movement_default = false
+place_graph_id = "mech_movement_modes"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_movement_modes/cell_a"
+
+[[place_graphs]]
+anchor_node_id = "mech_movement_modes/cell_a"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_movement_modes"
+description = "Four-edge star topology for the ADR-0101 alternative-modes content proof (task 6.3): fly-only chasm, walk-or-swim ford, cheapest-mode detour, movement_priority tie-break."
+display_name = "Mech Movement Modes"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_movement_modes"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_modes"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Modes — Home Cell"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_a"
+node_id = "mech_movement_modes/cell_a"
+place_graph_id = "mech_movement_modes"
+pos_present = true
+pos_x = 0
+pos_y = 10
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_modes"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Modes — Fly-Only Chasm"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_chasm"
+node_id = "mech_movement_modes/cell_chasm"
+place_graph_id = "mech_movement_modes"
+pos_present = true
+pos_x = -10
+pos_y = 3
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_modes"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Modes — Walk-Or-Swim Ford"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_ford"
+node_id = "mech_movement_modes/cell_ford"
+place_graph_id = "mech_movement_modes"
+pos_present = true
+pos_x = -6
+pos_y = -8
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_modes"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Modes — Cheapest-Mode Detour"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_distance"
+node_id = "mech_movement_modes/cell_distance"
+place_graph_id = "mech_movement_modes"
+pos_present = true
+pos_x = 6
+pos_y = -8
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_movement_modes"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Movement Modes — Priority Tie-Break"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "cell_tie"
+node_id = "mech_movement_modes/cell_tie"
+place_graph_id = "mech_movement_modes"
+pos_present = true
+pos_x = 10
+pos_y = 3
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_movement_modes"
+description = "Generic movement-modes mechanic fixture: movement reach — walk (cells)."
+display_name = "Movement reach — walk (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_movement_modes/speed-walk"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_movement_modes"
+description = "Generic movement-modes mechanic fixture: movement reach — swim (cells)."
+display_name = "Movement reach — swim (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_movement_modes/speed-swim"
+value_kind = "int"
+
+[[resource_definitions]]
+bundle_id = "mech_movement_modes"
+description = "Generic movement-modes mechanic fixture: movement reach — fly (cells)."
+display_name = "Movement reach — fly (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_movement_modes/speed-fly"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_movement_modes/author"
+bundle_id = "mech_movement_modes"
+description = "Fixture setup system-author authority over mech_movement_modes."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_movement_modes"
+role_id = "system-author"
+subject = "$sender"

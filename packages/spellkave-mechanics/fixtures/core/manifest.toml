@@ -1,0 +1,91 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+applyset = "core"
+schema_version = "1.0.0"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave"
+bundle_id = "core"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = []
+description = "Demo/test substrate world (bundle_id 'core') shipped under packages/spellkave-mechanics. Provides spatial topology, movement affordances, and identity bootstrapping for mechanic fixtures and local seeds — not a mandatory production foundation."
+display_name = "spellkave"
+tag_prefixes = []
+version = "1.0.0"
+
+[metadata]
+bundle = "core"
+profile = "core"
+
+[[include]]
+path = "base/spatial.toml"
+
+[[include]]
+path = "base/metadata-namespaces.toml"
+
+[[include]]
+path = "base/locations.toml"
+
+[[include]]
+path = "base/affordances.toml"
+
+[[include]]
+path = "base/roles.toml"
+
+[[include]]
+path = "base/extent-kinds.toml"
+
+[[include]]
+path = "base/items.toml"
+
+[[include]]
+path = "base/spatial_niches.toml"
+
+[[include]]
+path = "base/roll-tables.toml"
+
+[[include]]
+path = "base/conditions.toml"
+
+[[include]]
+path = "base/action-economy.toml"
+
+[[include]]
+path = "act/creatures.toml"
+
+[[include]]
+path = "act/vocabulary.toml"
+
+[[include]]
+path = "act/break-seal.toml"
+
+[[include]]
+path = "act/spawn.toml"
+
+[[include]]
+path = "act/despawn.toml"
+
+[[include]]
+path = "act/lock.toml"
+
+[[include]]
+path = "act/unlock.toml"
+
+[[include]]
+path = "act/give.toml"
+
+[[include]]
+path = "act/take-back.toml"
+
+[[include]]
+path = "act/afflict.toml"
+
+[[include]]
+path = "act/remove-condition.toml"
+
+[[include]]
+path = "act/plant.toml"
+
+[[include]]
+path = "base/long-running-actions.toml"

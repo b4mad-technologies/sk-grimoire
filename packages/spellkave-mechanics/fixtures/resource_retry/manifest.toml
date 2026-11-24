@@ -1,0 +1,340 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "resource_retry"
+
+[[action_definitions]]
+action_id = "resource_retry/recover"
+bundle_id = "resource_retry"
+cost_time_ms = 0
+description = "Use two carried units to recover five vitality."
+display_name = "Use remedy"
+on_failure = ""
+on_success = "resource_retry/recover/success"
+required_capability = "resource_retry/capability/recover"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = true
+session_def_id = ""
+
+[[action_definitions]]
+action_id = "resource_retry/inspect"
+bundle_id = "resource_retry"
+cost_time_ms = 0
+description = "Inspect the recovery station without spending remedies."
+display_name = "Inspect station"
+on_failure = ""
+on_success = "resource_retry/inspect/success"
+required_capability = "resource_retry/capability/recover"
+resolution_mode = "Deterministic"
+resolution_predicate_source = ""
+resumable = false
+self_eligible = true
+self_only = true
+session_def_id = ""
+
+[[actor_capabilities]]
+actor_entity_key = "resource_retry/patient"
+bundle_id = "resource_retry"
+capability_id = "resource_retry/capability/recover"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "resource_retry/patient"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/author"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/author"
+place_node_id = "resource_retry/author-room"
+selection_path = "manifest:resource_retry/author"
+
+[[actor_spatial_locations]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/patient"
+place_node_id = "resource_retry/room"
+selection_path = "manifest:resource_retry/patient"
+
+[[actors]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/author"
+name = "Fixture author"
+
+[[actors]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/patient"
+name = "Patient"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "resource_retry"
+capability_id = "resource_retry/capability/recover"
+display_name = "Use remedy"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:resource_retry/capability/recover"
+outcome_template_id = "resource_retry/recover/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "resource_retry/recover/affordance"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "resource_retry"
+capability_id = "resource_retry/capability/recover"
+display_name = "Inspect station"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "capability:resource_retry/capability/recover"
+outcome_template_id = "resource_retry/inspect/outcome"
+predicate_bool = true
+predicate_source = ""
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "resource_retry/inspect/affordance"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "resource_retry"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'resource_retry'."
+display_name = "Resource Retry"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "resource_retry"
+
+[[capability_definitions]]
+actor_kind = "player"
+bundle_id = "resource_retry"
+capability_id = "resource_retry/capability/recover"
+default_visibility = "Public"
+description = "Use carried remedies at the recovery station."
+display_name = "Recovery"
+
+[[consequence_frame_writes]]
+ordinal = 0
+template_id = "resource_retry/recover/success"
+
+[consequence_frame_writes.frame_write.RemoveItem]
+count = 2
+
+[consequence_frame_writes.frame_write.RemoveItem.source.ActorInventoryItem]
+actor_ref = "Actor"
+item_def_id = "resource_retry/remedy"
+
+[[consequence_frame_writes]]
+ordinal = 1
+template_id = "resource_retry/recover/success"
+
+[consequence_frame_writes.frame_write.ModifyResource]
+actor = "Actor"
+delta_source = "5"
+resource = "resource_retry/vitality"
+
+[[consequence_templates]]
+bundle_id = "resource_retry"
+template_id = "resource_retry/recover/success"
+
+[[consequence_templates]]
+bundle_id = "resource_retry"
+template_id = "resource_retry/inspect/success"
+
+[[entities]]
+bundle_id = "resource_retry"
+entity_def_id = ""
+entity_key = "resource_retry/author"
+kind = "npc"
+name = "Fixture author"
+owned_by_entity_key = ""
+place_node_id = "resource_retry/author-room"
+quantity = 1
+
+[[entities]]
+bundle_id = "resource_retry"
+entity_def_id = ""
+entity_key = "resource_retry/patient"
+kind = "player"
+name = "Patient"
+owned_by_entity_key = ""
+place_node_id = "resource_retry/room"
+quantity = 1
+
+[[entities]]
+bundle_id = "resource_retry"
+entity_def_id = "resource_retry/remedy"
+entity_key = "resource_retry/remedy-stack"
+kind = "item"
+name = "Resource Retry Remedy"
+owned_by_entity_key = ""
+place_node_id = "resource_retry/room"
+quantity = 1
+
+[[entity_containment]]
+container_entity_key = "resource_retry/patient"
+direction = ""
+entity_key = "resource_retry/remedy-stack"
+slot_id = ""
+
+[[entity_definitions]]
+affordance_seed_id = ""
+bundle_id = "resource_retry"
+display_name = "Remedy"
+entity_def_id = "resource_retry/remedy"
+grants_capability_while_equipped = ""
+grants_capability_while_present_in_location = ""
+lineage_id = ""
+on_consume_consequence_id = ""
+on_destroy_consequence_id = ""
+on_equip_consequence_id = ""
+on_unequip_consequence_id = ""
+slot_compatibility_predicate = ""
+stackable = true
+
+[[metadata_attachments]]
+bundle_id = "resource_retry"
+namespace = "ui.self_summary"
+payload_json = '{"slot":"vitals","order":10}'
+source = "manifest"
+target_kind = "resource_definition"
+target_ref = "resource_retry/vitality"
+
+[[metadata_namespaces]]
+audience = "public"
+bundle_id = "resource_retry"
+description = "Self summary membership"
+namespace = "ui.self_summary"
+
+[[niche_definitions]]
+bundle_id = "resource_retry"
+description = "WA-CAP-002 (sk-0m4.69): capability:* niches require an explicit provider. This demo is place-attached."
+display_name = "Recovery"
+niche_id = "capability:resource_retry/capability/recover"
+predicate_source = ""
+provider = "place"
+
+[[object_state]]
+bundle_id = "resource_retry"
+entity_key = "resource_retry/patient"
+expires_at_tick = 0
+source_template_id = "manifest"
+state_id = "resource_retry/vitality"
+value_bool = true
+value_int = 0
+
+[[outcome_templates]]
+bundle_id = "resource_retry"
+consequence_template_id = ""
+display_name = "Use remedy"
+manipulation_action_id = "resource_retry/recover"
+outcome_bool = true
+outcome_template_id = "resource_retry/recover/outcome"
+sense_visibility = "local"
+
+[[outcome_templates]]
+bundle_id = "resource_retry"
+consequence_template_id = ""
+display_name = "Inspect station"
+manipulation_action_id = "resource_retry/inspect"
+outcome_bool = true
+outcome_template_id = "resource_retry/inspect/outcome"
+sense_visibility = "local"
+
+[[place_graphs]]
+anchor_node_id = "resource_retry/room"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "resource_retry"
+description = ""
+display_name = "Resource Retry"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "resource_retry"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "resource_retry"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Resource recovery room"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "room"
+node_id = "resource_retry/room"
+place_graph_id = "resource_retry"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "resource_retry"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Fixture author room"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "author-room"
+node_id = "resource_retry/author-room"
+place_graph_id = "resource_retry"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "resource_retry"
+display_name = "Vitality"
+initial_value = 0
+max_value = 20
+min_value = 0
+recovery_rule = "none"
+resource_definition_id = "resource_retry/vitality"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "resource_retry/author"
+bundle_id = "resource_retry"
+description = "Fixture setup system-author authority over resource_retry."
+extent_kind_ref = "place_graph"
+extent_ref = "resource_retry"
+role_id = "system-author"
+subject = "$sender"
+
+[[spatial_niche_attachments]]
+bundle_id = "resource_retry"
+condition_bool = true
+ecological_invariant = false
+niche_id = "capability:resource_retry/capability/recover"
+on_entry_action_id = ""
+on_entry_target_entity_key = ""
+place_node_id = "resource_retry/room"
+visibility = "Public"

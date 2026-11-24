@@ -1,0 +1,13 @@
+[[location_definitions]]
+bundle_id = "core"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+display_name = "Core"
+interior_graph_id = ""
+location_def_id = "core/spell_cave"
+parent_def = ""
+
+[[location_traces]]
+location_def_id = "core/spell_cave"
+trace_kind_id = "scent"

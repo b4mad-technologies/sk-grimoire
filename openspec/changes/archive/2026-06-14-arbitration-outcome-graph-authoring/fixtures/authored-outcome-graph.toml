@@ -1,0 +1,63 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+[metadata]
+profile = "arbitration_outcome_graph_authoring"
+
+[[bundles]]
+bundle_id = "demo_graph"
+display_name = "Demo Outcome Graph"
+author = "spellkave"
+version = "1.0.0"
+description = "Driver fixture for manifest-authored outcome graph rows."
+
+[[outcome_templates]]
+outcome_template_id = "demo_graph/invoke"
+bundle_id = "demo_graph"
+display_name = "Invoke authored graph"
+outcome_expression_source = "invoke_outcome_graph('demo_graph/staged_skill_check')"
+
+[[outcome_templates]]
+outcome_template_id = "demo_graph/partial"
+bundle_id = "demo_graph"
+display_name = "Partial branch"
+outcome_bool = true
+
+[[outcome_templates]]
+outcome_template_id = "demo_graph/success"
+bundle_id = "demo_graph"
+display_name = "Success branch"
+outcome_bool = true
+
+[[outcome_graphs]]
+outcome_graph_id = "demo_graph/staged_skill_check"
+bundle_id = "demo_graph"
+display_name = "Staged skill check"
+root_node_id = "approach"
+max_depth = 3
+max_nodes = 8
+max_draws = 4
+
+[[outcome_graph_nodes]]
+outcome_graph_node_id = "demo_graph/staged_skill_check/approach"
+outcome_graph_id = "demo_graph/staged_skill_check"
+node_id = "approach"
+outcome_template_id = "demo_graph/partial"
+terminal = false
+authored_order = 0
+
+[[outcome_graph_nodes]]
+outcome_graph_node_id = "demo_graph/staged_skill_check/success"
+outcome_graph_id = "demo_graph/staged_skill_check"
+node_id = "success"
+outcome_template_id = "demo_graph/success"
+terminal = true
+authored_order = 1
+
+[[outcome_graph_edges]]
+outcome_graph_edge_id = "demo_graph/staged_skill_check/e0"
+outcome_graph_id = "demo_graph/staged_skill_check"
+from_node_id = "approach"
+to_node_id = "success"
+guard_predicate_source = "1 == 1"
+authored_order = 0

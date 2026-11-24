@@ -1,0 +1,257 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+applyset = "mech_place_graph_instance_move"
+
+[[actor_capabilities]]
+actor_entity_key = "mech_place_graph_instance_move/runner"
+bundle_id = "mech_place_graph_instance_move"
+capability_id = "core/walk"
+elevation_class = ""
+extent_kind_ref = ""
+extent_ref = ""
+source = "core"
+source_args_hash = ""
+
+[[actor_identities]]
+bundle_id = "mech_place_graph_instance_move"
+entity_key = "mech_place_graph_instance_move/runner"
+identity = "$sender"
+role = "primary"
+
+[[actor_spatial_locations]]
+bundle_id = "mech_place_graph_instance_move"
+entity_key = "mech_place_graph_instance_move/runner"
+place_node_id = "mech_place_graph_instance_move/hub/anchor"
+selection_path = "manifest:mech_place_graph_instance_move/runner"
+
+[[actors]]
+bundle_id = "mech_place_graph_instance_move"
+entity_key = "mech_place_graph_instance_move/runner"
+name = "Place Graph Instance Move Runner"
+
+[[affordance_templates]]
+accepts_global_storm = false
+bundle_id = "mech_place_graph_instance_move"
+capability_id = "mech_place_graph_instance_move/capability/key"
+display_name = "Locked door"
+locality_class = ""
+movement_cost_expression_source = ""
+niche_id = "mech_place_graph_instance_move/niche/locked_door"
+outcome_template_id = ""
+predicate_bool = false
+predicate_source = "actor.has_capability('mech_place_graph_instance_move/capability/key') && target.has_niche('mech_place_graph_instance_move/niche/locked_door')"
+range_m = 0.0
+reads_occupancy = false
+stratification_ok = true
+template_id = "mech_place_graph_instance_move/affordance/locked_door"
+
+[[bundles]]
+allow_flat_tags = false
+author = "spellkave-verb-tools"
+bundle_id = "mech_place_graph_instance_move"
+default_extent_params_json = ""
+default_extent_shape_id = ""
+depends_on = ["core"]
+description = "Bundle scaffolded by the #1968 verb-authoring tools on first write to 'mech_place_graph_instance_move'."
+display_name = "Mech Place Graph Instance Move"
+version = "1.0.0"
+
+[[bundles.tag_prefixes]]
+prefix = "mech_place_graph_instance_move"
+
+[[capability_definitions]]
+actor_kind = "entity"
+bundle_id = "mech_place_graph_instance_move"
+capability_id = "mech_place_graph_instance_move/capability/key"
+default_visibility = "Public"
+description = "The key the blueprint's entry-vault edge gates on. No actor in this fixture is granted it — the instance edge stays gated (sk-a3v: the explicit row must clone onto the instance's own edge_key for this to hold)."
+display_name = "Locked door key"
+
+[[entities]]
+bundle_id = "mech_place_graph_instance_move"
+entity_def_id = ""
+entity_key = "mech_place_graph_instance_move/runner"
+kind = "npc"
+name = "Place Graph Instance Move Runner"
+owned_by_entity_key = ""
+place_node_id = "mech_place_graph_instance_move/hub/anchor"
+quantity = 1
+
+[[movement_defaults]]
+affordance_template_id = "core/affordance/traverse_open_portal"
+bindings_json = '{"movement_reach_resource":"mech_place_graph_instance_move/speed","movement_channel":"core/action_class/movement","long_running_move_session":"core/long_running_move"}'
+bundle_id = "mech_place_graph_instance_move"
+mode_id = ""
+place_graph_id = ""
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_place_graph_instance_move/affordance/locked_door"
+bindings_json = "{}"
+edge_key = "mech_place_graph_instance_move/dungeon_bp/entry->mech_place_graph_instance_move/dungeon_bp/vault"
+mode_id = ""
+
+[[place_edge_affordance]]
+affordance_template_id = "mech_place_graph_instance_move/affordance/locked_door"
+bindings_json = "{}"
+edge_key = "mech_place_graph_instance_move/dungeon_bp/vault->mech_place_graph_instance_move/dungeon_bp/entry"
+mode_id = ""
+
+[[place_edges]]
+bundle_id = "mech_place_graph_instance_move"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_place_graph_instance_move/dungeon_bp/entry->mech_place_graph_instance_move/dungeon_bp/vault"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_place_graph_instance_move/dungeon_bp/entry"
+inherit_movement_default = true
+place_graph_id = "mech_place_graph_instance_move/dungeon_bp"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_place_graph_instance_move/dungeon_bp/vault"
+
+[[place_edges]]
+bundle_id = "mech_place_graph_instance_move"
+cell_anchor = 0
+cell_anchor_present = false
+cell_anchor_u = 0.0
+cell_anchor_v = 0.0
+edge_key = "mech_place_graph_instance_move/dungeon_bp/vault->mech_place_graph_instance_move/dungeon_bp/entry"
+from_anchor_offset = 0.0
+from_anchor_side = ""
+from_node_id = "mech_place_graph_instance_move/dungeon_bp/vault"
+inherit_movement_default = true
+place_graph_id = "mech_place_graph_instance_move/dungeon_bp"
+pose_dt_elevation = 0.0
+pose_dt_elevation_present = false
+substrate_crossing = false
+to_anchor_offset = 0.0
+to_anchor_side = ""
+to_node_id = "mech_place_graph_instance_move/dungeon_bp/entry"
+
+[[place_graph_instances]]
+blueprint_id = "mech_place_graph_instance_move/dungeon_bp"
+bundle_id = "mech_place_graph_instance_move"
+instance_id = "mech_place_graph_instance_move/dungeon_bp#alpha"
+parent_graph_id = ""
+
+[place_graph_instances.anchor]
+id = "mech_place_graph_instance_move/hub/anchor"
+kind = "place_node"
+
+[[place_graphs]]
+anchor_node_id = "mech_place_graph_instance_move/hub/anchor"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_place_graph_instance_move"
+description = "Root graph for the ADR-0101 sk-a3v instance-cloning content proof (task 6.3)."
+display_name = "Hub"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_place_graph_instance_move/hub"
+substrate_id = "outdoor"
+
+[[place_graphs]]
+anchor_node_id = "mech_place_graph_instance_move/dungeon_bp/entry"
+bearing = 0.0
+blueprint_id = ""
+bundle_id = "mech_place_graph_instance_move"
+description = "Dungeon blueprint (entry <-> vault, locked-door gated) — referenced by [[place_graph_instances]] below, never stamped into the world directly."
+display_name = "Dungeon Bp"
+is_ephemeral_instance = false
+metres_per_unit = 1.0
+origin_cell_res10 = 0
+origin_cell_res4 = 0
+origin_cell_res7 = 0
+parent_graph_id = ""
+place_graph_id = "mech_place_graph_instance_move/dungeon_bp"
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_place_graph_instance_move"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Place Graph Instance Move — Hub Anchor"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "anchor"
+node_id = "mech_place_graph_instance_move/hub/anchor"
+place_graph_id = "mech_place_graph_instance_move/hub"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_place_graph_instance_move"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Dungeon Blueprint — Entry"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "entry"
+node_id = "mech_place_graph_instance_move/dungeon_bp/entry"
+place_graph_id = "mech_place_graph_instance_move/dungeon_bp"
+pos_present = true
+pos_x = 0
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[place_nodes]]
+bundle_id = "mech_place_graph_instance_move"
+cell_res10 = 0
+cell_res4 = 0
+cell_res7 = 0
+description = ""
+display_name = "Dungeon Blueprint — Vault"
+extent_params_json = ""
+extent_shape_id = ""
+is_ephemeral = false
+local_id = "vault"
+node_id = "mech_place_graph_instance_move/dungeon_bp/vault"
+place_graph_id = "mech_place_graph_instance_move/dungeon_bp"
+pos_present = true
+pos_x = 10
+pos_y = 0
+pose_elevation = 0.0
+pose_elevation_present = true
+substrate_id = "outdoor"
+
+[[resource_definitions]]
+bundle_id = "mech_place_graph_instance_move"
+description = "Generic place-graph-instance-move mechanic fixture: the runner's base movement reach."
+display_name = "Movement reach (cells)"
+initial_value = 6
+max_value = 12
+min_value = 0
+recovery_rule = "persistent"
+resource_definition_id = "mech_place_graph_instance_move/speed"
+value_kind = "int"
+
+[[role_bindings]]
+binding_id = "mech_place_graph_instance_move/author"
+bundle_id = "mech_place_graph_instance_move"
+description = "Fixture setup system-author authority over mech_place_graph_instance_move/hub."
+extent_kind_ref = "place_graph"
+extent_ref = "mech_place_graph_instance_move/hub"
+role_id = "system-author"
+subject = "$sender"

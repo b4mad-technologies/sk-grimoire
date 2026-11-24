@@ -1,0 +1,11 @@
+[
+  {
+    "code": "MF-VAL-375",
+    "severity": "warning",
+    "message": "affordance_templates.capability_id 'role_capability_write_gate/mark/affordance' names reserved capability 'frontier.pace_time'; applying this authority-bearing row requires bundle-scoped escalation",
+    "path": "affordance_templates.capability_id",
+    "span": null,
+    "hint": null,
+    "details": null
+  }
+]

@@ -1,0 +1,29 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+# RED falsifier for MF-VAL-327 (sk-j8e.3 / BL-39): two identically eligible
+# offers at the same niche+outcome, differing only in range_m / template_id.
+# The leftover range-0 twin is the crypt-fight deadlock shape.
+
+[[outcome_templates]]
+outcome_template_id = "dup/open"
+bundle_id = "dup"
+display_name = "Open"
+
+[[affordance_templates]]
+template_id = "dup/door_a"
+bundle_id = "dup"
+niche_id = "dup/door"
+capability_id = "dup/open"
+display_name = "Door A"
+outcome_template_id = "dup/open"
+range_m = 1.5
+
+[[affordance_templates]]
+template_id = "dup/door_b"
+bundle_id = "dup"
+niche_id = "dup/door"
+capability_id = "dup/open"
+display_name = "Door B"
+outcome_template_id = "dup/open"
+range_m = 0.0

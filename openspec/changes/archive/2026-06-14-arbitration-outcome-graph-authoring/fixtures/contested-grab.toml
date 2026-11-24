@@ -1,0 +1,42 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+[metadata]
+profile = "contested_grab_arbitration"
+
+[[bundles]]
+bundle_id = "demo_arb"
+display_name = "Demo Arbitration"
+author = "spellkave"
+version = "1.0.0"
+description = "Driver fixture for an authored Arbitrate outcome and the claim-contended runtime branch."
+
+[[outcome_templates]]
+outcome_template_id = "demo_arb/contested_grab/raise_arbitration"
+bundle_id = "demo_arb"
+display_name = "Raise contested grab arbitration"
+outcome_expression_source = "arbitrate('demo_arb/who_grabs', 'visible_target=item', 'hero_takes=demo_arb/hero_takes_graph', 'npc_takes=demo_arb/npc_takes_graph')"
+
+[[outcome_graphs]]
+outcome_graph_id = "demo_arb/hero_takes_graph"
+bundle_id = "demo_arb"
+display_name = "Hero takes"
+root_node_id = "terminal"
+
+[[outcome_graph_nodes]]
+outcome_graph_node_id = "demo_arb/hero_takes_graph/terminal"
+outcome_graph_id = "demo_arb/hero_takes_graph"
+node_id = "terminal"
+terminal = true
+
+[[outcome_graphs]]
+outcome_graph_id = "demo_arb/npc_takes_graph"
+bundle_id = "demo_arb"
+display_name = "NPC takes"
+root_node_id = "terminal"
+
+[[outcome_graph_nodes]]
+outcome_graph_node_id = "demo_arb/npc_takes_graph/terminal"
+outcome_graph_id = "demo_arb/npc_takes_graph"
+node_id = "terminal"
+terminal = true

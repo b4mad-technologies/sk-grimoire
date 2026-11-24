@@ -1,0 +1,163 @@
+#:schema https://spellkave.dev/schema/world-manifest-1.0.0.json
+schema_version = "1.0.0"
+
+[metadata]
+profile = "actors_and_bodies"
+
+[[bundles]]
+bundle_id = "actors_and_bodies"
+display_name = "Actors and Bodies Demo"
+author = "spellkave"
+version = "1.0.0"
+description = "Demo actor + scenario object_state slices for the actors_and_bodies walkthrough; the wanderer actor is authored UNBOUND so the walkthrough connection claims it at runtime. Owns its own two-node place graph (#1968: core ships no place nodes of its own)."
+depends_on = ["core"]
+
+# ─── Own place graph: core ships no place nodes since #1968 ───
+
+[[place_graphs]]
+place_graph_id = "actors_and_bodies"
+bundle_id = "actors_and_bodies"
+substrate_id = "outdoor"
+display_name = "Actors and Bodies Demo Village"
+anchor_node_id = "actors_and_bodies/green"
+
+[[place_nodes]]
+node_id = "actors_and_bodies/green"
+bundle_id = "actors_and_bodies"
+place_graph_id = "actors_and_bodies"
+local_id = "green"
+substrate_id = "outdoor"
+display_name = "Demo Green"
+pos_x = 0
+pos_y = 0
+pos_present = true
+
+[[place_nodes]]
+node_id = "actors_and_bodies/well"
+bundle_id = "actors_and_bodies"
+place_graph_id = "actors_and_bodies"
+local_id = "well"
+substrate_id = "outdoor"
+display_name = "Demo Well"
+pos_x = 4
+pos_y = -6
+pos_present = true
+
+[[place_edges]]
+edge_key = "actors_and_bodies/edge/green-well"
+bundle_id = "actors_and_bodies"
+place_graph_id = "actors_and_bodies"
+from_node_id = "actors_and_bodies/green"
+to_node_id = "actors_and_bodies/well"
+
+[[place_edge_affordance]]
+edge_key = "actors_and_bodies/edge/green-well"
+affordance_template_id = "core/affordance/traverse_open_portal"
+
+# ─── Demo actor: authored unbound so the walkthrough connection can r_claim_actor it ───
+
+[[entities]]
+entity_key = "actors_and_bodies/wanderer"
+bundle_id = "actors_and_bodies"
+name = "Demo Wanderer"
+kind = "player"
+place_node_id = "actors_and_bodies/green"
+
+[[actors]]
+entity_key = "actors_and_bodies/wanderer"
+bundle_id = "actors_and_bodies"
+name = "Demo Wanderer"
+
+[[actor_spatial_locations]]
+entity_key = "actors_and_bodies/wanderer"
+place_node_id = "actors_and_bodies/green"
+bundle_id = "actors_and_bodies"
+selection_path = "manifest:actors_and_bodies/start"
+
+[[actor_capabilities]]
+actor_entity_key = "actors_and_bodies/wanderer"
+capability_id = "core/walk"
+source = "actors_and_bodies"
+bundle_id = "actors_and_bodies"
+
+[[actor_capabilities]]
+actor_entity_key = "actors_and_bodies/wanderer"
+capability_id = "core/sense"
+source = "actors_and_bodies"
+bundle_id = "actors_and_bodies"
+
+[[actor_capabilities]]
+actor_entity_key = "actors_and_bodies/wanderer"
+capability_id = "core/inspect"
+source = "actors_and_bodies"
+bundle_id = "actors_and_bodies"
+
+# Pillar 3 (entity containment): the wanderer carries one demo item.
+[[entities]]
+entity_key = "actors_and_bodies/travel_satchel"
+bundle_id = "actors_and_bodies"
+name = "Travel Satchel"
+kind = "item"
+place_node_id = ""
+
+[[entity_containment]]
+entity_key = "actors_and_bodies/travel_satchel"
+container_entity_key = "actors_and_bodies/wanderer"
+
+[[object_state_definitions]]
+state_id = "actors_and_bodies/fatigue"
+bundle_id = "actors_and_bodies"
+target_kind = "entity"
+display_name = "Fatigue"
+
+[[object_state_definitions]]
+state_id = "actors_and_bodies/hunger"
+bundle_id = "actors_and_bodies"
+target_kind = "entity"
+display_name = "Hunger"
+
+[[object_state]]
+entity_key = "actors_and_bodies/wanderer"
+state_id = "actors_and_bodies/fatigue"
+value_int = 2
+source_template_id = "actors_and_bodies/seed"
+bundle_id = "actors_and_bodies"
+
+[[object_state]]
+entity_key = "actors_and_bodies/wanderer"
+state_id = "actors_and_bodies/hunger"
+value_int = 1
+source_template_id = "actors_and_bodies/seed"
+bundle_id = "actors_and_bodies"
+
+# ─── Relational tag membership (CR-4: replaces inline `tags = "..."`) ───
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/fatigue"
+tag = "actor"
+bundle_id = "actors_and_bodies"
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/fatigue"
+tag = "state"
+bundle_id = "actors_and_bodies"
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/fatigue"
+tag = "fatigue"
+bundle_id = "actors_and_bodies"
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/hunger"
+tag = "actor"
+bundle_id = "actors_and_bodies"
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/hunger"
+tag = "state"
+bundle_id = "actors_and_bodies"
+
+[[object_state_definition_tag]]
+state_id = "actors_and_bodies/hunger"
+tag = "hunger"
+bundle_id = "actors_and_bodies"

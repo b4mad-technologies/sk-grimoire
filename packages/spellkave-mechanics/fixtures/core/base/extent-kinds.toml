@@ -1,0 +1,17 @@
+[[extent_kind_definitions]]
+bundle_id = "core"
+description = "place_graph_definition extent, including child combat grids"
+kind_id = "place_graph"
+resolution_shape = "PlaceGraph"
+
+[[extent_kind_definitions]]
+bundle_id = "core"
+description = "party membership-tag extent (extent_ref is the entity tag) plus current encounter union; any entity carrying that exact tag is a member — choose party refs from a namespace nothing else uses (e.g. srd.party.*)"
+kind_id = "party"
+resolution_shape = "Party"
+
+[[extent_kind_definitions]]
+bundle_id = "core"
+description = "Authored entity membership; excludes graphs, players and runtime spawns."
+kind_id = "bundle"
+resolution_shape = "Bundle"
