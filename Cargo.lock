@@ -411,7 +411,7 @@ checksum = "0c790de23124f9ab44544d7ac05d60440adc586479ce501c1d6d7da3cd8c9cf5"
 
 [[package]]
 name = "spellkave-authoring"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -422,7 +422,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-authoring-wasm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde_json",
  "spellkave-authoring",
@@ -433,7 +433,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-dsl"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -442,7 +442,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-format"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -452,7 +452,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-schema"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "schemars",
  "semver",
@@ -465,7 +465,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-validate"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
@@ -478,7 +478,7 @@ dependencies = [
 
 [[package]]
 name = "spellkave-validate-wasm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde",
  "serde_json",
