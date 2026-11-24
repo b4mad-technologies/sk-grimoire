@@ -1,5 +1,7 @@
 //! ADR-0155: authored DM choices admit scoped vocabulary, never authority tags.
-use crate::refs::{BundleScope, MF_VAL_CROSS_BUNDLE_SCOPE};
+use crate::reference_scope::BundleScope;
+pub use crate::refs::party_extents::party_extent_tags;
+use crate::refs::MF_VAL_CROSS_BUNDLE_SCOPE;
 use crate::{Diagnostic, Severity};
 use spellkave_schema::Manifest;
 use std::collections::{BTreeMap, BTreeSet};
@@ -12,49 +14,6 @@ pub const MF_VAL_DM_SPAWN_BLUEPRINT: &str = "MF-VAL-386";
 
 pub fn protected_tag(tag: &str, party_tags: &BTreeSet<String>) -> bool {
     tag == spellkave_schema::PLAYER_SEAT_TAG || party_tags.contains(tag)
-}
-
-pub fn party_extent_tags(
-    manifest: &Manifest,
-    live: Option<&crate::refs::LiveVocabulary>,
-) -> BTreeSet<String> {
-    let mut shapes: BTreeMap<&str, &str> = spellkave_schema::CORE_EXTENT_KINDS
-        .iter()
-        .map(|row| (row.kind_id, row.resolution_shape))
-        .collect();
-    if let Some(live) = live {
-        for (kind, shape) in &live.extent_shapes {
-            shapes.insert(kind, shape);
-        }
-    }
-    for row in &manifest.extent_kind_definitions {
-        shapes.insert(&row.kind_id, &row.resolution_shape);
-    }
-    manifest
-        .role_bindings
-        .iter()
-        .map(|r| (&r.extent_kind_ref, &r.extent_ref))
-        .chain(
-            manifest
-                .actor_capabilities
-                .iter()
-                .map(|r| (&r.extent_kind_ref, &r.extent_ref)),
-        )
-        .chain(
-            manifest
-                .entity_definition_initial_capability
-                .iter()
-                .map(|r| (&r.extent_kind_ref, &r.extent_ref)),
-        )
-        .chain(
-            manifest
-                .condition_capability_extent_grants
-                .iter()
-                .map(|r| (&r.extent_kind_ref, &r.extent_ref)),
-        )
-        .filter(|(kind, _)| shapes.get(kind.as_str()) == Some(&"Party"))
-        .map(|(_, tag)| tag.clone())
-        .collect()
 }
 
 pub fn validate(manifest: &Manifest, diags: &mut Vec<Diagnostic>) {

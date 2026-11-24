@@ -11,7 +11,9 @@ pub mod affordance_template_participants;
 mod area_shapes;
 pub mod autonomy_jobs;
 pub mod containment_policy;
+mod containment_vocabulary;
 pub mod diagnostic_codes;
+mod diagnostic_ids;
 pub mod dm_acts;
 pub mod dm_document_authority;
 pub mod dm_document_envelope;
@@ -36,12 +38,14 @@ pub mod metadata_attachments;
 pub mod npc_documents;
 pub mod numeric_dependencies;
 pub mod observation;
+mod reference_scope;
 pub mod refs;
 pub use refs::roles::{
     merged_role_capability_ids, MF_VAL_ROLE_AGGREGATION_REF, MF_VAL_ROLE_CAPABILITY_REF,
     MF_VAL_ROLE_DUPLICATE,
 };
 pub mod retractions;
+mod rules;
 pub mod stratification;
 pub mod tag_grammar;
 pub mod trace_kinds;
@@ -306,46 +310,16 @@ fn validate_manifest_impl(
     containment_context: Option<&refs::LiveVocabulary>,
 ) -> Vec<Diagnostic> {
     let mut diags = Vec::new();
-    let metadata = &manifest.metadata;
-
-    validate_typed_manifest_rows(manifest, existing_node_ids, live, &mut diags);
-    instance_owner::validate(applying_manifest, &mut diags);
-    containment_policy::validate(manifest, applying_manifest, containment_context, &mut diags);
-    refs::place_seals::validate(applying_manifest, live, &mut diags);
-    area_shapes::validate_area_shape_params(manifest, &mut diags);
-    dm_acts::validate_for_apply(manifest, applying_manifest, live, &mut diags);
-    dsl_macros::validate_dsl_macro_definitions(manifest, &mut diags);
-    validate_affordance_range_m(manifest, &mut diags);
-    validate_reachability_parity(manifest, &mut diags);
-    validate_long_action_promotion(manifest, &mut diags);
-    validate_stochastic_action_resolution(manifest, &mut diags);
-    validate_action_non_steering_shape(manifest, &mut diags);
-    validate_spatial_entry_action_shape(manifest, &mut diags);
-    diags.extend(validate_manifest_metadata(metadata));
-    validate_condition_authoring(manifest, &mut diags);
-    validate_item_dsl_sources(manifest, &mut diags);
-    equipped_numeric::validate(manifest, &mut diags);
-    validate_affordance_predicate_locality(manifest, &mut diags);
-    validate_affordance_predicate_stratification(manifest, &mut diags);
-    validate_prompt_predicate_locality(manifest, &mut diags);
-    validate_prompt_predicate_stratification(manifest, &mut diags);
-    refs::validate_cross_row_refs_for_apply(manifest, applying_manifest, live, &mut diags);
-    affordance_template_participants::validate_affordance_template_participants(
-        manifest, live, &mut diags,
+    rules::run(
+        &rules::ValidationContext {
+            manifest,
+            applying_manifest,
+            existing_node_ids,
+            live,
+            containment_context,
+        },
+        &mut diags,
     );
-    action_economy::validate_action_economy(manifest, &mut diags);
-    affordance_selection::validate_affordance_selection_ambiguity(manifest, &mut diags);
-    affordance_selection::validate_stochastic_affordance_overlap(manifest, &mut diags);
-    affordance_selection::validate_duplicate_niche_outcome_templates(manifest, &mut diags);
-    autonomy_jobs::validate_autonomy_jobs(manifest, &mut diags);
-    trace_kinds::validate_trace_kind_definitions(manifest, &mut diags);
-    trace_kinds::validate_place_node_trace_kind_closure(manifest, &mut diags);
-    retractions::validate_retractions(manifest, &mut diags);
-    observation::validate_observation_placeholders(manifest, &mut diags);
-    tag_grammar::validate_tag_vocabulary(manifest, &mut diags);
-    metadata_attachments::validate_metadata_attachment_target_kinds(manifest, &mut diags);
-    metadata_attachments::validate_metadata_namespace_audiences(manifest, &mut diags);
-    visibility::validate_visibility_tokens(manifest, &mut diags);
 
     canonicalize_diagnostics(&mut diags);
     diags

@@ -60,6 +60,7 @@
 //!    → `MF-VAL-226`, **Fatal**.
 
 pub mod condition_extents;
+pub(crate) mod party_extents;
 pub mod place_seals;
 pub mod privileged_namespace;
 pub mod privileged_templates;
@@ -73,7 +74,8 @@ use spellkave_dsl::{
 };
 use spellkave_schema::{EntityKindRow, Manifest};
 
-use crate::action_economy::{resolve_scoped_ref, RefResolution};
+use crate::containment_vocabulary::Vocabulary;
+use crate::reference_scope::{resolve_scoped_ref, BundleScope, RefResolution};
 use crate::{Diagnostic, Severity, MF_VAL_FK_CLOSURE};
 
 pub const MF_VAL_ROLL_TABLE_ENTRY_RESULT_REF: &str = "MF-VAL-210";
@@ -441,7 +443,7 @@ const DAMAGE_SLOT: &str = "srd/damage";
 /// enough to re-validate the referenced row's own content.
 #[derive(Default, Clone)]
 pub struct LiveVocabulary {
-    pub containment: crate::containment_policy::Vocabulary,
+    pub containment: Vocabulary,
     /// Existence and dependency facts for authored selections; no live DSL is reconstructed.
     pub dm: DmVocabulary,
     /// Authored extent vocabulary uses existing kernel resolution shapes.
@@ -527,7 +529,7 @@ impl LiveVocabulary {
     /// Same maps the server admission path fills from live tables.
     pub fn from_manifest(manifest: &Manifest) -> Self {
         let mut live = Self {
-            containment: crate::containment_policy::Vocabulary::from_manifest(manifest),
+            containment: Vocabulary::from_manifest(manifest),
             dm: DmVocabulary {
                 bundle_dependencies: manifest
                     .bundles
@@ -549,7 +551,7 @@ impl LiveVocabulary {
                     .iter()
                     .map(|r| (r.entity_def_id.clone(), r.bundle_id.clone()))
                     .collect(),
-                party_tags: crate::dm_acts::party_extent_tags(manifest, None),
+                party_tags: party_extents::party_extent_tags(manifest, None),
                 condition_extent_owners: manifest
                     .condition_capability_extent_grants
                     .iter()
@@ -912,84 +914,6 @@ fn validate_required_capability_refs(
                 ),
             ));
         }
-    }
-}
-
-/// Map of bundle_id → transitively-reachable bundle_ids (including self and
-/// the implicit "core" baseline that admission always seeds first).
-///
-/// `pub(crate)` so `action_economy.rs` can reuse the same `depends_on`-closure
-/// scope for reset-boundary vocabulary resolution (CR-12) instead of inventing
-/// a second cross-bundle rule.
-pub(crate) struct BundleScope {
-    closure: BTreeMap<String, BTreeSet<String>>,
-}
-
-impl BundleScope {
-    pub(crate) fn build(manifest: &Manifest) -> Self {
-        Self::build_with_live(manifest, &BTreeMap::new())
-    }
-
-    pub(crate) fn build_with_live(
-        manifest: &Manifest,
-        live: &BTreeMap<String, BTreeSet<String>>,
-    ) -> Self {
-        // Incoming headers replace their own edges; other live headers are reference facts.
-        let mut deps = live.clone();
-        let mut all_bundles: BTreeSet<String> = deps.keys().cloned().collect();
-        for row in &manifest.bundles {
-            all_bundles.insert(row.bundle_id.clone());
-            let entry = deps.entry(row.bundle_id.clone()).or_default();
-            entry.clear();
-            for dep in &row.depends_on {
-                entry.insert(dep.clone());
-            }
-        }
-        // Implicit "core" baseline — admission always seeds it before any
-        // bundle's manifest applies. Treat every authored bundle as if it
-        // depended on "core" so refs into core's vocabulary do not trip the
-        // cross-bundle scope check.
-        all_bundles.insert("core".to_owned());
-
-        // Transitive closure (small graph; quadratic fixed-point is fine).
-        let mut closure: BTreeMap<String, BTreeSet<String>> = BTreeMap::new();
-        for bundle in &all_bundles {
-            let mut reach: BTreeSet<String> = BTreeSet::new();
-            reach.insert(bundle.clone());
-            reach.insert("core".to_owned());
-            let mut frontier: Vec<String> = vec![bundle.clone()];
-            while let Some(b) = frontier.pop() {
-                if let Some(direct) = deps.get(&b) {
-                    for d in direct {
-                        if reach.insert(d.clone()) {
-                            frontier.push(d.clone());
-                        }
-                    }
-                }
-            }
-            closure.insert(bundle.clone(), reach);
-        }
-        Self { closure }
-    }
-
-    /// True when `referenced_bundle` is in scope of `owning_bundle`.
-    pub(crate) fn in_scope(&self, owning_bundle: &str, referenced_bundle: &str) -> bool {
-        match self.closure.get(owning_bundle) {
-            Some(reach) => reach.contains(referenced_bundle),
-            // Unknown owning bundle — be lenient; FK closure check
-            // (MF-VAL-101) already flagged the row.
-            None => true,
-        }
-    }
-
-    /// The transitive `depends_on` closure of `owning_bundle` (including self
-    /// and the implicit `core` baseline), or `None` when the bundle is unknown
-    /// to this manifest (no `[[bundles]]` row). Used by the reset-boundary
-    /// existence tier to decide whether the full vocabulary is visible: a
-    /// membership check may only reject an unknown token when every bundle in
-    /// the closure is present in the manifest under validation (CR-12).
-    pub(crate) fn closure_of(&self, owning_bundle: &str) -> Option<&BTreeSet<String>> {
-        self.closure.get(owning_bundle)
     }
 }
 

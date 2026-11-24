@@ -1,6 +1,9 @@
 //! Admission of deterministic containment predicates. The evaluator is the
 //! shared DSL evaluator; this module only restricts its authored input surface.
 
+use crate::containment_vocabulary::qualified;
+pub use crate::containment_vocabulary::Vocabulary;
+use crate::reference_scope::BundleScope;
 use spellkave_dsl::{DslMacroDefinition, Expression, Op, SubjectRef};
 use spellkave_schema::Manifest;
 use std::collections::{BTreeMap, BTreeSet};
@@ -39,67 +42,6 @@ impl ReferenceContext {
     }
 }
 
-#[derive(Default, Clone)]
-pub struct Vocabulary {
-    pub policies: BTreeMap<String, String>,
-    pub states: BTreeMap<String, String>,
-    /// Qualified authored entity key -> (owning bundle, definition).
-    pub entities: BTreeMap<String, (String, String)>,
-    pub definitions: BTreeMap<String, String>,
-    pub instances: BTreeMap<String, String>,
-}
-
-impl Vocabulary {
-    pub fn from_manifest(manifest: &Manifest) -> Self {
-        Self {
-            states: manifest
-                .object_state_definitions
-                .iter()
-                .map(|r| (r.state_id.clone(), r.bundle_id.clone()))
-                .chain(
-                    manifest
-                        .resource_definitions
-                        .iter()
-                        .map(|r| (r.resource_definition_id.clone(), r.bundle_id.clone())),
-                )
-                .collect(),
-            policies: manifest
-                .containment_policy_definition
-                .iter()
-                .map(|r| (r.policy_id.clone(), r.bundle_id.clone()))
-                .collect(),
-            entities: manifest
-                .entities
-                .iter()
-                .map(|r| {
-                    (
-                        format!("{}:{}", r.bundle_id, r.entity_key),
-                        (r.bundle_id.clone(), r.entity_def_id.clone()),
-                    )
-                })
-                .collect(),
-            definitions: manifest
-                .entity_definition_containment_policy
-                .iter()
-                .map(|r| (r.entity_def_id.clone(), r.policy_id.clone()))
-                .collect(),
-            instances: manifest
-                .entity_containment_policy
-                .iter()
-                .map(|r| (qualified(&r.bundle_id, &r.entity_key), r.policy_id.clone()))
-                .collect(),
-        }
-    }
-}
-
-fn qualified(bundle: &str, key: &str) -> String {
-    if key.contains(':') {
-        key.into()
-    } else {
-        format!("{bundle}:{key}")
-    }
-}
-
 fn diagnostic(path: &str, message: String, severity: crate::Severity) -> crate::Diagnostic {
     crate::Diagnostic {
         code: crate::diagnostic_codes::MF_VAL_CONTAINMENT_POLICY.into(),
@@ -128,7 +70,7 @@ pub(crate) fn validate(
     let dependencies = live
         .map(|v| v.dm.bundle_dependencies.clone())
         .unwrap_or_default();
-    let scope = crate::refs::BundleScope::build_with_live(manifest, &dependencies);
+    let scope = BundleScope::build_with_live(manifest, &dependencies);
     let macros = crate::dsl_macros::dsl_macro_compiler_definitions(manifest);
     let mut tags = live.map(|v| v.dm.tags.clone()).unwrap_or_default();
     tags.extend(

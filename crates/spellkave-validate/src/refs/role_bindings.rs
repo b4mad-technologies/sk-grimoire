@@ -147,7 +147,7 @@ pub(super) fn validate(
                 .any(|row| row.binding_id == precondition.binding_id)
         {
             diags.push(diag_fatal(
-                crate::diagnostic_codes::MF_VAL_ROLE_BINDING_CONSTRAINT,
+                crate::diagnostic_ids::MF_VAL_ROLE_BINDING_CONSTRAINT,
                 "binding_preconditions",
                 "invalid, duplicate or unmatched binding precondition".into(),
             ));
@@ -160,7 +160,7 @@ pub(super) fn validate(
             .is_some_and(|note| note.len() > 16 * 1024)
         {
             diags.push(diag_fatal(
-                crate::diagnostic_codes::MF_VAL_ROLE_BINDING_CONSTRAINT,
+                crate::diagnostic_ids::MF_VAL_ROLE_BINDING_CONSTRAINT,
                 "role_bindings.handover_note",
                 "shared briefing exceeds 16384 UTF-8 bytes".into(),
             ));
@@ -232,7 +232,7 @@ pub(super) fn validate(
             None | Some("person") | Some("service")
         ) {
             diags.push(diag_fatal(
-                crate::diagnostic_codes::MF_VAL_IDENTITY_PROVENANCE,
+                crate::diagnostic_ids::MF_VAL_IDENTITY_PROVENANCE,
                 "actor_identities.provenance",
                 "identity provenance must be person or service".into(),
             ));
@@ -244,7 +244,7 @@ pub(super) fn validate(
                     && binding.provenance.as_deref() == Some("person")
             })
         {
-            diags.push(diag_fatal(crate::diagnostic_codes::MF_VAL_AUTHORED_CO_PILOT, "actor_identities.role", "authored co-pilot requires a durable Service primary and no Person row; the server checks live-only bindings".into()));
+            diags.push(diag_fatal(crate::diagnostic_ids::MF_VAL_AUTHORED_CO_PILOT, "actor_identities.role", "authored co-pilot requires a durable Service primary and no Person row; the server checks live-only bindings".into()));
         }
         if row.role == "presence" {
             diags.push(diag_fatal(
