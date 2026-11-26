@@ -451,6 +451,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "spellkave-reference-docs"
+version = "0.2.0"
+dependencies = [
+ "serde_json",
+ "spellkave-dsl",
+ "spellkave-schema",
+]
+
+[[package]]
 name = "spellkave-schema"
 version = "0.2.0"
 dependencies = [

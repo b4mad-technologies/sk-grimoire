@@ -58,6 +58,9 @@ for (const crate of crates) {
 
     const node = { types: './node/index.d.cts', default: './node/index.cjs' };
     const browser = { types: './browser/index.d.ts', default: './browser/index.js' };
+    // The validator carries the DSL and manifest references, so a consumer
+    // reads the pages that match the code at its pinned version.
+    const docs = name === 'validate-wasm' ? ['dsl-grammar.md', 'manifest-format.md'] : [];
     const manifest = {
         name: `@spellkave/${name}`,
         version,
@@ -74,8 +77,9 @@ for (const crate of crates) {
             './browser': browser,
             './node/wasm': './node/index_bg.wasm',
             './browser/wasm': './browser/index_bg.wasm',
+            ...Object.fromEntries(docs.map(page => [`./docs/${page}`, `./docs/${page}`])),
         },
-        files: ['node', 'browser', 'LICENSE', 'NOTICE'],
+        files: ['node', 'browser', ...(docs.length ? ['docs'] : []), 'LICENSE', 'NOTICE'],
         publishConfig: { access: 'public', registry: 'https://registry.npmjs.org/' },
     };
     writeFileSync(`${dir}/package.json`, `${JSON.stringify(manifest, null, 2)}\n`);
@@ -83,5 +87,9 @@ for (const crate of crates) {
         copyFileSync(file, `${dir}/${file}`);
     }
     copyFileSync(`crates/${crate}/README.md`, `${dir}/README.md`);
+    if (docs.length) mkdirSync(`${dir}/docs`);
+    for (const page of docs) {
+        copyFileSync(`docs/${page}`, `${dir}/docs/${page}`);
+    }
     execFileSync('npm', ['pack', dir, '--pack-destination', output], { stdio: 'inherit' });
 }

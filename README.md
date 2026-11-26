@@ -16,12 +16,32 @@ cargo build --locked --workspace --all-features --target-dir target
 cargo test --locked --workspace --all-features --target-dir target
 cargo clippy --locked --workspace --all-targets --all-features --target-dir target -- -D warnings
 cargo fmt --all --check
+cargo run --locked --target-dir target -p spellkave-reference-docs -- --check
 cargo build --locked --release --target-dir target --target wasm32-unknown-unknown -p spellkave-validate-wasm -p spellkave-authoring-wasm
 ```
 
 The Wasm build produces `spellkave_validate_wasm.wasm` and
 `spellkave_authoring_wasm.wasm` in `target/wasm32-unknown-unknown/release/`.
 The workspace and its frozen fixture data are documented in [PROVENANCE.md](PROVENANCE.md).
+
+## Language reference
+
+- [DSL grammar](docs/dsl-grammar.md): every operator of the rule language,
+  and the operator precedence rule.
+- [Manifest format](docs/manifest-format.md): the top-level fields and every
+  row kind of a TOML manifest.
+
+Both pages are generated from `spellkave_dsl::dsl_reference()` and
+`spellkave_schema::manifest_json_schema()`. After a change to either, run
+the following command from the repository root and commit the result. The
+`--check` form, which CI runs, fails when a page is out of date.
+
+```sh
+cargo run --locked --target-dir target -p spellkave-reference-docs -- --write
+```
+
+The `@spellkave/validate-wasm` package ships both pages under `docs/`, so a
+consumer reads the reference that matches its pinned version.
 
 ## Diagnostic codes
 

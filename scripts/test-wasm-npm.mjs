@@ -32,6 +32,13 @@ try {
         return require(name);
     });
 
+    for (const page of ['dsl-grammar.md', 'manifest-format.md']) {
+        assert.equal(
+            readFileSync(require.resolve(`@spellkave/validate-wasm/docs/${page}`), 'utf8'),
+            readFileSync(resolve(root, 'docs', page), 'utf8'),
+            `@spellkave/validate-wasm is missing docs/${page}`,
+        );
+    }
     assert.deepEqual(JSON.parse(validator.validate_manifest_toml(sample)), []);
     assert.deepEqual(JSON.parse(authoring.applyset_root_info_json(sample)), {
         applyset: null, includes: [], bundles: [],
