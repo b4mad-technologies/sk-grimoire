@@ -3,6 +3,7 @@ name = "spellkave-validate-wasm"
 version = "0.2.0"
 edition = "2021"
 license = "PolyForm-Shield-1.0.0"
+publish = false
 
 [lib]
 crate-type = ["cdylib", "rlib"]
