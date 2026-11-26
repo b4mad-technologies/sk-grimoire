@@ -8,5 +8,6 @@ members = [
     "crates/spellkave-validate-wasm",
     "crates/spellkave-authoring-wasm",
     "crates/spellkave-test-data",
+    "crates/spellkave-reference-docs",
 ]
 resolver = "2"

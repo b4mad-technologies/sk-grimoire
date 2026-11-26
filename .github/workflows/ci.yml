@@ -18,6 +18,8 @@ jobs:
         run: cargo test --locked --workspace --all-features --target-dir target
       - name: Clippy
         run: cargo clippy --locked --workspace --all-targets --all-features --target-dir target -- -D warnings
+      - name: Reference docs
+        run: cargo run --locked --target-dir target -p spellkave-reference-docs -- --check
       - name: Format
         run: cargo fmt --all --check
       - name: Build Wasm

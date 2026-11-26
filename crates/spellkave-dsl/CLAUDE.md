@@ -77,13 +77,12 @@ Two doc/impl observations surfaced while building the eval gate — both fixed
 
 ## Precedence footgun — `||` binds tighter than `&&`
 
-**Operator precedence is inverted from C:** `||` binds TIGHTER than `&&`
-(`parse_and` is built over `parse_or`). So `A && B && C || D` parses as
-`A && B && (C || D)`. Avoid the flattened repeated-guard idiom
-(`act && niche && C || act && niche && D`) — it mis-parses. Boolean terms cannot
-be parenthesised either (`(` groups int expressions only); proof:
+`parse_and` is built over `parse_or`, so `||` binds tighter than `&&`. The
+author-facing rule, with examples, is in
+[`docs/dsl-grammar.md`](../../docs/dsl-grammar.md#operator-precedence); its text
+lives in `crates/spellkave-reference-docs/src/lib.rs`. Proof:
 `tests/corpus.rs::or_binds_tighter_than_and`. Keep-or-flip is open decision
-`sk-jay0.7.105.10`.
+`sk-jay0.7.105.10`; if it flips, update that text in the same change.
 
 When you add or change an operator: keep its example in real parser surface (the
 parse gate enforces this for `expression` ops), give it a `documented_expectations()`

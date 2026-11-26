@@ -1,0 +1,12 @@
+[package]
+name = "spellkave-reference-docs"
+version = "0.2.0"
+edition = "2021"
+license = "PolyForm-Shield-1.0.0"
+publish = false
+description = "Renders the DSL grammar and manifest format reference pages."
+
+[dependencies]
+serde_json = "1"
+spellkave-dsl = { path = "../spellkave-dsl" }
+spellkave-schema = { path = "../spellkave-schema" }
