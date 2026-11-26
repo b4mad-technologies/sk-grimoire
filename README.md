@@ -58,7 +58,7 @@ SPELLKAVE_WRITE_DIAGNOSTIC_CODES=1 cargo test --locked --target-dir target \
 ## Wasm npm packages
 
 Install both packages at an exact sk-grimoire release version. The first
-planned release is `v0.1.0`.
+release, `v0.1.0`, is on npm.
 
 ```sh
 npm install --save-exact @spellkave/validate-wasm@0.1.0 @spellkave/authoring-wasm@0.1.0

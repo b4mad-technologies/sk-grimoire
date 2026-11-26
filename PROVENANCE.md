@@ -25,8 +25,9 @@ The Spellkave content-language workspace was copied from Spellkave
 
 The seven crate manifests declare `PolyForm-Shield-1.0.0`. The licence
 body comes from the [PolyForm Project's tagged licence source](https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Shield-1.0.0.md).
-The required copyright notice follows the licence body. `NOTICE` retains
-the applicable SRD attribution for test excerpts.
+The required copyright notice follows the licence body. `NOTICE` repeats it
+and retains the applicable SRD attribution for test excerpts. Every crate
+sets `publish = false`: the crates are not released on crates.io.
 
 ## Test handoff
 

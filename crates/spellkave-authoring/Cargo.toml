@@ -3,6 +3,7 @@ name = "spellkave-authoring"
 version = "0.2.0"
 edition = "2021"
 license = "PolyForm-Shield-1.0.0"
+publish = false
 
 # Rust-owned manifest authoring operations (#1968 R7 strangler migration,
 # ADR-0087): the eventual home of `@spellkave/world-author`'s `compose.ts`
